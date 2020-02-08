@@ -1,0 +1,20 @@
+{
+    "name": "gillix/framework",
+    "description": "Gillix PHP framework",
+    "type": "library",
+    "require": {
+        "monolog/monolog": "^2.0",
+        "php": "^7.4",
+        "ext-apcu": "*",
+        "ext-json": "*",
+        "punic/punic": "*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yury Timoschuk",
+            "email": "yury.timoschuk@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
