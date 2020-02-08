@@ -16,5 +16,12 @@
             "email": "yury.timoschuk@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "glx\\": "src/framework/"
+        }
+    },
+
     "minimum-stability": "dev"
+    "prefer-stable": true
 }
