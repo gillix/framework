@@ -2,6 +2,8 @@
  namespace glx\HTTP\Server;
  
  
+ use glx\Library\Components;
+
  class Client implements I\Client
  {
     protected I\Request $request;
@@ -47,8 +49,7 @@
     {
       if(!isset($this->geo))
        {
-        $factory = new \glx\Library\Factory();
-        if($geo = $factory->get('geoip'))
+        if($geo = Components::get('geoip-city'))
           try { $this->geo = $geo->city($this->ip()); }
           catch(\Exception $e) {}
         else

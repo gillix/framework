@@ -9,7 +9,6 @@
  use glx\Locale\Currency;
 
  // This implementation requires punic package
- require_once __DIR__.'/../contrib/vendor/autoload.php';
  
 include_once 'I/Locale.php';
 include_once 'Locale/I/Calendar.php';

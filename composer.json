@@ -3,6 +3,7 @@
     "description": "Gillix PHP framework",
     "type": "library",
     "require": {
+        "geoip2/geoip2": "^2.0",
         "monolog/monolog": "^2.0",
         "php": "^7.4",
         "ext-apcu": "*",
@@ -18,7 +19,14 @@
     ],
     "autoload": {
         "psr-4": {
-            "glx\\": "src/framework/"
+            "glx\\": "src/framework/",
+            "files": [
+               "src/framework/core/Node.php",
+               "src/framework/core/Str.php",
+               "src/framework/core/Integer.php",
+               "src/framework/core/FloatNumber.php",
+               "src/framework/core/Method.php"
+            ]
         }
     },
 
