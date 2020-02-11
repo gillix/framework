@@ -56,7 +56,8 @@
   
     public static function clear(array $record, Storage\FS\I\Storage $storage): void
     {
-      $storage->compiler()->delete($record['source'], 'public');
+      if($record['source'])
+        $storage->compiler()->delete($record['source'], 'public');
       parent::clear($record, $storage);
     }
  }

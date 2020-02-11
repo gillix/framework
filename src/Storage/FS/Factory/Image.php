@@ -29,15 +29,16 @@
        {
         // if creates from file
         $source = $current->relative($info['file']);
-        $info = [];
+        $props = [];
         if(($imageinfo = getimagesize($file = $storage->structure()->get('source')->path($source))) === false)
           throw new Storage\Exception('File is not detected as image file: '.$file);
         else
          {
-          [$info['width'], $info['height'], $info['type'], $info['attributes']] = $imageinfo;
-          $info['type'] = image_type_to_extension($info['type']);
+          [$props['width'], $props['height'], $props['type'], $props['attributes']] = $imageinfo;
+          $props['type'] = image_type_to_extension($props['type']);
          }
         $record['source'] = $source;
+        $source = "/{$source}";
        }
 
       if($source === NULL)
@@ -50,10 +51,10 @@
       // fetch options for new object
       $options = [
         'storage' => $storage,
-        'source' => "/{$source}",
+        'source' => $source,
       ];
-      if(isset($info))
-        $options['info'] = $info;
+      if(isset($props))
+        $options['info'] = $props;
       if(($old = $info['old']) && $old instanceof core\I\Entity)
         $options['id'] = $old->id();
       

@@ -20,8 +20,9 @@
   
     public function info(string $param = NULL)
     {
+      if(!isset($this->info)) return [];
       if($param) return $this->info[$param];
-      return $this->info ?? [];
+      return $this->info;
     }
  
     public static function new(...$arguments): I\Image
