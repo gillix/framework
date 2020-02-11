@@ -7,9 +7,9 @@
  {
     protected const MASK = '0755';
   
-    protected $path;
-    protected $sections = [];
-    protected $relative;
+    protected string $path;
+    protected array $sections = [];
+    protected string $relative = '';
   
     public function __construct(string $path, $relative = NULL)
     {

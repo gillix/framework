@@ -1,10 +1,8 @@
 <?php
  namespace glx\Session\ID;
 
- class Custom implements I\Provider
+ class Custom extends Provider
  {
-    protected string $id;
-  
     public function __construct(string $id = NULL)
     {
       $this->id = $id ?? $this->create();
@@ -20,13 +18,10 @@
       return $this->id !== NULL;
     }
  
-    public function create(): string
+    public function create(int $lifetime = 0): string
     {
-      return $this->id = md5(uniqid(mt_rand(), true));
+      return $this->id = $this->generate();
     }
    
-    public function delete(): void
-    {
-    
-    }
+    public function delete(): void {}
  }

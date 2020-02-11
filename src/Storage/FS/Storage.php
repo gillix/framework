@@ -30,7 +30,12 @@
     protected I\Manifest $manifest;
     protected core\I\Entity $root;
     protected static array $locations = ['.', __DIR__.'/../../..'];
-  
+ 
+    /**
+     * Storage constructor.
+     * @param array|string $options
+     * @param \glx\I\Context|NULL $context
+     */
     public function __construct($options = [], \glx\I\Context $context = NULL)
     {
       $this->mode = $options['mode'] ?? 'production';
@@ -49,7 +54,7 @@
         else
           $manifest->init(['storage' => [
            'type' => 'fs',
-           'structure' => [
+           'structure' => ($options['structure'] ?? []) + [
               'source'   => '.src',
               'registry' => '.build/registry',
               'hidden'   => '.build/hidden',

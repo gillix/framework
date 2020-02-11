@@ -7,6 +7,7 @@
     public function store(string $id, array $content);
     public function read(string $path, string $target = 'cmp');
     public function write(string $path, $content, string $target = 'cmp'): void;
+    public function copy(string $path, string $from = 'source', string $target = 'public'): void;
     public function delete(string $path, string $target = 'cmp'): void;
     public function clear($section = 'cmp'): void;
  }

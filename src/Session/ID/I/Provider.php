@@ -6,6 +6,7 @@
  {
     public function id(): string;
     public function exist(): bool;
-    public function create(): string;
+    public function create(int $lifetime = 0): string;
     public function delete(): void;
+    public function __toString();
  }

@@ -27,9 +27,9 @@
       return $this->implementation->get($key);
     }
  
-    public function store(string $key, $value): void
+    public function store(string $key, $value, int $lifetime = 0): void
     {
-      $this->implementation->store($key, $value);
+      $this->implementation->store($key, $value, $lifetime);
     }
   
     public function delete(string $key, bool $search = false): void

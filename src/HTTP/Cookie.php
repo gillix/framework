@@ -30,7 +30,7 @@
         $options = $lifetime;
       else
        {
-        if($lifetime !== NULL)
+        if($lifetime)
           $options['expires'] = time() + $lifetime;
         if($path !== NULL)
           $options['path'] = $path;
@@ -49,7 +49,11 @@
     public function apply(): void
     {
       foreach($this->cookies as $name => $options)
-        setcookie($name, $options['value'], $options);
+       {
+        $value = $options['value'];
+        unset($options['value']);
+        setcookie($name, $value, $options);
+       }
     }
  
     public function get(string $name)

@@ -1,12 +1,15 @@
 <?php
  namespace glx\HTTP;
  
+ use glx\Context;
+ use glx\Session;
  
  class Server implements I\Server
  {
     protected Server\I\Request $request;
     protected Server\I\Response $response;
     protected I\Cookie $cookie;
+    protected array $session;
   
     public function __construct()
     {
@@ -40,6 +43,22 @@
     public function response(): Server\I\Response
     {
       return $this->response;
+    }
+   
+    public function session(string $channel = NULL, int $lifetime = 0): Session\I\Session
+    {
+      if(!isset($this->session))
+        $this->session = [];
+      if(!isset($this->session[$channel]))
+       {
+        if($options = Context::config()->session)
+          $options = $options->array();
+        $options ??= [];
+        if($lifetime)
+          $options['lifetime'] = $lifetime;
+        $this->session[$channel] = new Session\Session(new Session\ID\Cookie($channel, $this->cookie, $options['secure'] ?? true), $options);
+       }
+      return $this->session[$channel];
     }
    
     public function send(): void

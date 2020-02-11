@@ -6,17 +6,18 @@
  use glx\Exception;
  use glx\HTTP;
  
- class Cookie implements I\Provider
+ class Cookie extends Provider
  {
     protected string $key;
-    protected string $id;
     protected HTTP\I\Cookie $cookie;
+    protected bool $secure;
     
-    public const DEFAULT_KEY = 'GILLIX-SESSION';
+    public const DEFAULT_KEY = 'GLX-SESSION';
   
-    public function __construct(string $key = NULL, HTTP\I\Cookie $cookie = NULL)
+    public function __construct(string $key = NULL, HTTP\I\Cookie $cookie = NULL, bool $secure = true)
     {
-      $this->cookie = $cookie ?? ($http = Context::http()) ? $http->cookie() : NULL;
+      $this->cookie = $cookie ?? (($http = Context::http()) ? $http->cookie() : NULL);
+      $this->secure = $secure;
       if(!$this->cookie)
         throw new Exception('Can`t resolve session ID by cookie in non-http context');
       $this->key = $key ?? self::DEFAULT_KEY;
@@ -37,15 +38,10 @@
     public function create(int $lifetime = 0): string
     {
       $this->id = $this->generate();
-      $this->cookie->set($this->key, $this->id, $lifetime, '/', NULL, true, true);
+      $this->cookie->set($this->key, $this->id, $lifetime, '/', NULL, $this->secure, true);
       return $this->id;
     }
   
-    protected function generate(): string
-    {
-      return md5(uniqid('session', true));
-    }
- 
     public function delete(): void
     {
       unset($this->id);

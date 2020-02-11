@@ -1,6 +1,7 @@
 <?php
  namespace glx\HTTP;
  
+ use glx\Common\I\ObjectAccess;
  use glx\Common\Stopwatch;
  use glx\core;
  use glx\Locale;
@@ -25,18 +26,19 @@
         $locale = NULL;
       return [
         'locale'  => $locale,
-        'profile' => $this->config->profile,
-        'cache'   => $this->config->cache->array(),
-        'logger'  => $this->config->logger->array(),
+        'profile' => $this->configSection('profile'),
+        'cache'   => $this->configSection('cache'),
+        'logger'  => $this->configSection('logger'),
         'http'    => $this->server,
         'input'   => $this->server->request()->input(),
         'config'  => $this->config
       ];
     }
   
-    private function configSection()
+    private function configSection(string $section)
     {
-      // вернуть массив, если объект, значение если нет
+      $section = $this->config[$section];
+      return $section instanceof ObjectAccess ? $section->array() : $section;
     }
   
     public function server(): Server

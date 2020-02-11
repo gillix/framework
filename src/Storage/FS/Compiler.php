@@ -2,12 +2,10 @@
  
  namespace glx\Storage\FS;
  
- use glx\Storage;
-
  
  class Compiler implements I\Compiler
  {
-    protected $structure;
+    protected I\Structure $structure;
   
     public function __construct(I\Structure $structure)
     {
@@ -30,7 +28,7 @@
     {
       $path = $this->structure->get($target)->path($relative);
       if(is_file($path))
-        return file_get_contents($this->structure->get($target)->path($relative));
+        return file_get_contents($path);
       return NULL;
     }
   
@@ -44,7 +42,10 @@
     {
       unlink($this->structure->get($target)->path($relative));
     }
-
+ 
+    /**
+     * @param string|array $section
+     */
     public function clear($section = 'registry'): void
     {
       if(is_array($section))
@@ -52,5 +53,13 @@
           $this->clear($item);
       else
         $this->structure->get($section)->destruct();
+    }
+ 
+    public function copy(string $path, string $source = 'source', string $target = 'public'): void
+    {
+      $to = $this->structure->get($target);
+      $to->get(dirname($path))->implement();
+      $from = $this->structure->get($source);
+      copy($from->path($path), $to->path($path));
     }
  }

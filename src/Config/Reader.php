@@ -4,6 +4,7 @@ namespace glx\Config;
 
 require_once 'I/Reader.php';
 
+// TODO: переделать интерфейс: непрозрачно и неудобно
 class Reader implements I\Reader
 {
    protected static string $default = 'gcml';
@@ -62,7 +63,16 @@ class Reader implements I\Reader
    {
      if(!is_file($path))
        throw new \glx\Exception("Can`t read config file: '{$path}' is not exist.");
-     $format = (new \SplFileInfo($path))->getExtension();
-     return static::get($format)->parse(file_get_contents($path));
+     $cwd = getcwd();
+     chdir(dirname($path));
+    try
+     {
+      $format = (new \SplFileInfo($path))->getExtension();
+      return static::get($format)->parse(file_get_contents($path));
+     }
+    finally
+     {
+      chdir($cwd);
+     }
    }
 }

@@ -13,7 +13,7 @@
    
     public function __construct($id = NULL, array $options = [], \glx\I\Context $context = NULL)
     {
-      $this->id = $id ?? uniqid('', true);
+      $this->id = $id ?? self::generate();
       Manager::register($this->id, $this);
       $this->registry = new Registry();
     }
@@ -25,9 +25,14 @@
   
     public function register($object): core\I\ID
     {
-      $id = uniqid('', true);
+      $id = self::generate();
       $this->registry->add($id, $object);
       return new core\ID($this->id, $id);
+    }
+  
+    protected static function generate()
+    {
+      return md5(uniqid('storage', true));
     }
  
     public static function new($options, \glx\I\Context $context = NULL): I\Storage

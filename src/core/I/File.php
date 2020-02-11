@@ -1,9 +1,11 @@
 <?php
  namespace glx\core\I;
 
- interface File 
+ use glx\HTTP;
+
+ interface File
  {
     public function source(): string;
-    public function uri(): string;
+    public function uri(): HTTP\I\URI;
     public function url(): string;
  }

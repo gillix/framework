@@ -21,16 +21,15 @@
       return $success ? $value : NULL;
     }
   
-    public function store(string $key, $value)
+    public function store(string $key, $value, int $lifetime = 0): void
     {
       // возможно устанавливать время жизни
-      apcu_store($key, $value);
+      apcu_store($key, $value, $lifetime);
     }
 
-    public function delete(string $key, bool $search = false)
+    public function delete(string $key, bool $search = false): void
     {
-      if($search) $key = new \APCUIterator($key, APC_ITER_ALL, 1000);
-      apcu_delete($key);
+      apcu_delete($search ? new \APCUIterator($key, APC_ITER_ALL, 1000) : $key);
     }
  }
  
