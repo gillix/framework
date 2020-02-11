@@ -39,7 +39,7 @@
     public function __construct($options = [], \glx\I\Context $context = NULL)
     {
       $this->mode = $options['mode'] ?? 'production';
-      $path = realpath(is_string($options) ? $options : $options['path']);
+      $path = realpath(is_string($options) ? $options : $options['path'] ?? $options['location']);
       $this->key = md5($path);
       if(!$path || !is_dir($path))
         throw new Exception('Storage path is not provided or path is not a directory');

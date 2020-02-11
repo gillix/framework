@@ -18,16 +18,18 @@
         }
     ],
     "autoload": {
-        "files": [
-           "src/framework/core/Node.php",
-           "src/framework/core/Str.php",
-           "src/framework/core/Integer.php",
-           "src/framework/core/FloatNumber.php",
-           "src/framework/core/Method.php"
-        ],
         "psr-4": {
-            "glx\\": "src/framework/"
-        }
+            "glx\\": "src/"
+        },
+        "files": [
+           "src/core/Node.php",
+           "src/core/Str.php",
+           "src/core/Integer.php",
+           "src/core/FloatNumber.php",
+           "src/core/Image.php",
+           "src/core/File.php",
+           "src/core/Method.php"
+        ]
     },
 
     "minimum-stability": "dev",

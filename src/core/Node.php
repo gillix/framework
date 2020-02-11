@@ -260,7 +260,7 @@
     public function obtain(string $name, $type = NULL): ? I\Joint
     {
       try { if($property = $this->property($name, $type)) return $property; }
-      catch(PropertyAccessViolationException $e) {}
+      catch(E\PropertyAccessViolation $e) {}
       return $this->super()->get($name, $type);
     }
  

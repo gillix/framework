@@ -10,8 +10,7 @@
 
     public static function probe(array $info, Storage\FS\I\Structure $current): bool
     {
-      if(($info['content'] && in_array($info['extension'], ['image', 'img'], true)) ||
-         ($info['file'] && in_array(strtolower($info['extension']), ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'ico'])))
+      if(($info['content'] && $info['extension'] === 'file') || ($info['file'] && $info['extension']))
         return true;
       return false;
     }
@@ -43,7 +42,7 @@
       // fetch options for new object
       $options = [
         'storage' => $storage,
-        'source' => $source
+        'source' => "/{$source}"
       ];
       if(($old = $info['old']) && $old instanceof core\I\Entity)
         $options['id'] = $old->id();
@@ -57,9 +56,9 @@
   
     public static function clear(array $record, Storage\FS\I\Storage $storage): void
     {
-      $storage->compiler()->delete($record['hidden'], 'hidden');
+      $storage->compiler()->delete($record['source'], 'public');
       parent::clear($record, $storage);
     }
  }
  
- Storage\FS\Storage::factory([Storage\FS\Storage::DEFAULT_FACTORY, 'image', 'img', 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'ico'], File::class);
+ Storage\FS\Storage::factory([Storage\FS\Storage::DEFAULT_FACTORY, 'file'], File::class);

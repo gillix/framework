@@ -3,5 +3,5 @@
 
  interface Image extends File, Printable
  {
-    public function dimensions(): array;
+    public function info(string $param = NULL);
  }

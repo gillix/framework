@@ -6,21 +6,22 @@
  class Image extends File implements I\Image
  {
     protected static string $_type = 'IMAGE';
-    protected array $dimensions;
+    protected array $info;
   
     public function __construct($options = NULL)
     {
       if(is_array($options))
        {
-        if($options['dimensions'])
-          $this->dimensions = $options['dimensions'];
+        if($options['info'])
+          $this->info = $options['info'];
        }
       parent::__construct($options);
     }
   
-    public function dimensions(): array
+    public function info(string $param = NULL)
     {
-      return $this->dimensions ?? [];
+      if($param) return $this->info[$param];
+      return $this->info ?? [];
     }
  
     public static function new(...$arguments): I\Image
@@ -37,8 +38,7 @@
  
     public function __toString()
     {
-      $dim = $this->dimensions ?? [];
-      return "<img src=\"{$this->url()}\"".(count($dim) ? " width=\"{$dim['width']}\" height=\"{$dim['height']}\"" : NULL).'/>';
+      return "<img alt='' src=\"{$this->url()}\" {$this->info('attributes')}/>";
     }
  }
  
@@ -48,11 +48,11 @@
 
  /**
   * global function for simplify usage
-  * creates new object of File
+  * creates new object of Image
   * @param mixed ...$arguments
-  * @return I\File
+  * @return I\Image
   */
- function file(...$arguments): I\File
+ function image(...$arguments): I\Image
  {
-   return File::new(...$arguments);
+   return Image::new(...$arguments);
  }
