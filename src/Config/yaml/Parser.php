@@ -4,7 +4,7 @@
  
  use glx\Config;
  
- require_once __DIR__.'../I/Parser.php';
+ require_once __DIR__.'/../I/Parser.php';
  
  class Parser implements Config\I\Parser
  {
