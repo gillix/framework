@@ -5,7 +5,7 @@
  
  use glx\Common;
 
- class Query extends Common\ObjectAccess implements I\Query
+ class Query extends Common\Collection implements I\Query
  {
     protected array $params;
     

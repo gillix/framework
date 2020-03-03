@@ -153,7 +153,13 @@
     {
       return $entity->childOf($this->this());
     }
-  
+ 
+    /**
+     * @param string $name
+     * @param string|null $type
+     * @return I\Joint|null
+     * @throws E\PropertyAccessAmbiguous
+     */
     public function property(string $name, $type = NULL): ? I\Joint
     {
   /** @var I\Binder $property */
@@ -174,10 +180,18 @@
        }
       return NULL;
     }
-  
-    private function find(?array $index, string $name, $type = NULL)
+ 
+    /**
+     * @param array|null $index
+     * @param string $name
+     * @param string|null $type
+     * @return I\Binder|null
+     * @throws E\PropertyAccessAmbiguous
+     */
+    private function find(?array $index, string $name, $type = NULL): ? I\Binder
     {
       if(!is_array($index) || !count($index)) return NULL;
+      $property = NULL;
       if(array_key_exists($name, $index) && ($variants = $index[$name]))
        {
         if(count($variants) === 1 && !$type)
@@ -239,12 +253,14 @@
       if($my)
        {
         if($my === '.')
-          return $rest ? $this->explore($rest, $type, $strict) : ((!$type || $this->is($type)) ? $this->this() : NULL);
+          if($rest) return $this->explore($rest, $type, $strict);
+          else return (!$type || $this->is($type)) ? $this->this() : NULL;
         if($my === '..')
          {
           if($parent = $this->this()->parent())
-            return $rest ? $parent->explore($rest, $type, $strict) : ((!$type || $parent->is($type)) ? $parent : NULL);
-          return NULL; // исключение
+            if($rest) return $parent->explore($rest, $type, $strict);
+            else return (!$type || $parent->is($type)) ? $parent : NULL;
+          throw new Exception('Can`t fetch parent node: parent is not exist.');
          }
         if($child = $strict ? $this->property($my, $type) : $this->obtain($my, $type))
           if(!$rest)

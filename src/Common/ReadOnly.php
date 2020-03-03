@@ -2,9 +2,9 @@
  
  namespace glx\Common;
  
- require_once 'ObjectAccess.php';
+ require_once 'Collection.php';
  
- class ReadOnly extends ObjectAccess
+ class ReadOnly extends Collection
  {
     public function __set($name, $value)
     {

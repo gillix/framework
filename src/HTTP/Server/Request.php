@@ -7,12 +7,12 @@
 
  class Request extends HTTP\Request implements I\Request
  {
-    protected Common\I\ObjectAccess $get;
-    protected Common\I\ObjectAccess $post;
-    protected Common\I\ObjectAccess $cookie;
-    protected Common\I\ObjectAccess $server;
-    protected Common\I\ObjectAccess $files;
-    protected Common\I\ObjectAccess $request;
+    protected Common\I\Collection $get;
+    protected Common\I\Collection $post;
+    protected Common\I\Collection $cookie;
+    protected Common\I\Collection $server;
+    protected Common\I\Collection $files;
+    protected Common\I\Collection $request;
     protected I\Client $client;
   
     public function __construct(array $params)
@@ -22,7 +22,7 @@
       $this->server = new Common\ReadOnly($array = $params['server'] ?? $_SERVER);
       $this->files = new Common\ReadOnly($array = $params['files'] ?? $_FILES);
       $this->request = new Common\ReadOnly($array = $params['request'] ?? $_REQUEST);
-      $this->cookie = $params['cookie'] instanceof Common\ObjectAccess ? $params['cookie'] : new Common\ReadOnly($array = $params['cookie'] ?? $_COOKIE);
+      $this->cookie = $params['cookie'] instanceof Common\I\Collection ? $params['cookie'] : new Common\ReadOnly($array = $params['cookie'] ?? $_COOKIE);
       $this->client = new Client($this);
       parent::__construct($params);
     }

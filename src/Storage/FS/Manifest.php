@@ -5,7 +5,7 @@
  use glx\Common;
  use glx\Storage;
 
- class Manifest extends Common\ObjectAccess implements I\Manifest
+ class Manifest extends Common\Collection implements I\Manifest
  {
     protected string $path;
     protected static array $template = ['package' => [], 'storage' => ['structure' => []], 'build' => []];

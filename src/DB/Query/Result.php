@@ -2,10 +2,9 @@
  
  namespace glx\DB\Query;
  
- use glx\Common\ObjectAccess;
  use glx\Common;
 
- class Result extends ObjectAccess implements I\Result
+ class Result extends Common\Collection implements I\Result
  {
     protected Common\I\Stopwatch $timer;
     

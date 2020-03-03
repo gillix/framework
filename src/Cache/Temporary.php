@@ -4,9 +4,9 @@
  
  use glx\Common;
 
- require_once __DIR__.'/../Common/ObjectAccess.php';
+ require_once __DIR__.'/../Common/Collection.php';
  
- class Temporary extends Common\ObjectAccess
+ class Temporary extends Common\Collection
  {
     public function __construct()
     {

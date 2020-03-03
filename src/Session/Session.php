@@ -5,7 +5,7 @@
  use glx\Common;
  use glx\Exception;
 
- class Session extends Common\ObjectAccess implements I\Session
+ class Session extends Common\Collection implements I\Session
  {
     protected ID\I\Provider $id;
     protected I\Storage $storage;

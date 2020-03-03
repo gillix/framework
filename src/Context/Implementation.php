@@ -13,18 +13,18 @@
 
  require_once 'CallStack.php';
  require_once __DIR__.'/../Cache/Persistent.php';
- require_once __DIR__.'/../Common/ObjectAccess.php';
+ require_once __DIR__.'/../Common/Collection.php';
 // require_once __DIR__.'/../Config/ReadOnly.php';
  
  class Implementation implements \glx\I\Context
  {
     private I\CallStack $callstack;
     private Cache\I\Persistent $persistent;
-    private Common\I\ObjectAccess $temporary;
+    private Common\I\Collection $temporary;
     private \glx\I\Locale $locale;
     private \glx\I\Logger $logger;
-    private Common\I\ObjectAccess $input;
-    private ?Common\I\ObjectAccess $config = NULL;
+    private Common\I\Collection $input;
+    private ?Common\I\Collection $config = NULL;
     private ?HTTP\I\Server $http = NULL;
     private array $options;
     private I\Profile $profile;
@@ -38,10 +38,10 @@
       $this->persistent = new Cache\Persistent($this->options['cache'] ?? []);
       $this->temporary = new Cache\Temporary();
       $this->events = new Events\Manager();
-      $this->input = new Common\ObjectAccess($content = []); // TODO: добавлять переменные веб-контекста
-      if($options['input'] && $options['input'] instanceof Common\I\ObjectAccess)
+      $this->input = new Common\Collection($content = []); // TODO: добавлять переменные веб-контекста
+      if($options['input'] && $options['input'] instanceof Common\I\Collection)
         $this->input->link($options['input']);
-      if($options['config'] && $options['config'] instanceof Common\I\ObjectAccess)
+      if($options['config'] && $options['config'] instanceof Common\I\Collection)
         $this->config = $options['config'];
       $this->profile = new Profile($options['profile']);
       if($options['http'] && $options['http'] instanceof HTTP\I\Server)
@@ -102,7 +102,7 @@
       return $this->logger;
     }
    
-    public function config(): ?Common\I\ObjectAccess
+    public function config(): ?Common\I\Collection
     {
       return $this->config;
     }

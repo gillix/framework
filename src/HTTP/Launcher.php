@@ -1,7 +1,7 @@
 <?php
  namespace glx\HTTP;
  
- use glx\Common\I\ObjectAccess;
+ use glx\Common\I\Collection;
  use glx\Common\Stopwatch;
  use glx\core;
  use glx\Locale;
@@ -38,7 +38,7 @@
     private function configSection(string $section)
     {
       $section = $this->config[$section];
-      return $section instanceof ObjectAccess ? $section->array() : $section;
+      return $section instanceof Collection ? $section->array() : $section;
     }
   
     public function server(): Server

@@ -36,9 +36,10 @@
         };
       elseif($callback instanceof \Closure)
         $walker = function($item) use($callback, $arguments) {
-           $callback->call($item, $arguments);
+           echo $callback->call($item, $arguments);
         };
-      if($walker) array_walk($this->array(), $walker);
+      
+      if($walker) array_walk($a = $this->array(), $walker);
       return $this;
     }
   
@@ -49,6 +50,11 @@
         ob_start();
         $this->each($callback, $arguments);
         return ob_get_contents();
+       }
+      catch(\glx\Exception $e)
+       {
+        $e->out(ob_get_contents());
+        throw $e;
        }
       finally
        {

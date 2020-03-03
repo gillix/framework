@@ -38,7 +38,7 @@
     public function root(): I\Joint { return $this; }
     public function visibility(): int { return I\Visibility::PUBLIC; }
     public function profile(): string { return Context::DEFAULT_PROFILE; }
-    protected function this() { return $this->_joint ?? $this; }
+    protected function this(): I\Joint { return $this->_joint ?? $this; }
  
     public static function resolver($class)
     {

@@ -4,7 +4,7 @@
  
  use glx\Common;
 
- class Cookie extends Common\ObjectAccess implements I\Cookie
+ class Cookie extends Common\Collection implements I\Cookie
  {
     protected array $cookies = [];
   

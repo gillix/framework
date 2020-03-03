@@ -5,7 +5,7 @@
  require_once 'I/ObjectAccess.php';
  
  
- class ObjectAccess implements I\ObjectAccess, \IteratorAggregate, \Countable
+ class Collection implements I\Collection, \IteratorAggregate, \Countable
  {
     protected ?array $content = NULL;
     protected ?array $linked = NULL;
@@ -79,7 +79,7 @@
       return count($this->content);
     }
  
-    public function link(I\ObjectAccess $another): void
+    public function link(I\Collection $another): void
     {
       if($this->linked === NULL)
         $this->linked = [];

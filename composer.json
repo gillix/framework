@@ -18,18 +18,19 @@
         }
     ],
     "autoload": {
-        "psr-4": {
-            "glx\\": "src/"
-        },
+        "optimize-autoloader": true,
+        "apcu-autoloader": true,
         "files": [
            "src/core/Node.php",
            "src/core/Str.php",
            "src/core/Integer.php",
            "src/core/FloatNumber.php",
            "src/core/Image.php",
-           "src/core/File.php",
            "src/core/Method.php"
-        ]
+        ],
+        "psr-4": {
+            "glx\\": "src/"
+        }
     },
 
     "minimum-stability": "dev",

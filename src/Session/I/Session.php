@@ -3,7 +3,7 @@
 
  use glx\Common;
 
- interface Session extends Common\I\ObjectAccess
+ interface Session extends Common\I\Collection
  {
     public function has(string $name): bool;
     public function get(string $name, $default = NULL);

@@ -9,7 +9,7 @@
 
  abstract class Launcher implements I\Launcher, Events\I\Emitter
  {
-    protected Common\I\ObjectAccess $config;
+    protected Common\I\Collection $config;
     protected Storage\I\Storage $storage;
     
     use Events\Delegated;
@@ -19,8 +19,8 @@
       if(is_string($config))
         $config = Config\Reader::read($config);
       if(is_array($config))
-        $this->config = new Common\ObjectAccess($config);
-      elseif($config instanceof Common\I\ObjectAccess)
+        $this->config = new Common\Collection($config);
+      elseif($config instanceof Common\I\Collection)
         $this->config = $config;
       if($storage = $config['storage'])
         if(is_array($storage))
@@ -79,7 +79,7 @@
        {
         $context->log()->critical($e->getMessage(), [$e->getTrace()]);
        }
-      catch(\Exception $e)
+      catch(\Exception|\Error $e)
        {
         if($context)
           $context->log()->critical($e->getMessage(), [$e->getTrace()]);

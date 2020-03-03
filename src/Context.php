@@ -12,7 +12,7 @@
  require_once 'Context/CallStack.php';
  require_once 'Context/Implementation.php';
  require_once 'Cache/Persistent.php';
- require_once 'Common/ObjectAccess.php';
+ require_once 'Common/Collection.php';
  
  /**
   * @method static Context\Profile profile($profile = NULL)
@@ -22,7 +22,7 @@
   * @method static \glx\I\Locale locale(\glx\I\Locale $locale = NULL)
   * @method static input(string $name = NULL)
   * @method static Events\I\Event|Events\Manager event(string $name = NULL)
-  * @method static Common\I\ObjectAccess config()
+  * @method static Common\I\Collection config()
   * @method static HTTP\I\Server http()
   * @method static Log\I\Channel log(string $channel = NULL)
   */

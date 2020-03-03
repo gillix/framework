@@ -19,7 +19,7 @@
     public function log(string $channel = NULL): Log\I\Channel;
     public function locale(\glx\I\Locale $locale = NULL): \glx\I\Locale;
     public function profile($profile = null): Profile;
-    public function config(): ?Common\I\ObjectAccess;
+    public function config(): ?Common\I\Collection;
     public function event(string $name = NULL);
  }
  
