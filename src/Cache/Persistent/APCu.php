@@ -11,7 +11,7 @@
     public function __construct()
     {
       if(!extension_loaded('apcu'))
-        throw new \glx\Exception('Can`t initialise persistent cache. Extension \'apcu\' is not loaded');
+        throw new Cache\E\NotAvailable('Can`t initialise persistent cache. Extension \'apcu\' is not loaded');
     }
  
     public function get(string $key)
@@ -33,4 +33,4 @@
     }
  }
  
- Cache\Persistent::register('apc', APCu::class);
+ Cache\Persistent::register('apcu', APCu::class);

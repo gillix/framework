@@ -2,6 +2,8 @@
  
  namespace glx\Cache;
  
+ use glx\Cache\E\NotAvailable;
+
  require_once 'I/Persistent.php';
  
  class Persistent implements I\Persistent
@@ -12,14 +14,23 @@
   
     public function __construct(array $options = [])
     {
-      $implementation = $options['storage'] ?? 'apc';
+      $implementation = $options['storage'] ?? 'apcu';
       $implementation = self::$implementations[$implementation];
-      if(!$implementation)
-        $implementation = self::$implementations['apc']; // логировать warning
+      if($options['fallback'])
+        $fallback = $options['fallback'];
       if(!$implementation)
         throw new \glx\Exception('Can`t load cache implementation');
       else
-        $this->implementation = new $implementation();
+       try { $this->implementation = new $implementation(); }
+       catch(NotAvailable $e)
+        {
+         if(isset($fallback))
+           foreach($fallback as $storage)
+             try { $this->implementation = new self::$implementations[$storage]; }
+             catch(NotAvailable $e) { continue; }
+         if(!$this->implementation)
+           throw $e;
+        }
     }
  
     public function get(string $key)
