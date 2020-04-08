@@ -53,7 +53,7 @@
     public function one(): I\Result
     {
       $stopwatch = Common\Stopwatch::start();
-      return new Result($this->limit(1)->fetch(static function(\PDOStatement $stmt){ return $stmt->fetch(\PDO::FETCH_ASSOC); }, $stopwatch), $stopwatch);
+      return new Result($this->limit(1)->fetch(static function(\PDOStatement $stmt){ return $stmt->fetch(\PDO::FETCH_ASSOC) ?: []; }, $stopwatch), $stopwatch);
     }
    
     public function page($page, $pp = Paginated::DEFAULT_PER_PAGE, $callback = NULL): I\Paginated
