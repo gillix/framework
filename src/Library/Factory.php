@@ -253,7 +253,7 @@
       try { $reflector = new \ReflectionClass($class); }
       catch (\ReflectionException $e)
        { throw new FactoryResolutionException("Target class [$class] does not exist.", 0, $e); }
-      $isConsumer = $reflector->implementsInterface('I\FactoryConsumer') || in_array('FactoryConsumer', $reflector->getTraitNames(), true);
+      $isConsumer = $reflector->implementsInterface(I\FactoryConsumer::class) || in_array('FactoryConsumer', $reflector->getTraitNames(), true);
       if(!isset($object))
        {
         if($arguments)
