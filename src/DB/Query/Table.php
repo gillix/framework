@@ -22,10 +22,11 @@
   */
  class Table extends Builder implements I\Table
  {
-    public function __construct(DB\I\Driver $connection, $table, string $alias = NULL)
+    public function __construct(DB\I\Driver $connection, $table = null, string $alias = NULL)
     {
       parent::__construct($connection);
-      $this->table($table, $alias);
+      if($table !== null)
+        $this->table($table, $alias);
     }
  
     public function insert($fields): int

@@ -61,4 +61,9 @@
         return call_user_func_array([$component, $name], $arguments);
       return NULL;
     }
+    
+    public function __toString()
+    {
+        return "[{$this->name()} library component]";
+    }
  }
