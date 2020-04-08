@@ -27,7 +27,7 @@
           if(is_object($maker))
             $this->instance($id, $maker);
           elseif(is_string($maker) || $maker instanceof \Closure)
-            $this->bind($id, ['maker' => $maker]);
+            $this->bind($id, $maker/*['maker' => $maker]*/);
           elseif(is_array($maker))
            {
             if(!($class = $maker['class'] ?? $maker['factory']))
