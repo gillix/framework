@@ -253,6 +253,7 @@
       try { $reflector = new \ReflectionClass($class); }
       catch (\ReflectionException $e)
        { throw new FactoryResolutionException("Target class [$class] does not exist.", 0, $e); }
+      $isConsumer = $reflector->implementsInterface('I\FactoryConsumer') || in_array('FactoryConsumer', $reflector->getTraitNames(), true);
       if(!isset($object))
        {
         if($arguments)
@@ -272,9 +273,17 @@
             else
               throw new FactoryResolutionException("Can`t resolve arguments for class {$class}.");
          }
-        $object = $reflector->newInstanceArgs($arguments ?? []);
+        if($isConsumer)
+         {
+          $object = $reflector->newInstanceWithoutConstructor();
+          $object->factory($this);
+          if(isset($constructor))
+            $constructor->invokeArgs($object, $arguments ?? []);
+         }
+        else
+          $object = $reflector->newInstanceArgs($arguments ?? []);
        }
-      if($object instanceof I\FactoryConsumer || in_array('FactoryConsumer', $reflector->getTraitNames(), true))
+      elseif($isConsumer)
         $object->factory($this);
       return $object;
     }
