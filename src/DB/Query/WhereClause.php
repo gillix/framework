@@ -17,8 +17,8 @@
   * @method Searchable offset(int $offset)
   * @method iterable get($callback = NULL)
   * @method value($column = NULL)
-  * @method array one()
-  * @method Paginated page($page, $pp = NULL)
+  * @method I\Result one()
+  * @method I\Paginated page($page, $pp = NULL)
   * @method iterable column($index)
   * @method object($class = NULL, $args = NULL)
   */

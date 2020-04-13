@@ -55,7 +55,7 @@
       return $this->metatype ?? [];
     }
  
-    protected function isMeta($type, bool $not = false)
+    public function isMeta($type, bool $not = false)
     {
       foreach($this->metatype() as $metatype)
         if(strtoupper($type) === strtoupper($metatype))
