@@ -45,7 +45,7 @@
          {
           ob_start();
           $callstack->enter($this->this());
-          return $this->function->call($caller, ...($arguments ?? [])) ?? ob_get_contents();
+          return $this->function->call($caller, ...($arguments ?? [])) ?? (ob_get_contents() ?: null);
          }
         catch(\glx\Exception $e)
          {

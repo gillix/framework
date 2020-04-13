@@ -39,8 +39,13 @@
     public function visibility(): int { return I\Visibility::PUBLIC; }
     public function profile(): string { return Context::DEFAULT_PROFILE; }
     protected function this(): I\Joint { return $this->_joint ?? $this; }
- 
-    public static function resolver($class)
+    
+    public function __toString()
+    {
+      return "[{$this->type()}:{$this->location()}]";
+    }
+    
+     public static function resolver($class)
     {
       if(class_exists($class, false) && method_exists($class, 'resolve'))
         self::$resolvers[] = $class;
