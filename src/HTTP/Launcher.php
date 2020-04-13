@@ -22,8 +22,10 @@
     {
       if(!is_string($locale = $this->config->locale) && $locale->auto)
         $locale = $this->detectLocale() ?? $locale->default;
+      else
+        $locale = $locale->default;
       if(!is_string($locale) && !$locale instanceof \glx\I\Locale)
-        $locale = NULL;
+        $locale = null;
       return [
         'locale'  => $locale,
         'profile' => $this->configSection('profile'),
