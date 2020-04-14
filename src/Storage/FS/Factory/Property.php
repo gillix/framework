@@ -12,7 +12,7 @@
     {
       $val = $info['content'];
       $extension = $info['extension'];
-      if((!$extension && $val && (is_bool($val) || is_int($val) || is_float($val) || is_string($val)))
+      if((!$extension && (is_bool($val) || is_int($val) || is_float($val) || is_string($val)))
        || ($extension && in_array($extension, ['float', 'int', 'bool', 'string', 'str'])))
         return true;
       return false;
