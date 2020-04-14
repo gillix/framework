@@ -85,6 +85,8 @@
          if($values)
            static::bind($stmt, $values);
 
+         $stmt->execute();
+         
          return $stmt->rowCount();
       }, $query, $values);
     }
