@@ -1,6 +1,6 @@
 <?php
- namespace glx;
  
+ namespace glx;
 
  class Error extends Exception
  {

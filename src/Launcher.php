@@ -77,12 +77,12 @@
        }
       catch(Exception $e)
        {
-        $context->log()->critical($e->getMessage(), $e);
+        $context->log()->critical($e->getMessage(), (array)$e);
        }
       catch(\Exception|\Error $e)
        {
         if($context)
-          $context->log()->critical($e->getMessage(), $e->getTrace());
+          $context->log()->critical($e->getMessage(), (array)$e);
         else
           throw $e;
        }

@@ -12,7 +12,7 @@
     public function __construct($options)
     {
       if(is_array($options))
-        if($options['value'])
+        if(isset($options['value']))
            $this->value = $options['value'];
       parent::__construct(is_array($options) ? $options : []);
     }

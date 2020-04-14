@@ -18,7 +18,7 @@
       return $this->__isset($name);
     }
    
-    public function set($name, $value, $lifetime = NULL, string $path = NULL, string $domain = NULL, bool $secure = NULL, bool $httponly = NULL): void
+    public function set($name, $value, $lifetime = NULL, string $path = NULL, string $domain = NULL, bool $secure = NULL, bool $httponly = NULL, string $samesite = null): void
     {
       if(is_array($name))
        {
@@ -40,6 +40,8 @@
           $options['secure'] = $secure;
         if($httponly !== NULL)
           $options['httponly'] = $httponly;
+        if($samesite !== NULL)
+          $options['samesite'] = $samesite;
        }
       $options ??= [];
       $options['value'] = $value;
