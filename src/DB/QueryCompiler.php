@@ -49,6 +49,7 @@
       return ['UPDATE ' . implode(" \n", array_filter([
         $uc->table($units['table']),
         $uc->join($units['join']),
+        $uc->set($units['fields']),
         $uc->where($units['where']),
         $uc->order($units['order']),
         $uc->limit($units['limit'])])), $uc->bindings()];
