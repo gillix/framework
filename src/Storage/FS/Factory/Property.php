@@ -12,7 +12,7 @@
     {
       $val = $info['content'];
       $extension = $info['extension'];
-      if((!$extension && (is_bool($val) || is_int($val) || is_float($val) || is_string($val)))
+      if((!$extension && isset($info['content']) && (is_bool($val) || is_int($val) || is_float($val) || is_string($val)))
        || ($extension && in_array($extension, ['float', 'int', 'bool', 'string', 'str'])))
         return true;
       return false;
@@ -24,7 +24,7 @@
 
       $value = null;
       // loading value of property
-      if($info['content'])
+      if(isset($info['content']))
        {
         // if creates from parent .node definition
         $value = $info['content'];

@@ -173,7 +173,7 @@
       if($factories)
         foreach($factories as $pretender)
           if($pretender::probe($info, $current))
-            $factory = $pretender;
+           { $factory = $pretender; break; }
       if(!$factory)
         foreach(self::$factories as $pretender)
           if($pretender::probe($info, $current))
