@@ -292,7 +292,16 @@
         foreach($cache[$id] as $name => $value)
           $extra[] = $options && $options[$name] ? $options[$name] : $value;
        }
-      if(isset($extra))
+      elseif(is_array($this->capture))
+       {
+        $extra = [];
+        foreach($this->capture as $name)
+          if($options && $options[$name])
+            $extra[] = $options[$name];
+          else
+            break;
+       }
+      if(isset($extra) && count($extra))
         return implode('/', $extra).'/';
       return NULL;
     }
