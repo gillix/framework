@@ -70,13 +70,13 @@
       return NULL;
     }
   
-    public static function super(array $arguments = NULL): I\Invokable
+    public static function super(array $arguments = NULL)
     {
       $callstack = Context::get()->callstack();
       if($callstack->empty()) return NULL;
      
       $method = $callstack->current();
-      if($super = $method->parent()->super()->get($method->name(), 'method'))
+      if($super = $method->owner()->super()->get($method->name(), 'method'))
         return $super->apply($method->parent(), $arguments);
       return NULL;
     }
