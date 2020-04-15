@@ -88,7 +88,7 @@
         return $this->get($column);
      
       return $this->get(static function(\PDOStatement $stmt) use($column) {
-         return $stmt->fetchAll(\PDO::FETCH_COLUMN, is_int($column) ? $column : 1);
+         return $stmt->fetchAll(\PDO::FETCH_COLUMN, is_int($column) ? $column : 0);
       });
     }
    
