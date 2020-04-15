@@ -19,7 +19,7 @@
   * @method value($column = NULL)
   * @method I\Result one()
   * @method I\Paginated page($page, $pp = NULL)
-  * @method iterable column($index)
+  * @method iterable column($index = NULL)
   * @method object($class = NULL, $args = NULL)
   */
  class WhereClause extends QueryClause implements I\WhereClause

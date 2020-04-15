@@ -15,9 +15,9 @@
         $uc->from($units['table']),
         $uc->join($units['join']),
         $uc->where($units['where']),
-        $uc->order($units['order']),
         $uc->group($units['group']),
         $uc->having($units['having']),
+        $uc->order($units['order']),
         $uc->limit($units['limit']),
         $uc->offset($units['offset'])])), $uc->bindings()];
     }

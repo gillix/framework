@@ -33,7 +33,8 @@
     public function delete(array $where = NULL): int
     {
       $query = Delete::createFrom($this);
-      $query->where($where);
+      if($where !== null)
+        $query->where($where);
       return $query->perform();
     }
 
