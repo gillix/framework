@@ -60,16 +60,16 @@
   
     public function has(string $id): bool
     {
-      $id = self::key($id);
-      if(isset($this->instances) && array_key_exists($id, $this->instances))
+      $key = self::key($id);
+      if(isset($this->instances) && array_key_exists($key, $this->instances))
         return true;
-      if(isset($this->makers) && array_key_exists($id, $this->makers))
+      if(isset($this->makers) && array_key_exists($key, $this->makers))
         return true;
       if(isset($this->parents))
         foreach($this->parents as $parent)
           if($result = $parent->has($id))
             return $result;
-      if(isset(self::$_makers) && array_key_exists($id, self::$_makers))
+      if(isset(self::$_makers) && array_key_exists($key, self::$_makers))
         return true;
       return false;
     }
@@ -101,31 +101,31 @@
   
     protected function find($id)
     {
-      $id = self::key($id);
-      if(isset($this->instances) && array_key_exists($id, $this->instances))
-        return $this->instances[$id];
-      if(isset($this->makers) && array_key_exists($id, $this->makers))
-        return $this->makers[$id];
+      $key = self::key($id);
+      if(isset($this->instances) && array_key_exists($key, $this->instances))
+        return $this->instances[$key];
+      if(isset($this->makers) && array_key_exists($key, $this->makers))
+        return $this->makers[$key];
       if(isset($this->parents))
         foreach($this->parents as $parent)
           if($result = $parent->find($id))
             return $result;
-      if(isset(self::$_makers) && array_key_exists($id, self::$_makers))
-        return self::$_makers[$id];
+      if(isset(self::$_makers) && array_key_exists($key, self::$_makers))
+        return self::$_makers[$key];
       return NULL;
     }
   
     public function maker($id)
     {
-      $id = self::key($id);
-      if(isset($this->makers) && array_key_exists($id, $this->makers))
-        return $this->makers[$id];
+      $key = self::key($id);
+      if(isset($this->makers) && array_key_exists($key, $this->makers))
+        return $this->makers[$key];
       if(isset($this->parents))
         foreach($this->parents as $parent)
           if($result = $parent->maker($id))
             return $result;
-      if(isset(self::$_makers) && array_key_exists($id, self::$_makers))
-        return self::$_makers[$id];
+      if(isset(self::$_makers) && array_key_exists($key, self::$_makers))
+        return self::$_makers[$key];
       return NULL;
     }
   
