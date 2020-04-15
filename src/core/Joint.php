@@ -37,7 +37,7 @@
       return $this->parent()->path($options).
              $this->name().
             ($this->origin() instanceof I\Node ? '/' : NULL).
-          ((($options === NULL || $options['clean'] !== true) && $this->origin() instanceof I\Rewriter) ? $this->origin()->extend($options) : NULL);
+          ((($options !== NULL && $options['clean'] !== true) && $this->origin()->is('NODE')) ? $this->origin()->extend($options) : NULL);
     }
     public function childOf(I\Joint $parent): bool { return $this->parent()->sameAs($parent) || $this->parent()->childOf($parent); }
     public function origin(): I\Entity { return $this->_binder->origin(); }
