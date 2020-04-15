@@ -77,7 +77,7 @@
      
       $method = $callstack->current();
       if($super = $method->parent()->super()->get($method->name(), 'method'))
-        $super->apply($method->parent(), $arguments);
+        return $super->apply($method->parent(), $arguments);
       return NULL;
     }
   
