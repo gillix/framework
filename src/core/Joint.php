@@ -36,8 +36,8 @@
     {
       return $this->parent()->path($options).
              $this->name().
-            ($this->origin()->is('NODE') ? '/' : NULL).
-          ((($options !== NULL && $options['clean'] !== true) && $this->origin()->is('NODE')) ? $this->origin()->extend($options) : NULL);
+            ($this->origin()->type() === 'NODE' ? '/' : NULL).
+          ((($options !== NULL && $options['clean'] !== true) && $this->origin()->type() === 'NODE') ? $this->origin()->extend($options) : NULL);
     }
     public function childOf(I\Joint $parent): bool { return $this->parent()->sameAs($parent) || $this->parent()->childOf($parent); }
     public function origin(): I\Entity { return $this->_binder->origin(); }
