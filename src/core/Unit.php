@@ -31,7 +31,7 @@
     public function path(?array $options = NULL): string
     {
       return isset($this->_joint) ? $this->_joint->path($options) : '/'.
-          ((($options !== NULL && $options['clean'] !== true) && $this instanceof I\Rewriter) ? $this->extend($options) : NULL);
+          ((($options === NULL || $options['clean'] !== true) && $this instanceof I\Rewriter) ? $this->extend($options) : NULL);
     }
     public function childOf(I\Joint $parent): bool { return isset($this->_joint) ? $this->_joint->childOf($parent) : false; }
     public function origin(): I\Entity { return $this; }
