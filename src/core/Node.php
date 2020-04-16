@@ -268,7 +268,10 @@
           else
             return $child->explore($rest);
         if($this->capture($my))
-          return $this->explore($rest, $type, $strict);
+          if($rest)
+            return $this->explore($rest, $type, $strict);
+          else
+            return $this;
        }
       return NULL;
     }
