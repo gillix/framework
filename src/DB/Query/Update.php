@@ -13,6 +13,12 @@
    
     public function set($name, $value = NULL): I\Update
     {
+      if(is_array($name))
+       {
+        foreach($name as $key => $val)
+          $this->set($key, $val);
+        return $this;
+       }
       $this->units['fields'][$name] = $value;
       return $this;
     }
