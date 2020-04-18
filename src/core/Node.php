@@ -295,11 +295,11 @@
         foreach($cache[$id] as $name => $value)
           $extra[] = $options && $options[$name] ? $options[$name] : $value;
        }
-      elseif(is_array($this->capture))
+      elseif($options && is_array($this->capture))
        {
         $extra = [];
         foreach($this->capture as $name)
-          if($options && $options[$name])
+          if($options[$name])
             $extra[] = $options[$name];
           else
             break;
@@ -312,10 +312,16 @@
     protected function capture(string $value): bool
     {
       if($this->capture === NULL || !count($this->capture)) return false;
-      $key = array_shift($this->capture);
-      $id = $this->id().':captured';
       $context = Context::get();
       $cache = $context->temporary();
+      
+      $id = $this->id().':capture';
+      if(!isset($cache[$id]))
+        $cache[$id] = $this->capture;
+      $capture = $cache[$id];
+      $key = array_shift($capture);
+          
+      $id = $this->id().':captured';
       if(!isset($cache[$id])) $cache[$id] = [];
       $cache[$id][$key] = $value;
       $context->input()[$key] = $value;

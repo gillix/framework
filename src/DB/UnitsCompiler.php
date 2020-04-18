@@ -154,7 +154,7 @@
     {
       if(!$data) return '';
       foreach($data as $name => $value)
-        $data[$name] = "$name = {$this->mark($value)}";
+        $data[$name] = "{$this->escape($name)} = {$this->mark($value)}";
       return $this->list($data);
     }
    
@@ -171,7 +171,7 @@
         $data = $data->target();
       if($data instanceof Query\I\Select)
         return $this->sub($data);
-      return "({$this->list(array_keys($data))}) VALUES ({$this->mark($data)})";
+      return "({$this->listNames(array_keys($data))}) VALUES ({$this->mark($data)})";
     }
   
     protected function condition($field, $operator, $value): string
@@ -234,9 +234,20 @@
       return $cond;
     }
   
+    protected function escape(string $name): string
+    {
+        // TODO: we can escape just name of field or table, but not all together
+      return "$name";
+    }
+    
     protected function list($items, $glue = ', ')
     {
       return implode($glue, $items);
+    }
+  
+    protected function listNames(array $items, $glue = ', ')
+    {
+      return $this->list(array_map(fn($name) => $this->escape($name), $items), $glue);
     }
   
     protected function listMarks($values, $glue = ', ')
