@@ -318,7 +318,7 @@
       $id = $this->id().':capture';
       if(!isset($cache[$id]))
         $cache[$id] = $this->capture;
-      $capture = $cache[$id];
+      $capture = $cache[$id]->array();
       $key = array_shift($capture);
           
       $id = $this->id().':captured';
