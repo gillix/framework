@@ -320,7 +320,8 @@
         $cache[$id] = $this->capture;
       $capture = $cache[$id]->array();
       $key = array_shift($capture);
-          
+      $cache[$id] = $capture;
+      
       $id = $this->id().':captured';
       if(!isset($cache[$id])) $cache[$id] = [];
       $cache[$id][$key] = $value;
