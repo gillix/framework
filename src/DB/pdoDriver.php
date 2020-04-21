@@ -124,7 +124,21 @@
         [$query, $values] = $query->compile();
       $stopwatch = Stopwatch::start();
 // TODO: ловить исключение
-      $result = $execute($query, $values);
+        try
+         {
+          $result = $execute($query, $values);
+         }
+        catch(\PDOException $e)
+         {
+          Context::log()->error($e->getMessage(), [
+             'query' => $query,
+             'values' => $values,
+             'file' => $e->getFile(),
+             'line' => $e->getLine(),
+             'trace' => $e->getTrace()
+          ]);
+          return null;
+         }
       $time = $stopwatch->elapsed()->get();
 //      Context::event('db.query')->fire($query, $values, $time);
       Context::log()->debug((string)$query, compact('values', 'time'));
