@@ -101,7 +101,7 @@
       /** @var string $scheme */
       $scheme = $scheme ? "{$scheme}://" : '//';
        /** @var string $port */
-      $port = $port && (int)$port !== self::$ports[$scheme]  ? ":{$port}" : NULL;
+      $port = ($port && (int)$port !== self::$ports[$scheme])  ? ":{$port}" : NULL;
       /** @var string $pass */
       $pass = $pass ? ":{$pass}" : NULL;
       /** @var string $user */
