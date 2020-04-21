@@ -99,9 +99,9 @@
     {
       extract($this->parts, NULL);
       /** @var string $scheme */
-      $scheme = $scheme ? "{$scheme}://" : '//';
-       /** @var string $port */
+      /** @var string $port */
       $port = ($port && (int)$port !== self::$ports[$scheme])  ? ":{$port}" : NULL;
+      $scheme = $scheme ? "{$scheme}://" : '//';
       /** @var string $pass */
       $pass = $pass ? ":{$pass}" : NULL;
       /** @var string $user */
