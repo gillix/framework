@@ -94,7 +94,15 @@
         $this->parts[$name] = $value;
       return $this->parts[$name];
     }
- 
+
+    public function with(array $params = []): I\URI
+    {
+      $new = new static($this);
+      foreach($params as $name => $value)
+        $new->param($name, $value);
+      return $new;
+    }
+
     public function __toString()
     {
       extract($this->parts, NULL);

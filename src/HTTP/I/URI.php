@@ -16,5 +16,6 @@
     public function get(string $name);
     public function parts(array $value = NULL): array;
     public function has(string $name): bool;
+    public function with(array $params = []): self;
     public function __toString();
  }
