@@ -277,7 +277,7 @@
          {
           $object = $reflector->newInstanceWithoutConstructor();
           $object->factory($this);
-          if(isset($constructor))
+          if(isset($constructor) || ($constructor = $reflector->getConstructor()))
             $constructor->invokeArgs($object, $arguments ?? []);
          }
         else
