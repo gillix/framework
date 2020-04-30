@@ -3,12 +3,20 @@
     "description": "Gillix PHP framework",
     "type": "library",
     "require": {
-        "geoip2/geoip2": "^2.0",
         "monolog/monolog": "^2.0",
         "php": "^7.4",
-        "ext-apcu": "*",
+        "symfony/cache": "*",
         "ext-json": "*",
+        "ext-pdo": "*",
         "punic/punic": "*"
+    },
+    "suggest": {
+        "geoip2/geoip2": "Allows detect geo information of user",
+        "ext-yaml": "In case you want to use yamle format for configurations",
+        "ext-apcu": "Required for APCu cache storage",
+        "ext-memcached": "Required for Memcached cache storage",
+        "ext-redis": "For using Redis as cache storage",
+        "predis/predis": "Alternative ability for Redis cache storage"
     },
     "license": "MIT",
     "authors": [

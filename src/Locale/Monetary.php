@@ -17,6 +17,6 @@
   
     public function format($number, $currency = NULL, string $width = NULL, string $kind = 'standard'): string
     {
-      return (new Currency($this->locale, $currency))->format($number);
+      return (new Currency($this->locale, $currency))->format($number, $width, $kind);
     }
  }
