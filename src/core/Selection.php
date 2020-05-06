@@ -132,7 +132,7 @@
       return new static(array_map($callback, $this->array()));
     }
   
-    protected function array(): array
+    public function array(): array
     {
       $array = $this->exchangeArray([]);
       $this->exchangeArray($array);
