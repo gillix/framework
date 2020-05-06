@@ -47,7 +47,7 @@
           if(count($factories))
             $options['use'] = $factories;
          }
-        if($this->bind)
+        if(isset($this->bind))
           $options['bind'] = $this->bind;
         $this->factory = new Library\Factory($options);
        }

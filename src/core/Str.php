@@ -35,8 +35,9 @@
     
     public function __call($name, $arguments)
     {
-      if(method_exists($this->value, $name))
-        return call_user_func_array([$this->value, $name], $arguments);
+      $value = $this->get();
+      if(method_exists($value, $name))
+        return call_user_func_array([$value, $name], $arguments);
       return NULL; // бросать исключение
     }
  }
