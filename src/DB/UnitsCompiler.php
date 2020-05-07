@@ -167,6 +167,18 @@
     public function values($data): string
     {
       if(!$data) return '';
+      if(is_array($data) && is_int(key($data)) && is_array($data[0]))
+       {
+        // insert multiple rows
+        $average = array_intersect_key(...$data);
+        $rows = [];
+        foreach($data as $row)
+         {
+          $row = array_intersect_key($row, $average);
+          $rows[] = "({$this->mark($row)})";
+         }
+        return "({$this->listNames(array_keys($average))}) VALUES {$this->list($rows)}";
+       }
       if($data instanceof Query\I\QueryClause)
         $data = $data->target();
       if($data instanceof Query\I\Select)
