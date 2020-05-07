@@ -31,6 +31,14 @@
     public function lower(): I\_string { return new _string(strtolower($this->__string)); }
     public function upper(): I\_string { return new _string(strtoupper($this->__string)); }
     public static function format(string $format, ...$arguments): I\_string { return new _string(sprintf($format, ...$arguments)); }
+    /**
+     * get parsed from markdown to html
+     */
+    public function md(): _string
+    {
+      $parser = new \Parsedown();
+      return new _string($parser->line((string)$this->__string));
+    }
     public function __toString() { return (string)$this->__string; }
  }
  
