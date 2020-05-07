@@ -19,7 +19,7 @@
   * @method I\Searchable limit(int $count, int $offset = NULL)
   * @method I\Searchable offset(int $offset)
   * @method iterable get($callback = NULL)
-  * @method array one()
+  * @method I\Result one()
   * @method Paginated page($page, $pp = NULL)
   * @method Aggregated aggregated($page, $pp = NULL)
   * @method iterable column($index)
