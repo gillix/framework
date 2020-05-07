@@ -32,7 +32,17 @@
     {
       return $this->value === $other;
     }
-    
+
+    /**
+     * get parsed from markdown to html
+     * @return _string
+     */
+    public function md(): _string
+    {
+      $parser = new \Parsedown();
+      return new _string($parser->line((string)$this->value));
+    }
+
     public function __call($name, $arguments)
     {
       $value = $this->get();
