@@ -36,8 +36,7 @@
      */
     public function md(): _string
     {
-      $parser = new \Parsedown();
-      return new _string($parser->line((string)$this->__string));
+      return new _string(\Parsedown::instance()->setBreaksEnabled(true)->line($this->__string));
     }
     public function __toString() { return (string)$this->__string; }
  }
