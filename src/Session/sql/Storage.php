@@ -24,7 +24,7 @@
  
     public function read(string $id): array
     {
-      return unserialize($this->db->from($this->table)->where('id', $id)->value('data'), false) ?? [];
+      return unserialize($this->db->from($this->table)->where('id', $id)->value('data'), false) ?: [];
     }
    
     public function write(string $id, array $data, int $lifetime = NULL): void
