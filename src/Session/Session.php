@@ -109,11 +109,11 @@
       return $this->started;
     }
 
-    public function create(int $lifetime = 0): bool
+    public function create(int $lifetime = 0, array $options = []): bool
     {
       if($this->started)
         $this->destroy();
-      return $this->started = (bool)$this->id->create($lifetime ?? $this->lifetime);
+      return $this->started = (bool)$this->id->create($lifetime ?? $this->lifetime, $options);
     }
 
     protected function save(): void

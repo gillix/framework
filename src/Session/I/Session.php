@@ -13,5 +13,5 @@
     public function refresh(): void;
     public function destroy(): void;
     public function started(): bool;
-    public function create(int $lifetime = 0): bool;
+    public function create(int $lifetime = 0, array $options = []): bool;
  }
