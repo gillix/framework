@@ -35,18 +35,18 @@
       return (isset($this->id) && $this->id !== NULL) || $this->cookie->has($this->key);
     }
  
-    public function create(int $lifetime = 0): string
+    public function create(int $lifetime = 0, array $options = []): string
     {
       $this->id = $this->generate();
       $this->cookie->set(
           $this->key,
           $this->id,
           $lifetime,
-          $this->options['path'] ?? '/',
-          $this->options['domain'] ?? null,
-          $this->options['secure'] ?? true,
-          $this->options['httponly'] ?? true,
-          $this->options['samesite'] ?? 'none'
+          $options['path'] ?? $this->options['path'] ?? '/',
+          $options['domain'] ?? $this->options['domain'] ?? null,
+          $options['secure'] ?? $this->options['secure'] ?? true,
+          $options['httponly'] ?? $this->options['httponly'] ?? true,
+          $options['samesite'] ?? $this->options['samesite'] ?? 'none'
       );
       return $this->id;
     }
