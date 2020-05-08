@@ -10,7 +10,7 @@
  {
     protected Cache\I\Persistent $cache;
     
-    public function __construct()
+    public function __construct(array $options = [])
     {
       $this->cache = Context::persistent();
       if(!$this->cache)

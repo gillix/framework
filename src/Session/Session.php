@@ -25,7 +25,7 @@
        {
         include_once $file;
         if(class_exists($class = "\glx\Session\\{$storage}\Storage"))
-          $this->storage = new $class();
+          $this->storage = new $class($options);
        }
       if(!isset($this->storage))
         throw new Exception('Session storage not configured properly.');
