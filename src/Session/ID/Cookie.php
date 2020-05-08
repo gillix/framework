@@ -10,16 +10,16 @@
  {
     protected string $key;
     protected HTTP\I\Cookie $cookie;
-    protected bool $secure;
+    protected array $options;
     
     public const DEFAULT_KEY = 'GLX-SESSION';
   
-    public function __construct(string $key = NULL, HTTP\I\Cookie $cookie = NULL, bool $secure = true)
+    public function __construct(string $key = NULL, HTTP\I\Cookie $cookie = NULL, array $options = [])
     {
-      $this->cookie = $cookie ?? (($http = Context::http()) ? $http->cookie() : NULL);
-      $this->secure = $secure;
-      if(!$this->cookie)
-        throw new Exception('Can`t resolve session ID by cookie in non-http context');
+      if(!$cookie && !($http = Context::http()))
+          throw new Exception('Can`t resolve session ID by cookie in non-http context');
+      $this->cookie = $cookie ?? $http->cookie();
+      $this->options = $options;
       $this->key = $key ?? self::DEFAULT_KEY;
     }
   
@@ -38,7 +38,16 @@
     public function create(int $lifetime = 0): string
     {
       $this->id = $this->generate();
-      $this->cookie->set($this->key, $this->id, $lifetime, '/', NULL, $this->secure, true);
+      $this->cookie->set(
+          $this->key,
+          $this->id,
+          $lifetime,
+          $this->options['path'] ?? '/',
+          $this->options['domain'] ?? null,
+          $this->options['secure'] ?? true,
+          $this->options['httponly'] ?? true,
+          $this->options['samesite'] ?? 'none'
+      );
       return $this->id;
     }
   

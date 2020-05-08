@@ -56,7 +56,7 @@
         $options ??= [];
         if($lifetime)
           $options['lifetime'] = $lifetime;
-        $this->session[$channel] = new Session\Session(new Session\ID\Cookie($channel, $this->cookie, $options['secure'] ?? true), $options);
+        $this->session[$channel] = new Session\Session(new Session\ID\Cookie($channel, $this->cookie, $options), $options);
        }
       return $this->session[$channel];
     }
