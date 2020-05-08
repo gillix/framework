@@ -10,9 +10,10 @@
     protected ID\I\Provider $id;
     protected I\Storage $storage;
     protected bool $started = false;
+    protected bool $unsaved = false;
     protected int $lifetime = 0;
     protected const DEFAULT_STORAGE = 'cache';
-    
+
     public function __construct(ID\I\Provider $id, array $options = [])
     {
       $this->id = $id;
@@ -42,6 +43,7 @@
     {
       $this->load() || $this->create();
       $this->content[$name] = $value;
+      $this->unsaved = true;
     }
   
     public function destroy(): void
@@ -119,13 +121,15 @@
     protected function save(): void
     {
       $this->storage->write((string)$this->id, $this->content, $this->lifetime);
+      $this->unsaved = false;
     }
 
     protected function close(): void
     {
       if($this->started)
        {
-        $this->save();
+        if($this->unsaved)
+          $this->save();
         $this->started = false;
        }
     }

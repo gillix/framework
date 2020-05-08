@@ -13,7 +13,7 @@
     protected string $table;
     protected const DEFAULT_LIFETIME = 24*60*60;
     protected const DEFAULT_TABLE = 'session.session';
-  
+
     public function __construct(array $options = [])
     {
       $this->db = Components::get('db');
@@ -24,7 +24,7 @@
  
     public function read(string $id): array
     {
-      return unserialize($this->db->from($this->table)->where('id', $id)->value('data'), false) ?: [];
+      return unserialize($this->db->from($this->table)->where('id', $id)->value('data')) ?: [];
     }
    
     public function write(string $id, array $data, int $lifetime = NULL): void
