@@ -94,9 +94,8 @@
         throw $e;
        }
       $stopwatch->tick('execute');
-      $this->server->send();
-      $stopwatch->tick('send');
       $this->context->log('stat')->info('Launcher timing', $stopwatch->stat());
+      $this->server->send();
       return $stopwatch;
     }
   

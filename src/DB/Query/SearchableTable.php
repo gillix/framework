@@ -17,7 +17,8 @@
   * @method SearchableTable offset(int $offset)
   * @method iterable get($callback = NULL)
   * @method I\Result one()
-  * @method Paginated page($page, $pp = NULL)
+  * @method value($column = NULL)
+  * @method I\Paginated page($page, $pp = NULL)
   * @method iterable column($index)
   * @method object($class = NULL, $args = NULL)
   */
