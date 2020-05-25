@@ -20,9 +20,9 @@
   * @method static temporary(string $name = NULL)
   * @method static Context\I\Callstack callstack()
   * @method static \glx\I\Locale locale(\glx\I\Locale $locale = NULL)
-  * @method static input(string $name = NULL)
+  * @method static Common\I\Collection input(string $name = NULL)
   * @method static Events\I\Event|Events\Manager event(string $name = NULL)
-  * @method static Common\I\Collection config()
+  * @method static ?Common\I\Collection config()
   * @method static HTTP\I\Server http()
   * @method static Log\I\Channel log(string $channel = NULL)
   */
