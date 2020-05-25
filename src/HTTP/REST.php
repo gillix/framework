@@ -16,6 +16,7 @@
         try
          {
           $request = (array)json_decode($requestBody, true, 512, JSON_THROW_ON_ERROR);
+          $request = new Common\Collection($request);
           $this->context->input()->link(new Common\Collection($request));
          }
         catch(\JsonException $e) {}
@@ -28,7 +29,7 @@
        {
         return json_encode($result = $target->call(
             $index ?? self::DEFAULT_INDEX,
-            $request ?? $this->context->http()->request()->input()->array()
+            [$request ?? $this->context->http()->request()->input()]
         ), JSON_THROW_ON_ERROR);
        }
       catch(RestError $e) { return json_encode(['error' => $e->getMessage()], JSON_THROW_ON_ERROR); }
