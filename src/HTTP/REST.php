@@ -28,7 +28,7 @@
        {
         return json_encode($result = $target->call(
             $index ?? self::DEFAULT_INDEX,
-            $request ?? $this->context->input()->array()
+            $request ?? $this->context->http()->request()->input()->array()
         ), JSON_THROW_ON_ERROR);
        }
       catch(RestError $e) { return json_encode(['error' => $e->getMessage()], JSON_THROW_ON_ERROR); }
