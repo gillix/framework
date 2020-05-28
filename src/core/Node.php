@@ -416,7 +416,7 @@
     {
       $classes = class_parents(static::class);
       $classes[] = static::class;
-      return array_merge(...array_filter($classes, fn($item) => isset($item::$_reserved)));
+      return array_merge(...array_map(fn($item) => $item::$_reserved, array_filter($classes, fn($item) => isset($item::$_reserved))));
     }
  }
  
