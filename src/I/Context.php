@@ -14,7 +14,7 @@
     public function callstack(): CallStack;
     public function persistent(): Cache\I\Persistent;
     public function temporary(string $name = NULL);
-    public function input(string $name = NULL): Common\I\Collection;
+    public function input(string $name = NULL);
     public function http(): ?HTTP\I\Server;
     public function log(string $channel = NULL): Log\I\Channel;
     public function locale(\glx\I\Locale $locale = NULL): \glx\I\Locale;

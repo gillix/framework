@@ -71,7 +71,7 @@
       return $this->temporary;
     }
  
-    public function input(string $name = NULL): Common\I\Collection
+    public function input(string $name = NULL)
     {
       if($name)
         return $this->input[$name];
