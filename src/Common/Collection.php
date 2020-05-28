@@ -64,8 +64,10 @@
       $this->__unset($name);
     }
   
-    public function array(): array
+    public function array(bool $linked = false): array
     {
+      if($linked && $this->linked)
+        return array_merge($this->content, ...array_map(fn($item) => $item->array(true), $this->linked));
       return $this->content;
     }
    

@@ -236,7 +236,7 @@
  }
  
  Manager::storage('fs', Storage::class);
- Manager::autoloader(function(string $label, ?array $options = NULL): \glx\Storage\I\Storage {
+ Manager::autoloader(function(string $label, ?array $options = NULL): ?\glx\Storage\I\Storage {
     $options = $options ?? [];
     if(Storage::valid($label))
       return Storage::new(array_merge(['path' => $label], $options));

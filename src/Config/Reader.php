@@ -24,13 +24,9 @@ class Reader implements I\Reader
  
    public function parse(string $content): array
    {
-     return $this->parser::parse($content, [ 'include' => static function($value){
-        $include = (array)$value;
-        $result = [];
-        foreach($include as $path)
-          $result = array_merge($result, static::read($path));
-        return $result;
-     }]);
+     return $this->parser::parse($content, [
+        'include' => fn($value) => array_merge(...array_map(fn($item) => static::read($item), (array)$value))
+     ]);
    }
    
    public static function get(string $format = NULL): I\Reader
