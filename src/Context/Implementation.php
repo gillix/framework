@@ -5,6 +5,7 @@
  use glx\Cache;
  use glx\core;
  use glx\Common;
+ use glx\Error;
  use glx\HTTP;
  use glx\Locale;
  use glx\Log;
@@ -24,8 +25,8 @@
     private \glx\I\Locale $locale;
     private \glx\I\Logger $logger;
     private Common\I\Collection $input;
-    private ?Common\I\Collection $config = NULL;
-    private ?HTTP\I\Server $http = NULL;
+    private Common\I\Collection $config;
+    private HTTP\I\Server $http;
     private array $options;
     private I\Profile $profile;
     private Events\Manager $events;
@@ -33,12 +34,12 @@
  
     public function __construct(array $options = [])
     {
-      $this->options = $options;
+//      $this->options = $options;
       $this->callstack = new CallStack();
-      $this->persistent = new Cache\Persistent($this->options['cache'] ?? []);
+      $this->persistent = new Cache\Persistent($options['cache'] ?? []);
       $this->temporary = new Cache\Temporary();
       $this->events = new Events\Manager();
-      $this->input = new Common\Collection($content = []); // TODO: добавлять переменные веб-контекста
+      $this->input = new Common\Collection($content = []);
       if($options['input'] && $options['input'] instanceof Common\I\Collection)
         $this->input->link($options['input']);
       if($options['config'] && $options['config'] instanceof Common\I\Collection)
@@ -90,8 +91,10 @@
       return $this->locale;
     }
   
-    public function http(): ?HTTP\I\Server
+    public function http(): HTTP\I\Server
     {
+      if(!isset($this->http))
+        throw new Error('HTTP server parameters is not available in non-HTTP context');
       return $this->http;
     }
   
@@ -102,9 +105,9 @@
       return $this->logger;
     }
    
-    public function config(): ?Common\I\Collection
+    public function config(): Common\I\Collection
     {
-      return $this->config;
+      return $this->config ?? new Common\ReadOnly($empty = []);
     }
  
     public function event(string $name = NULL)
