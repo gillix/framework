@@ -16,10 +16,17 @@
         try
          {
           $request = (array)json_decode($requestBody, true, 512, JSON_THROW_ON_ERROR);
-          $request = new Common\Collection($request);
-          $this->context->input()->link(new Common\Collection($request));
+          if($request)
+           {
+            $request = new Common\Collection($request);
+            $this->context->input()->link($request);
+           }
+          else $request = null;
          }
         catch(\JsonException $e) {}
+
+      // set json as returned type
+      $this->server->response()->contentType('application.json');
 
       // index by request type
       $index = $this->config->index;
