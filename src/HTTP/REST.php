@@ -26,7 +26,7 @@
         catch(\JsonException $e) {}
 
       // set json as returned type
-      $this->server->response()->contentType('application.json');
+      $this->server->response()->contentType('application/json');
 
       // index by request type
       $index = $this->config->index;
