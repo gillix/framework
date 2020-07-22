@@ -1,16 +1,18 @@
 <?php
  namespace glx\Log\I;
  
- interface Channel
+ use Psr\Log\LoggerInterface;
+
+ interface Channel extends LoggerInterface
  {
    public function name(): string;
-   public function debug(...$arguments): self;
-   public function info(...$arguments): self;
-   public function notice(...$arguments): self;
-   public function warning(...$arguments): self;
-   public function error(...$arguments): self;
-   public function critical(...$arguments): self;
-   public function alert(...$arguments): self;
-   public function emergency(...$arguments): self;
-   public function log(...$arguments): self;
+   public function debug($message, array $context = []): self;
+   public function info($message, array $context = []): self;
+   public function notice($message, array $context = []): self;
+   public function warning($message, array $context = []): self;
+   public function error($message, array $context = []): self;
+   public function critical($message, array $context = []): self;
+   public function alert($message, array $context = []): self;
+   public function emergency($message, array $context = []): self;
+   public function log($level, $message, array $context = []): self;
  }

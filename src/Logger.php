@@ -47,57 +47,57 @@
       return $this->default;
     }
   
-    public function debug(...$arguments): Log\I\Channel
+    public function debug($message, array $context = []): Log\I\Channel
     {
-      call_user_func_array([$this->default(), __FUNCTION__], $arguments ?? []);
+      call_user_func([$this->default(), __FUNCTION__], $message, $context);
       return $this;
     }
-   
-    public function info(...$arguments): Log\I\Channel
+
+    public function info($message, array $context = []): Log\I\Channel
     {
-      call_user_func_array([$this->default(), __FUNCTION__], $arguments ?? []);
+      call_user_func([$this->default(), __FUNCTION__], $message, $context);
       return $this;
     }
-   
-    public function notice(...$arguments): Log\I\Channel
+
+    public function notice($message, array $context = []): Log\I\Channel
     {
-      call_user_func_array([$this->default(), __FUNCTION__], $arguments ?? []);
+      call_user_func([$this->default(), __FUNCTION__], $message, $context);
       return $this;
     }
-   
-    public function warning(...$arguments): Log\I\Channel
+
+    public function warning($message, array $context = []): Log\I\Channel
     {
-      call_user_func_array([$this->default(), __FUNCTION__], $arguments ?? []);
+      call_user_func([$this->default(), __FUNCTION__], $message, $context);
       return $this;
     }
-   
-    public function error(...$arguments): Log\I\Channel
+
+    public function error($message, array $context = []): Log\I\Channel
     {
-      call_user_func_array([$this->default(), __FUNCTION__], $arguments ?? []);
+      call_user_func([$this->default(), __FUNCTION__], $message, $context);
       return $this;
     }
-   
-    public function critical(...$arguments): Log\I\Channel
+
+    public function critical($message, array $context = []): Log\I\Channel
     {
-      call_user_func_array([$this->default(), __FUNCTION__], $arguments ?? []);
+      call_user_func([$this->default(), __FUNCTION__], $message, $context);
       return $this;
     }
-   
-    public function alert(...$arguments): Log\I\Channel
+
+    public function alert($message, array $context = []): Log\I\Channel
     {
-      call_user_func_array([$this->default(), __FUNCTION__], $arguments ?? []);
+      call_user_func([$this->default(), __FUNCTION__], $message, $context);
       return $this;
     }
-   
-    public function emergency(...$arguments): Log\I\Channel
+
+    public function emergency($message, array $context = []): Log\I\Channel
     {
-      call_user_func_array([$this->default(), __FUNCTION__], $arguments ?? []);
+      call_user_func([$this->default(), __FUNCTION__], $message, $context);
       return $this;
     }
-   
-    public function log(...$arguments): Log\I\Channel
+
+    public function log($level, $message, array $context = []): Log\I\Channel
     {
-      call_user_func_array([$this->default(), __FUNCTION__], $arguments ?? []);
+      call_user_func([$this->default(), __FUNCTION__], $level, $message, $context);
       return $this;
     }
 
