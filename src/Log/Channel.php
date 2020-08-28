@@ -62,7 +62,7 @@
          }
       if(!$handlers)
        {
-        if(($arguments = $handlers[self::DEFAULT_HANDLER][1]) && ($level = self::$levels[$arguments[count($arguments) - 1]]))
+        if(($arguments = self::$handlers[self::DEFAULT_HANDLER][1]) && ($level = self::$levels[$arguments[count($arguments) - 1]]))
           $arguments[count($arguments) - 1] = $level;
         else
           $arguments[] = self::$levels[self::DEFAULT_LEVEL];
