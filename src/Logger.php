@@ -37,7 +37,7 @@
    
     public static function new($channel, array $options = NULL): Log\I\Channel
     {
-      return new Log\Channel($channel, $options);
+      return new Log\Channel($channel, $options ?? []);
     }
   
     public function default(string $channel = NULL): Log\I\Channel
