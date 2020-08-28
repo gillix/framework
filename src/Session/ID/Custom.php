@@ -18,7 +18,7 @@
       return $this->id !== NULL;
     }
  
-    public function create(int $lifetime = 0): string
+    public function create(int $lifetime = 0, array $options = []): string
     {
       return $this->id = $this->generate();
     }

@@ -53,6 +53,8 @@
         $this->locale = Locale::get('en_US');
       if($options['logger'])
         $this->logger = $options['logger'] instanceof \glx\I\Logger ? $options['logger'] : new Logger($options['logger']);
+      else
+        $this->logger = new Logger();
     }
    
     public function callstack(): I\CallStack
