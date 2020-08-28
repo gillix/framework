@@ -21,13 +21,14 @@
     protected const DEFAULT_LEVEL = 'error';
     protected static array $handlers = [
        // TODO: add all other handlers
+       // TODO: add default arguments
        'file'     => [StreamHandler::class],
        'rotate'   => [RotatingFileHandler::class],
        'fire'     => [FirePHPHandler::class],
        'console'  => [BrowserConsoleHandler::class],
        'chrome'   => [ChromePHPHandler::class],
        'phpconsole' => [PHPConsoleHandler::class],
-       'errorlog' => [ErrorLogHandler::class, [ErrorLogHandler::OPERATING_SYSTEM, self::DEFAULT_LEVEL],
+       'errorlog' => [ErrorLogHandler::class, [ErrorLogHandler::OPERATING_SYSTEM, self::DEFAULT_LEVEL]],
        'syslog'   => [SyslogHandler::class],
        'telegram' => [TelegramBotHandler::class],
        'mail'     => [NativeMailerHandler::class],
