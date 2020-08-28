@@ -1,6 +1,18 @@
 <?php
  namespace glx\Log;
  
+ use Monolog\Handler\BrowserConsoleHandler;
+ use Monolog\Handler\ChromePHPHandler;
+ use Monolog\Handler\ElasticsearchHandler;
+ use Monolog\Handler\ErrorLogHandler;
+ use Monolog\Handler\FirePHPHandler;
+ use Monolog\Handler\NativeMailerHandler;
+ use Monolog\Handler\PHPConsoleHandler;
+ use Monolog\Handler\RotatingFileHandler;
+ use Monolog\Handler\StreamHandler;
+ use Monolog\Handler\SyslogHandler;
+ use Monolog\Handler\TelegramBotHandler;
+
  class Channel implements I\Channel
  {
     protected string $name;
@@ -9,17 +21,17 @@
     protected const DEFAULT_LEVEL = 'error';
     protected static array $handlers = [
        // TODO: add all other handlers
-       'file'     => \Monolog\Handler\StreamHandler::class,
-       'rotate'   => \Monolog\Handler\RotatingFileHandler::class,
-       'fire'     => \Monolog\Handler\FirePHPHandler::class,
-       'console'  => \Monolog\Handler\BrowserConsoleHandler::class,
-       'chrome'   => \Monolog\Handler\ChromePHPHandler::class,
-       'phpconsole' => \Monolog\Handler\PHPConsoleHandler::class,
-       'errorlog' => \Monolog\Handler\ErrorLogHandler::class,
-       'syslog'   => \Monolog\Handler\SyslogHandler::class,
-       'telegram' => \Monolog\Handler\TelegramBotHandler::class,
-       'mail'     => \Monolog\Handler\NativeMailerHandler::class,
-       'elastic'  => \Monolog\Handler\ElasticsearchHandler::class,
+       'file'     => [StreamHandler::class],
+       'rotate'   => [RotatingFileHandler::class],
+       'fire'     => [FirePHPHandler::class],
+       'console'  => [BrowserConsoleHandler::class],
+       'chrome'   => [ChromePHPHandler::class],
+       'phpconsole' => [PHPConsoleHandler::class],
+       'errorlog' => [ErrorLogHandler::class, [ErrorLogHandler::OPERATING_SYSTEM, self::DEFAULT_LEVEL],
+       'syslog'   => [SyslogHandler::class],
+       'telegram' => [TelegramBotHandler::class],
+       'mail'     => [NativeMailerHandler::class],
+       'elastic'  => [ElasticsearchHandler::class],
     ];
     protected static array $levels = [
        'debug'     => \Monolog\Logger::DEBUG,
@@ -44,11 +56,17 @@
             $arguments[count($arguments) - 1] = $level;
           else
             $arguments[] = self::$levels[self::DEFAULT_LEVEL];
-          $class = self::$handlers[$handler] ?? self::$handlers[self::DEFAULT_HANDLER];
+          $class = self::$handlers[$handler][0] ?? self::$handlers[self::DEFAULT_HANDLER][0];
           $handlers[] = new $class(...$arguments);
          }
       if(!$handlers)
-        $handlers[] = new self::$handlers[self::DEFAULT_HANDLER](self::$levels[self::DEFAULT_LEVEL]);
+       {
+        if(($arguments = $handlers[self::DEFAULT_HANDLER][1]) && ($level = self::$levels[$arguments[count($arguments) - 1]]))
+          $arguments[count($arguments) - 1] = $level;
+        else
+          $arguments[] = self::$levels[self::DEFAULT_LEVEL];
+        $handlers[] = new self::$handlers[self::DEFAULT_HANDLER][0](...$arguments);
+       }
       $this->logger = new \Monolog\Logger($channel, $handlers);
     }
  
