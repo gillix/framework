@@ -1,9 +1,10 @@
 <?php
- namespace glx\Cache\E;
-
- use glx\Exception;
-
- class NotAvailable extends Exception
- {
     
- }
+    namespace glx\Cache\E;
+    
+    use glx\Exception;
+
+    class NotAvailable extends Exception
+    {
+    
+    }

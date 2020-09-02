@@ -1,8 +1,9 @@
 <?php
- namespace glx\HTTP;
- 
-
- class Error extends Status
- {
- 
- }
+    
+    namespace glx\HTTP;
+    
+    
+    class Error extends Status
+    {
+    
+    }

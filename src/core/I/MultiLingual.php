@@ -1,9 +1,10 @@
 <?php
- namespace glx\core\I;
+    
+    namespace glx\core\I;
+    
+    use glx\Common\_string;
 
- use glx\Common\_string;
- 
- interface MultiLingual 
- {
-    public function get(string $lang = NULL): _string;
- }
+    interface MultiLingual
+    {
+        public function get(string $lang = null): _string;
+    }

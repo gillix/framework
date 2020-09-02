@@ -1,5 +1,7 @@
 <?php
- 
- namespace glx\core;
- 
- class Exception extends \glx\Exception {}
+    
+    namespace glx\core;
+    
+    class Exception extends \glx\Exception
+    {
+    }

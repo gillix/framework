@@ -1,13 +1,17 @@
 <?php
- 
- namespace glx\HTTP\I;
- 
- 
- interface Cookie
- {
-    public function delete($name): void;
-    public function has(string $name): bool;
-    public function get(string $name);
-    public function set($name, $value, $lifetime = NULL, string $path = NULL, string $domain = NULL, bool $secure = NULL, bool $httponly = NULL, string $samesite = null): void;
-    public function apply(): void;
- }
+    
+    namespace glx\HTTP\I;
+    
+    
+    interface Cookie
+    {
+        public function delete($name): void;
+        
+        public function has(string $name): bool;
+        
+        public function get(string $name);
+        
+        public function set($name, $value, $lifetime = null, string $path = null, string $domain = null, bool $secure = null, bool $httponly = null, string $samesite = null): void;
+        
+        public function apply(): void;
+    }

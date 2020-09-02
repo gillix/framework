@@ -1,18 +1,20 @@
 <?php
- 
- namespace glx\Common;
- 
- require_once 'Collection.php';
- 
- class ReadOnly extends Collection
- {
-    public function __set($name, $value)
-    {
-      throw new \glx\Exception('Can`t modify read-only configuration');
-    }
+    
+    namespace glx\Common;
+    
+    use glx\Exception;
 
-    public function __unset($name)
+    require_once 'Collection.php';
+    
+    class ReadOnly extends Collection
     {
-      throw new \glx\Exception('Can`t modify read-only configuration');
+        public function __set($name, $value)
+        {
+            throw new Exception('Can`t modify read-only configuration');
+        }
+        
+        public function __unset($name)
+        {
+            throw new Exception('Can`t modify read-only configuration');
+        }
     }
- }

@@ -1,25 +1,25 @@
 <?php
- 
- namespace glx\DB\Query;
- 
- 
- class JoinCondition implements I\JoinCondition
- {
-    protected array $condition;
     
-    public function init($condition, string $type = 'on')
-    {
-      $this->condition = [ 'type' => $type, 'condition' => $condition ];
-    }
-  
-    public function inited(): bool
-    {
-      return isset($this->condition);
-    }
+    namespace glx\DB\Query;
     
-    public function condition(): array
+    
+    class JoinCondition implements I\JoinCondition
     {
-      return $this->condition ?? [];
+        protected array $condition;
+        
+        public function init($condition, string $type = 'on')
+        {
+            $this->condition = ['type' => $type, 'condition' => $condition];
+        }
+        
+        public function inited(): bool
+        {
+            return isset($this->condition);
+        }
+        
+        public function condition(): array
+        {
+            return $this->condition ?? [];
+        }
     }
- }
  

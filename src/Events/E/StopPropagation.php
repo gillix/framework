@@ -1,12 +1,13 @@
 <?php
- namespace glx\Events\E;
- 
- use Throwable;
+    
+    namespace glx\Events\E;
+    
+    use Exception;
 
- class StopPropagation extends \Exception
- {
-    public function __construct()
+    class StopPropagation extends Exception
     {
-      parent::__construct($message, $code, $previous);
+        public function __construct()
+        {
+            parent::__construct($message, $code, $previous);
+        }
     }
- }

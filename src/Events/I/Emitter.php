@@ -1,7 +1,8 @@
 <?php
- namespace glx\Events\I;
- 
- interface Emitter
- {
- }
+    
+    namespace glx\Events\I;
+    
+    interface Emitter
+    {
+    }
  

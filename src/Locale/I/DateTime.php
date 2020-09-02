@@ -1,8 +1,9 @@
 <?php
- namespace glx\Locale\I;
- 
- interface DateTime
- {
-    public function format($format = NULL): string;
-    // TODO: full format
- }
+    
+    namespace glx\Locale\I;
+    
+    interface DateTime
+    {
+        public function format($format = null): string;
+        // TODO: full format
+    }

@@ -1,5 +1,9 @@
 <?php
+    
+    namespace glx\core\E;
+    
+    use Exception;
 
- namespace glx\core\E;
- 
- class PropertyAccessAmbiguous extends \Exception {}
+    class PropertyAccessAmbiguous extends Exception
+    {
+    }

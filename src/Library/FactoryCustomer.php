@@ -1,16 +1,18 @@
 <?php
- 
- namespace glx\Library;
- 
- 
- trait FactoryCustomer
- {
-    protected I\Factory $factory;
     
-    public function factory(I\Factory $factory = NULL): I\Factory
+    namespace glx\Library;
+    
+    
+    trait FactoryCustomer
     {
-      if($factory)
-        $this->factory = $factory;
-      return $this->factory;
+        protected I\Factory $factory;
+        
+        public function factory(I\Factory $factory = null): I\Factory
+        {
+            if ($factory) {
+                $this->factory = $factory;
+            }
+            
+            return $this->factory;
+        }
     }
- }

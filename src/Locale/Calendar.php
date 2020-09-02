@@ -1,12 +1,13 @@
 <?php
- namespace glx\Locale;
- 
- class Calendar extends Localized implements I\Calendar
- {
- 
- 
-    public function format($time, $format = NULL): string
+    
+    namespace glx\Locale;
+    
+    class Calendar extends Localized implements I\Calendar
     {
-     // TODO: Implement format() method.
+        
+        
+        public function format($time, $format = null): string
+        {
+            // TODO: Implement format() method.
+        }
     }
- }

@@ -1,11 +1,15 @@
 <?php
- namespace glx\HTTP;
- 
+    
+    namespace glx\HTTP;
+    
+    
+    use glx\Exception;
+    use Throwable;
 
- class Status extends \glx\Exception
- {
-    public function __construct(int $code = I\Response::OK, \Throwable $previous = NULL)
+    class Status extends Exception
     {
-      parent::__construct('', $code, $previous);
+        public function __construct(int $code = I\Response::OK, Throwable $previous = null)
+        {
+            parent::__construct('', $code, $previous);
+        }
     }
- }

@@ -1,18 +1,20 @@
 <?php
+    
+    namespace glx\Storage\FS\Factory;
+    
+    use Exception;
 
- namespace glx\Storage\FS\Factory;
- 
- class RecordChanged extends \Exception
- {
-    private $record;
-  
-    public function __construct(array $record)
+    class RecordChanged extends Exception
     {
-      $this->record = $record;
+        private $record;
+        
+        public function __construct(array $record)
+        {
+            $this->record = $record;
+        }
+        
+        public function record(): array
+        {
+            return $this->record;
+        }
     }
-  
-    public function record(): array
-    {
-     return $this->record;
-    }
- }

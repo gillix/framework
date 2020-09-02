@@ -1,12 +1,15 @@
 <?php
- namespace glx\HTTP;
- 
+    
+    namespace glx\HTTP;
+    
+    
+    use Throwable;
 
- class InternalRedirect extends Redirect
- {
-    public function __construct($uri, \Throwable $previous = NULL)
+    class InternalRedirect extends Redirect
     {
-      parent::__construct($uri, self::INTERNAL, $previous);
+        public function __construct($uri, Throwable $previous = null)
+        {
+            parent::__construct($uri, self::INTERNAL, $previous);
+        }
     }
- }
  

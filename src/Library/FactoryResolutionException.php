@@ -1,8 +1,10 @@
 <?php
- 
- namespace glx\Library;
- 
- class FactoryResolutionException extends \glx\Exception
- {
- 
- }
+    
+    namespace glx\Library;
+    
+    use glx\Exception;
+
+    class FactoryResolutionException extends Exception
+    {
+    
+    }

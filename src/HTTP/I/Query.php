@@ -1,11 +1,11 @@
 <?php
- 
- namespace glx\HTTP\I;
- 
- 
- use glx\Common;
+    
+    namespace glx\HTTP\I;
+    
+    
+    use glx\Common;
 
- interface Query extends Common\I\Collection
- {
-    public function __toString();
- }
+    interface Query extends Common\I\Collection
+    {
+        public function __toString();
+    }

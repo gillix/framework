@@ -1,15 +1,15 @@
 <?php
- 
- namespace glx\Cache;
- 
- use glx\Common;
+    
+    namespace glx\Cache;
+    
+    use glx\Common;
 
- require_once __DIR__.'/../Common/Collection.php';
- 
- class Temporary extends Common\Collection
- {
-    public function __construct()
+    require_once __DIR__ . '/../Common/Collection.php';
+    
+    class Temporary extends Common\Collection
     {
-      parent::__construct($array = []);
+        public function __construct()
+        {
+            parent::__construct($array = []);
+        }
     }
- }

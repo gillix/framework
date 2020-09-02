@@ -1,11 +1,12 @@
 <?php
- 
- namespace glx\DB\Query\I;
- 
- 
- interface ConditionExpression
- {
-    public function or($name, $operator = NULL, $value = NULL): Sequence;
-    public function and($name, $operator = NULL, $value = NULL): Sequence;
- }
+    
+    namespace glx\DB\Query\I;
+    
+    
+    interface ConditionExpression
+    {
+        public function or($name, $operator = null, $value = null): Sequence;
+        
+        public function and($name, $operator = null, $value = null): Sequence;
+    }
  

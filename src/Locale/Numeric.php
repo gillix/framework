@@ -1,24 +1,28 @@
 <?php
- namespace glx\Locale;
- 
- class Numeric extends Localized implements I\Numeric
- {
-    protected $number;
     
-    public function __construct(\glx\I\Locale $locale, $number)
+    namespace glx\Locale;
+    
+    use glx\I\Locale;
+    use Punic\Number;
+
+    class Numeric extends Localized implements I\Numeric
     {
-      parent::__construct($locale);
-      $this->number = $number;
-    }
- 
-    public function format($precision = NULL): string
-    {
-      return \Punic\Number::format($this->number, $precision, $this->locale->name());
-    }
-  
+        protected $number;
+        
+        public function __construct(Locale $locale, $number)
+        {
+            parent::__construct($locale);
+            $this->number = $number;
+        }
+        
+        public function format($precision = null): string
+        {
+            return Number::format($this->number, $precision, $this->locale->name());
+        }
+
 //    public function asText(): array
 //    {
 //
 //    }
- }
+    }
  

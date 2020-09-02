@@ -1,17 +1,18 @@
 <?php
- namespace glx\Session\ID;
-
- abstract class Provider implements I\Provider
- {
-    protected string $id;
-
-    protected function generate(): string
+    
+    namespace glx\Session\ID;
+    
+    abstract class Provider implements I\Provider
     {
-      return md5(uniqid('session', true));
+        protected string $id;
+        
+        protected function generate(): string
+        {
+            return md5(uniqid('session', true));
+        }
+        
+        public function __toString()
+        {
+            return $this->id();
+        }
     }
-
-    public function __toString()
-    {
-      return $this->id();
-    }
- }

@@ -1,10 +1,11 @@
 <?php
- namespace glx\core\I;
+    
+    namespace glx\core\I;
+    
+    use glx\Common;
 
- use glx\Common;
- 
- interface Entity extends Common\I\Entity
- {
-    public function id(): ID;
- }
+    interface Entity extends Common\I\Entity
+    {
+        public function id(): ID;
+    }
  

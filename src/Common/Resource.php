@@ -1,6 +1,7 @@
 <?php
- namespace glx\Common;
-
- class Resource implements I\Resource
- {
- }
+    
+    namespace glx\Common;
+    
+    class Resource implements I\Resource
+    {
+    }

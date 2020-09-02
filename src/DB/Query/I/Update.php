@@ -1,9 +1,9 @@
 <?php
- 
- namespace glx\DB\Query\I;
- 
- interface Update extends Joinable, Writable
- {
-    public function set($name, $value = NULL): self;
- }
+    
+    namespace glx\DB\Query\I;
+    
+    interface Update extends Joinable, Writable
+    {
+        public function set($name, $value = null): self;
+    }
  
