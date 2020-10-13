@@ -141,11 +141,11 @@
             return $this;
         }
         
-        public function having($name, $operator, $value): I\WhereClause
+        public function having($name, $operator = null, $value = null): I\WhereClause
         {
             $expr = Condition::fetch($name, $operator, $value);
             if (!isset($this->units['having'])) {
-                $this->units['having'] = $expr instanceof I\Sequence ? $expr : seq();
+                $this->units['having'] = $expr instanceof I\Sequence ? $expr : seq($expr);
             } else {
                 $this->units['having']->add($expr);
             }
