@@ -295,7 +295,7 @@
         if (strpos('/', $label) === 0) {
             return null;
         }
-        $cwd = Storage::cwd()->current();
+        $cwd = Storage::cwd()->top();
         $locations = Storage::locations();
         foreach ($locations as $location) {
             do {
