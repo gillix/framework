@@ -302,7 +302,7 @@
                 if (Storage::valid($target = $cwd . DIRECTORY_SEPARATOR . $location . DIRECTORY_SEPARATOR . $label)) {
                     return Storage::new(array_merge(['path' => $target], $options));
                 }
-            } while ($location !== ($new = realpath($cwd . DIRECTORY_SEPARATOR . $location . DIRECTORY_SEPARATOR . '..')) && ($location = $new));
+            } while ($location !== ($new = realpath($location . DIRECTORY_SEPARATOR . '..')) && ($location = $new));
         }
         
         return null; // исключение
