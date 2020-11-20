@@ -298,8 +298,9 @@
         $cwd = Storage::cwd()->top();
         $locations = Storage::locations();
         foreach ($locations as $location) {
+            $location = $cwd . DIRECTORY_SEPARATOR . $location;
             do {
-                if (Storage::valid($target = $cwd . DIRECTORY_SEPARATOR . $location . DIRECTORY_SEPARATOR . $label)) {
+                if (Storage::valid($target = $location . DIRECTORY_SEPARATOR . $label)) {
                     return Storage::new(array_merge(['path' => $target], $options));
                 }
             } while ($location !== ($new = realpath($location . DIRECTORY_SEPARATOR . '..')) && ($location = $new));
