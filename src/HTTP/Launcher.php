@@ -138,10 +138,12 @@
             }
             if (!$locale && $country = $this->server->request()->client()->country()) {
                 return Locale::for($country);
-            } elseif ($locale) {
+            }
+    
+            if ($locale) {
                 return Locale::get($locale);
             }
-            
+    
             return null;
         }
     }

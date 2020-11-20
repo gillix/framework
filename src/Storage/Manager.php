@@ -5,6 +5,7 @@
     
     use Closure;
     use DirectoryIterator;
+    use glx\Storage\E\StorageNotFound;
 
     final class Manager implements I\Manager
     {
@@ -12,15 +13,21 @@
         private static array $loaders   = [];
         private static array $factories = [];
         public const STORAGE_ANY = '*';
-        
-        public static function get($label, array $options = null): ?I\Storage
+    
+        /**
+         * @param $label
+         * @param array|null $options
+         * @return I\Storage
+         * @throws StorageNotFound
+         */
+        public static function get($label, array $options = null): I\Storage
         {
             
             // TODO: подумать о постоянном кешировании хранилищ
             
             if (is_array($label)) {
                 if (!($type = $label['type'] ?? $label[0]) || !($label = $label['location'] ?? $label['path'] ?? $label[1])) {
-                    return null;
+                    throw new \InvalidArgumentException("Can`t find requested storage: label argument is not recognized");
                 }
 //        if(self::include() && ($factory = self::$factories[$type]))
 //          return $factory::new($label, $options);
@@ -55,7 +62,7 @@
                 }
             }
             
-            return null;
+            throw new StorageNotFound("Can`t find requested storage '{$label}'");
         }
         
         public static function register(string $label, $storage): void

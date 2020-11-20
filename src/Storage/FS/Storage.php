@@ -31,6 +31,7 @@
         protected I\Manifest         $manifest;
         protected core\I\Entity      $root;
         protected static array       $locations = ['.', __DIR__ . '/../../..'];
+        protected static \SplStack   $cwd;
         
         /**
          * Storage constructor.
@@ -264,10 +265,29 @@
             return is_dir($location) && is_file($location . DIRECTORY_SEPARATOR . Manifest::$fileName);
         }
         
+        public function locate($label, array $options = null): \glx\Storage\I\Storage
+        {
+            self::cwd()->push($this->structure()->path());
+            $storage = Manager::get($label, $options);
+            self::cwd()->pop();
+            return $storage;
+        }
+
+        public static function cwd(): \SplStack
+        {
+            if (!isset(self::$cwd)) {
+                self::$cwd = new \SplStack();
+                self::$cwd->push(getcwd());
+            }
+            return self::$cwd;
+        }
     }
     
     Manager::storage('fs', Storage::class);
     Manager::autoloader(function (string $label, ?array $options = null): ?\glx\Storage\I\Storage {
+ 
+ //  TODO: поиск должен начинаться с текущего проекта
+        
         $options = $options ?? [];
         if (Storage::valid($label)) {
             return Storage::new(array_merge(['path' => $label], $options));
@@ -275,15 +295,14 @@
         if (strpos('/', $label) === 0) {
             return null;
         }
-//    if($slash !== false)
-//      [$label, $rest] = explode('/', $label, 2);
+        $cwd = Storage::cwd()->current();
         $locations = Storage::locations();
         foreach ($locations as $location) {
             do {
-                if (Storage::valid($target = $location . DIRECTORY_SEPARATOR . $label)) {
+                if (Storage::valid($target = $cwd . DIRECTORY_SEPARATOR . $location . DIRECTORY_SEPARATOR . $label)) {
                     return Storage::new(array_merge(['path' => $target], $options));
                 }
-            } while ($location !== ($new = realpath($location . DIRECTORY_SEPARATOR . '..')) && ($location = $new));
+            } while ($location !== ($new = realpath($cwd . DIRECTORY_SEPARATOR . $location . DIRECTORY_SEPARATOR . '..')) && ($location = $new));
         }
         
         return null; // исключение

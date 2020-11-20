@@ -2,7 +2,7 @@
     
     namespace glx\core\E;
     
-    use Exception;
+    use glx\core\Exception;
 
     class PropertyAccessAmbiguous extends Exception
     {

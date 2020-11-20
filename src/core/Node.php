@@ -179,7 +179,7 @@
          * @param string $name
          * @param string|null $type
          * @return I\Joint|null
-         * @throws E\PropertyAccessAmbiguous
+         * @throws E\PropertyAccessAmbiguous|E\PropertyAccessViolation
          */
         public function property(string $name, $type = null): ?I\Joint
         {
@@ -239,14 +239,21 @@
             
             return $property;
         }
-        
+    
+        /**
+         * @param string $name
+         * @param null $type
+         * @return I\Joint|null
+         * @throws Exception
+         */
         public function get(string $name, $type = null): ?I\Joint
         {
             if (($pos = strrpos($name, ':')) !== false) {
-                if ($storage = Storage\Manager::get($storageName = substr($name, 0, $pos))) {
+                try {
+                    $storage = Storage\Manager::get($this->id()->storage())->locate($storageName = substr($name, 0, $pos));
                     return $storage->root()->get(substr($name, $pos + 1), $type);
-                } else {
-                    throw new Exception('Can`t fetch external storage: ' . $storageName);
+                } catch (Storage\E\StorageNotFound $e) {
+                    throw new Exception("Cant fetch external storage: {$e->getMessage()}");
                 }
             }
             
