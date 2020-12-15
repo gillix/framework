@@ -2,7 +2,6 @@
     
     namespace glx\Locale;
     
-    
     use Punic\Exception;
 
     class DateTime extends Localized implements I\DateTime
@@ -24,7 +23,7 @@
             }
         }
     
-        public function formatDate($format = I\DateTime::FORMAT_LONG): string
+        public function formatDate($format = self::FORMAT_LONG): string
         {
             try {
                 return \Punic\Calendar::formatDate($this->time, $format, $this->locale->name());
@@ -33,7 +32,7 @@
             }
         }
     
-        public function formatTime($format = I\DateTime::FORMAT_LONG): string
+        public function formatTime($format = self::FORMAT_LONG): string
         {
             try {
                 return \Punic\Calendar::formatDate($this->time, $format, $this->locale->name());

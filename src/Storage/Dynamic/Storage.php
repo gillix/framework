@@ -43,5 +43,16 @@
         {
             return $this->registry->object($id);
         }
-        
+    
+        /**
+         * @param array|string $label
+         * @param array|null $options
+         * @return I\Storage
+         * @throws \glx\Storage\E\StorageNotFound
+         */
+        public function locate($label, array $options = null): \glx\Storage\I\Storage
+        {
+            // not sure
+            return Manager::get($label, $options);
+        }
     }
