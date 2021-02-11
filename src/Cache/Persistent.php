@@ -25,7 +25,7 @@
                 throw new Exception('Can`t load cache implementation');
             } else {
                 try {
-                    $this->implementation = new $implementation();
+                    $this->implementation = new $implementation($options);
                 } catch (NotAvailable $e) {
                     if (isset($fallback)) {
                         foreach ($fallback as $storage) {
