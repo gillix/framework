@@ -28,3 +28,4 @@
         }
     }
  
+    Cache\Persistent::register('memcached', Memcached::class);

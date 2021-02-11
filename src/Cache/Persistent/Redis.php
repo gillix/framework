@@ -18,3 +18,4 @@
         }
     }
  
+    Cache\Persistent::register('redis', Redis::class);
