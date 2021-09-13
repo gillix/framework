@@ -8,9 +8,9 @@
     class QueryPerformingFailed extends Exception
     {
         protected string $query;
-        protected string $values;
+        protected array $values;
         
-        public function __construct(string $query, string $values, $message = '', $code = 0, Throwable $previous = null, string $content = null)
+        public function __construct(string $query, array $values, $message = '', $code = 0, Throwable $previous = null, string $content = null)
         {
             parent::__construct($message, $code, $previous, $content);
             $this->query = $query;
@@ -22,7 +22,7 @@
             return $this->query;
         }
         
-        public function values(): string
+        public function values(): array
         {
             return $this->values;
         }
