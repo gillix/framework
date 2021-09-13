@@ -171,7 +171,7 @@
                  'line'   => $e->getLine(),
                  'trace'  => $e->getTrace()
                 ]);
-                throw new DB\E\QueryPerformingFailed($query, $query, $e->getMessage(), $e->getCode(), $e);
+                throw new DB\E\QueryPerformingFailed($query, $values, $e->getMessage(), 0, $e);
             }
             $time = $stopwatch->elapsed()->get();
             $this->logger->debug((string)$query, compact('values', 'time'));
