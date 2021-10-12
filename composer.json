@@ -4,13 +4,14 @@
     "type": "library",
     "require": {
         "monolog/monolog": "^2.0",
-        "php": "^7.4",
+        "php": "^7.4 || ^8.0",
         "symfony/cache": "*",
         "ext-json": "*",
         "ext-pdo": "*",
         "psr/log": "*",
         "punic/punic": "*",
-        "erusev/parsedown": "*"
+        "erusev/parsedown": "*",
+        "symfony/yaml": "*"
     },
     "suggest": {
         "geoip2/geoip2": "Allows detect geo information of user",

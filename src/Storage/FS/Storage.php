@@ -140,7 +140,7 @@
             return "storage:{$this->key}:{$suffix}";
         }
         
-        public function compile(array $options = null)
+        public function compile(array $options = null): void
         {
             // Include only if we need
             $this->include();

@@ -249,7 +249,7 @@
                     }
                     break;
                 case 'period':
-                    $cond = "{$field} >= {$this->mark($value[0])} AND {$field} < DATE_ADD('{$this->mark($value[1])}', INTERVAL 1 DAY)";
+                    $cond = "{$field} >= {$this->mark($value[0])} AND {$field} < DATE_ADD({$this->mark($value[1])}, INTERVAL 1 DAY)";
                     break;
                 case 'from':
                 case 'to':

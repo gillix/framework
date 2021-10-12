@@ -67,7 +67,7 @@
             }
             $reserved = $class::reserved();
             foreach ($definitions as $name => $value) {
-                if (in_array($name, $reserved)) {
+                if (in_array($name, $reserved, true)) {
                     $options[$name] = $value;
                     unset($definitions[$name]);
                     continue;
