@@ -8,6 +8,7 @@
     {
         public function __construct()
         {
-            parent::__construct([]);
+            $empty = [];
+            parent::__construct($empty);
         }
     }
