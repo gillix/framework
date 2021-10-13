@@ -46,7 +46,8 @@
             }
             
             if ($walker) {
-                array_walk($a = $this->array(), $walker);
+                $array = $this->array();
+                array_walk($array, $walker);
             }
             
             return $this;
@@ -122,7 +123,7 @@
                     $b = $b->get($by);
                     $y = $b && $b->is('PROPERTY') ? $b->get() : ($b instanceof I\Printable ? (string)$b : $b);
                     
-                    return $x == $y ? 0 : ($x < $y ? -1 : 1) * $way;
+                    return $x === $y ? 0 : ($x < $y ? -1 : 1) * $way;
                 };
             } elseif ($by instanceof Closure) {
                 $walker = $by;

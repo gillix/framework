@@ -8,7 +8,7 @@
     {
         protected Common\I\Stopwatch $timer;
         
-        public function __construct(array &$array, Common\I\Stopwatch $timer = null)
+        public function __construct(array $array, Common\I\Stopwatch $timer = null)
         {
             if ($timer) {
                 $timer->finish();
