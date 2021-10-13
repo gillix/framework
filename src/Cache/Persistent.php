@@ -18,27 +18,27 @@
         {
             $implementation = $options['storage'] ?? 'apcu';
             $implementation = self::$implementations[$implementation];
-            if ($options['fallback']) {
+            if (isset($options['fallback'])) {
                 $fallback = $options['fallback'];
             }
             if (!$implementation) {
                 throw new Exception('Can`t load cache implementation');
-            } else {
-                try {
-                    $this->implementation = new $implementation($options);
-                } catch (NotAvailable $e) {
-                    if (isset($fallback)) {
-                        foreach ($fallback as $storage) {
-                            try {
-                                $this->implementation = new self::$implementations[$storage];
-                            } catch (NotAvailable $e) {
-                                continue;
-                            }
+            }
+    
+            try {
+                $this->implementation = new $implementation($options);
+            } catch (NotAvailable $e) {
+                if (isset($fallback)) {
+                    foreach ($fallback as $storage) {
+                        try {
+                            $this->implementation = new self::$implementations[$storage];
+                        } catch (NotAvailable $e) {
+                            continue;
                         }
                     }
-                    if (!$this->implementation) {
-                        throw $e;
-                    }
+                }
+                if (!isset($this->implementation)) {
+                    throw $e;
                 }
             }
         }
