@@ -41,7 +41,8 @@
             $this->persistent = new Cache\Persistent($options['cache'] ?? []);
             $this->temporary = new Cache\Temporary();
             $this->events = new Events\Manager();
-            $this->input = new Common\Collection($content = []);
+            $content = [];
+            $this->input = new Common\Collection($content);
             if ($options['input'] && $options['input'] instanceof Common\I\Collection) {
                 $this->input->link($options['input']);
             }
