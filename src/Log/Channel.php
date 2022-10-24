@@ -74,67 +74,49 @@
             $this->logger = new Logger($channel, $handlers);
         }
         
-        public function debug($message, array $context = []): I\Channel
+        public function debug($message, array $context = []): void
         {
             call_user_func([$this->logger, __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function info($message, array $context = []): I\Channel
+        public function info($message, array $context = []): void
         {
             call_user_func([$this->logger, __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function notice($message, array $context = []): I\Channel
+        public function notice($message, array $context = []): void
         {
             call_user_func([$this->logger, __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function warning($message, array $context = []): I\Channel
+        public function warning($message, array $context = []): void
         {
             call_user_func([$this->logger, __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function error($message, array $context = []): I\Channel
+        public function error($message, array $context = []): void
         {
             call_user_func([$this->logger, __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function critical($message, array $context = []): I\Channel
+        public function critical($message, array $context = []): void
         {
             call_user_func([$this->logger, __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function alert($message, array $context = []): I\Channel
+        public function alert($message, array $context = []): void
         {
             call_user_func([$this->logger, __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function emergency($message, array $context = []): I\Channel
+        public function emergency($message, array $context = []): void
         {
             call_user_func([$this->logger, __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function log($level, $message, array $context = []): I\Channel
+        public function log($level, $message, array $context = []): void
         {
             call_user_func([$this->logger, __FUNCTION__], $level, $message, $context);
-            
-            return $this;
         }
         
         public function name(): string
