@@ -8,7 +8,7 @@
         "symfony/cache": "*",
         "ext-json": "*",
         "ext-pdo": "*",
-        "psr/log": "*",
+        "psr/log": "^1.1.4",
         "punic/punic": "*",
         "erusev/parsedown": "*",
         "symfony/yaml": "*"
