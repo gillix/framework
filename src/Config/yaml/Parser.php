@@ -11,7 +11,7 @@
     
     class Parser implements Config\I\Parser
     {
-        public static function parse(string $content): array
+        public static function parse(string $content, array $callbacks = null): array
         {
             if (extension_loaded('yaml')) {
                 return yaml_parse($content);
