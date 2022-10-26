@@ -69,10 +69,12 @@
       function ($matches, $callbacks) {
           if (isset($matches['_directive']) && $callbacks && ($callback = $callbacks[substr($matches['_directive'], 1)])) {
               return $callback(Parser::fetch('list', $matches, $callbacks));
-          } elseif (isset($matches['_name'])) {
+          }
+
+          if (isset($matches['_name'])) {
               return [(string)$matches['_name'] => Parser::fetch('list', $matches, $callbacks)];
           }
-          
+
           return null;
       }
      ],

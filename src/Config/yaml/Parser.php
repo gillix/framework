@@ -23,4 +23,20 @@
             throw new Exception('Need to load module "yaml" for parsing yaml content');
             
         }
+
+        protected function fetchDirectives(array $directives, array $data): array
+        {
+            $walker = static function (&$item, $key) use ($directives, &$walker) {
+                if (isset($directives[$key])) {
+                    $callback = $directives[$key];
+                    if (is_callable($callback)) {
+                        $item = $callback($item);
+                    }
+                } elseif (is_array($item)) {
+                    array_walk($item, $walker);
+                }
+            };
+            array_walk($data, $walker);
+            return $data;
+        }
     }
