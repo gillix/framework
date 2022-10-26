@@ -28,7 +28,7 @@
         
         public static function fetch($subject, $data, ?array $callbacks = null)
         {
-            if (is_array($data) && $data["_$subject"]) {
+            if (is_array($data) && isset($data["_$subject"]) && $data["_$subject"]) {
                 $content = $data["_$subject"];
             } else {
                 $content = $data;
@@ -37,7 +37,7 @@
             [$pattern, $handler] = $grammar[$subject];
             
             $pattern = preg_replace_callback('/\(\?&(\w+)\)/', static function ($matches) use ($grammar) {
-                if ($grammar[$matches[1]][1]) {
+                if (isset($grammar[$matches[1]][1])) {
                     return "(?<_{$matches[1]}> (?&{$matches[1]}))";
                 }
                 
@@ -67,9 +67,9 @@
      'pair'      => [
       '((?&directive)|(?&name))[ \t]*:\s*(?&list)',
       function ($matches, $callbacks) {
-          if ($matches['_directive'] && $callbacks && ($callback = $callbacks[substr($matches['_directive'], 1)])) {
+          if (isset($matches['_directive']) && $callbacks && ($callback = $callbacks[substr($matches['_directive'], 1)])) {
               return $callback(Parser::fetch('list', $matches, $callbacks));
-          } elseif ($matches['_name']) {
+          } elseif (isset($matches['_name'])) {
               return [(string)$matches['_name'] => Parser::fetch('list', $matches, $callbacks)];
           }
           
@@ -103,7 +103,7 @@
      'array'     => [
       '\s*\[\s*(?&items)?\s*\]',
       function ($matches, $callbacks) {
-          if ($matches['_items']) {
+          if (isset($matches['_items'])) {
               return Parser::fetch('items', $matches, $callbacks) ?? [];
           }
           
@@ -115,7 +115,7 @@
       function ($matches, $callbacks) {
 //             if($matches['_value']) $matches['_value'] = trim($matches['_value']);
           $result = Parser::fetch('value', $matches, $callbacks);
-          if ($matches['_list']) {
+          if (isset($matches['_list'])) {
               $result = array_merge([$result], (array)Parser::fetch('list', $matches, $callbacks));
           }
           
@@ -126,7 +126,7 @@
       '(?&array)|(?&code)|(?&text)|(?&quoted)|(?&boolean)|(?&number)|(?&string)',
       function ($matches, $callbacks) {
           foreach (['code', 'array', 'text', 'quoted', 'boolean', 'number', 'string'] as $value) {
-              if ($matches["_$value"]) {
+              if (isset($matches["_$value"])) {
                   return Parser::fetch($value, $matches, $callbacks);
               }
           }
@@ -141,7 +141,7 @@
      'item'      => [
       '[ \t]*((?&pair)|(?&value))[ \t]*(?&comment)?',
       function ($matches, $callbacks) {
-          if ($matches['_pair']) {
+          if (isset($matches['_pair'])) {
               return Parser::fetch('pair', $matches, $callbacks);
           }
           $value = Parser::fetch('value', $matches, $callbacks);
@@ -152,11 +152,11 @@
      'items'     => [
       '((?&comment)|(?&item))(\s*($|,)\s*(?&items))?',
       function ($matches, $callbacks) {
-          if ($matches['_item']) {
+          if (isset($matches['_item'])) {
               $item = Parser::fetch('item', $matches, $callbacks);
           }
           $item ??= [];
-          if ($matches['_items']) {
+          if (isset($matches['_items'])) {
               $items = (array)(Parser::fetch('items', $matches, $callbacks) ?: []);
               if (is_array($item) && count($item) && !array_key_exists(0, $item)) {
                   foreach ($item as $name => $value) {

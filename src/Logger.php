@@ -11,7 +11,7 @@
         
         public function __construct(array $options = [])
         {
-            if ($options['default']) {
+            if (isset($options['default'])) {
                 $default = $options['default'];
                 unset($options['default']);
             }

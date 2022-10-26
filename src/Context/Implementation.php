@@ -43,22 +43,22 @@
             $this->events = new Events\Manager();
             $content = [];
             $this->input = new Common\Collection($content);
-            if ($options['input'] && $options['input'] instanceof Common\I\Collection) {
+            if (isset($options['input']) && $options['input'] instanceof Common\I\Collection) {
                 $this->input->link($options['input']);
             }
-            if ($options['config'] && $options['config'] instanceof Common\I\Collection) {
+            if (isset($options['config']) && $options['config'] instanceof Common\I\Collection) {
                 $this->config = $options['config'];
             }
             $this->profile = new Profile($options['profile']);
-            if ($options['http'] && $options['http'] instanceof HTTP\I\Server) {
+            if (isset($options['http']) && $options['http'] instanceof HTTP\I\Server) {
                 $this->http = $options['http'];
             }
-            if ($options['locale']) {
+            if (isset($options['locale'])) {
                 $this->locale = $options['locale'] instanceof \glx\I\Locale ? $options['locale'] : Locale::get($options['locale']);
             } else {
                 $this->locale = Locale::get('en_US');
             }
-            if ($options['logger']) {
+            if (isset($options['logger'])) {
                 $this->logger = $options['logger'] instanceof \glx\I\Logger ? $options['logger'] : new Logger($options['logger']);
             } else {
                 $this->logger = new Logger();

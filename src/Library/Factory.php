@@ -246,7 +246,7 @@
                 if (is_string($maker)) {
                     $maker = ['class' => $maker];
                 }
-                static::default(array_filter([$id, $maker['alias']]), $maker['class'] ?? $maker['factory'], $maker['arguments'], $maker['source']);
+                static::default(array_filter([$id, $maker['alias'] ?? null]), $maker['class'] ?? $maker['factory'], $maker['arguments'] ?? null, $maker['source'] ?? null);
             }
         }
         
