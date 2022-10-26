@@ -21,14 +21,14 @@
                     $result = Yaml::parse($content);
                 }
 
-                return $result;
+                return self::fetchDirectives($callbacks, $result);
             } catch (\Exception $e) {
                 throw new Exception('Yaml parcer error: ' . $e->getMessage());
             }
 
         }
 
-        protected function fetchDirectives(array $directives, array $data): array
+        protected static function fetchDirectives(array $directives, array $data): array
         {
             $walker = static function (&$item, $key) use ($directives, &$walker) {
                 if (isset($directives[$key])) {
