@@ -13,15 +13,19 @@
     {
         public static function parse(string $content, array $callbacks = null): array
         {
-            if (extension_loaded('yaml')) {
-                return yaml_parse($content);
-            }
             try {
-                return Yaml::parse($content);
-            } catch (ParseException $e) {
+                $result = [];
+                if (extension_loaded('yaml')) {
+                    $result = yaml_parse($content);
+                } else {
+                    $result = Yaml::parse($content);
+                }
+
+                return $result;
+            } catch (\Exception $e) {
+                throw new Exception('Yaml parcer error: ' . $e->getMessage());
             }
-            throw new Exception('Need to load module "yaml" for parsing yaml content');
-            
+
         }
 
         protected function fetchDirectives(array $directives, array $data): array
