@@ -23,18 +23,21 @@
 
                 return self::fetchDirectives($callbacks, $result);
             } catch (\Exception $e) {
-                throw new Exception('Yaml parcer error: ' . $e->getMessage());
+                throw new Exception('Yaml parser error: ' . $e->getMessage());
             }
 
         }
 
         protected static function fetchDirectives(array $directives, array $data): array
         {
-            $walker = static function (&$item, $key) use ($directives, &$walker) {
+            $walker = static function (&$item, &$key) use ($directives, &$walker) {
                 if (isset($directives[$key])) {
                     $callback = $directives[$key];
                     if (is_callable($callback)) {
-                        $item = $callback($item);
+                        foreach ($callback($item) as $name => $value) {
+                            $key = $name;
+                            $item = $value;
+                        }
                     }
                 } elseif (is_array($item)) {
                     array_walk($item, $walker);
