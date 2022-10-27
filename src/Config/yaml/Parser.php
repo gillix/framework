@@ -30,18 +30,20 @@
 
         protected static function fetchDirectives(array $directives, array $data): array
         {
-            $walker = static function (&$item, $key, &$arr) use ($directives, &$walker) {
-                if (isset($directives[$key])) {
-                    $callback = $directives[$key];
-                    if (is_callable($callback)) {
-                        unset($arr[$key]);
-                        array_merge($callback($item), $arr);
+            $walker = static function (&$array) use ($directives, &$walker) {
+                foreach ($array as $key => &$item) {
+                    if (isset($directives[$key])) {
+                        $callback = $directives[$key];
+                        if (is_callable($callback)) {
+                            unset($array[$key]);
+                            $array += $callback($item);
+                        }
+                    } elseif (is_array($item)) {
+                        $walker($item);
                     }
-                } elseif (is_array($item)) {
-                    array_walk($item, $walker, $item);
                 }
             };
-            array_walk($data, $walker, $data);
+            $walker($data);
             return $data;
         }
     }
