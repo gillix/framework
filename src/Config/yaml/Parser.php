@@ -41,7 +41,7 @@
                     array_walk($item, $walker, $item);
                 }
             };
-            array_walk($data, $walker);
+            array_walk($data, $walker, $data);
             return $data;
         }
     }
