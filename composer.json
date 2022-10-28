@@ -4,11 +4,11 @@
     "type": "library",
     "require": {
         "monolog/monolog": "^2.0",
-        "php": "^7.4 || ^8.0",
-        "symfony/cache": "^5.0",
+        "php": "^8.0",
+        "symfony/cache": "^6.0",
         "ext-json": "*",
         "ext-pdo": "*",
-        "psr/log": "^1.1.4",
+        "psr/log": "*",
         "punic/punic": "*",
         "erusev/parsedown": "*",
         "symfony/yaml": "*"
