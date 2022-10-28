@@ -49,7 +49,7 @@
             if (isset($options['config']) && $options['config'] instanceof Common\I\Collection) {
                 $this->config = $options['config'];
             }
-            $this->profile = new Profile($options['profile']);
+            $this->profile = new Profile($options['profile'] ?? '');
             if (isset($options['http']) && $options['http'] instanceof HTTP\I\Server) {
                 $this->http = $options['http'];
             }
