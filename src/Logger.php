@@ -54,67 +54,49 @@
             return $this->default;
         }
         
-        public function debug($message, array $context = []): Log\I\Channel
+        public function debug(\Stringable|string $message, array $context = []): void
         {
             call_user_func([$this->default(), __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function info($message, array $context = []): Log\I\Channel
+        public function info(\Stringable|string $message, array $context = []): void
         {
             call_user_func([$this->default(), __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function notice($message, array $context = []): Log\I\Channel
+        public function notice(\Stringable|string $message, array $context = []): void
         {
             call_user_func([$this->default(), __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function warning($message, array $context = []): Log\I\Channel
+        public function warning(\Stringable|string $message, array $context = []): void
         {
             call_user_func([$this->default(), __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function error($message, array $context = []): Log\I\Channel
+        public function error(\Stringable|string $message, array $context = []): void
         {
             call_user_func([$this->default(), __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function critical($message, array $context = []): Log\I\Channel
+        public function critical(\Stringable|string $message, array $context = []): void
         {
             call_user_func([$this->default(), __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function alert($message, array $context = []): Log\I\Channel
+        public function alert(\Stringable|string $message, array $context = []): void
         {
             call_user_func([$this->default(), __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function emergency($message, array $context = []): Log\I\Channel
+        public function emergency(\Stringable|string $message, array $context = []): void
         {
             call_user_func([$this->default(), __FUNCTION__], $message, $context);
-            
-            return $this;
         }
         
-        public function log($level, $message, array $context = []): Log\I\Channel
+        public function log($level, \Stringable|string $message, array $context = []): void
         {
             call_user_func([$this->default(), __FUNCTION__], $level, $message, $context);
-            
-            return $this;
         }
         
         public function name(): string
