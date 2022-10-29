@@ -10,7 +10,7 @@
 // TODO: переделать интерфейс: непрозрачно и неудобно
     class Reader implements I\Reader
     {
-        protected static string $default = 'gcml';
+        protected static string $default = 'yaml';
         protected string        $parser;
         
         public function __construct(string $format = null)

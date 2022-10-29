@@ -12,11 +12,11 @@
     {
         public static function probe(array $info, Storage\FS\I\Structure $current): bool
         {
-            if ((!$info['extension'] && $info['content'] && is_array($info['content'])) || ($info['file'] && $info['extension'] === 'node' && $info['path'] && is_file($info['path'])) || ($info['path'] && is_dir($info['path']))) {
-                return true;
-            }
-            
-            return false;
+            return (!$info['extension'] && $info['content'] && is_array(
+                        $info['content']
+                    )) || ($info['file'] && $info['extension'] === 'node' && $info['path'] && is_file(
+                        $info['path']
+                    )) || ($info['path'] && is_dir($info['path']));
         }
         
         public static function create(array $info, Storage\FS\I\Structure $current, Storage\FS\I\Storage $storage): array
@@ -37,7 +37,7 @@
                 elseif (is_dir($current->path())) {
                     if (!is_file($path = $current->path('.node'))) {
                         $path = null;
-                        $definitions = [];
+                      //  $definitions = [];
                     }
                     $record['source'] = $current->relative();
                 } else {
