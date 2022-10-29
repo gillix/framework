@@ -9,6 +9,7 @@
         "ext-json": "*",
         "ext-pdo": "*",
         "psr/log": "*",
+        "psr/simple-cache": "*",
         "punic/punic": "*",
         "erusev/parsedown": "*",
         "symfony/yaml": "*"
