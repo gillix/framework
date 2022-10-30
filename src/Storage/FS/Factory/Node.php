@@ -25,13 +25,13 @@
             $record['creator'] = self::class;
             
             // loading node definition
-            if ($info['content']) {
+            if (isset($info['content'])) {
                 // if creates from parent .node definition
                 $definitions = $info['content'];
 //        $record['source'] = $info['source'];
             } else {
                 // if creates from file definition
-                if ($info['file'] && is_file($path = $info['path'])) {
+                if (isset($info['file']) && is_file($path = $info['path'])) {
                     $record['source'] = $current->relative($info['file']);
                 } // if create form filesystem folder
                 elseif (is_dir($current->path())) {
@@ -62,7 +62,7 @@
             
             // fetching node options
             $options = ['storage' => $storage];
-            if (($old = $info['old']) && $old instanceof core\I\Entity) {
+            if (($old = $info['old'] ?? null) && $old instanceof core\I\Entity) {
                 $options['id'] = $old->id();
             }
             $reserved = $class::reserved();
@@ -106,11 +106,11 @@
                     } catch (Storage\Exception $e) {
                         return;
                     }
-                    if ($child['source']) {
+                    if (isset($child['source'])) {
                         $node->add($this);
                     }
                 });
-            } elseif (!$info['content'] && !$info['file']) // add children from filesystem directory
+            } elseif (!isset($info['content']) && !isset($info['file'])) // add children from filesystem directory
             {
                 foreach (new DirectoryIterator($current->path()) as $file) {
                     if (in_array($file->getFilename(), ['.', '..', '.node'])) {
@@ -126,7 +126,7 @@
                     
                     // put loader object instead of original one to avoid full loading of objects tree on each request
                     if ($child) {
-                        [$name, $profile] = explode('@', $item['name'], 2);
+                        [$name, $profile] = explode('@', $item['name'] ?? '', 2);
                         $profile ??= Context::DEFAULT_PROFILE;
                         $binder = new core\Binder($name, $child['object'], $item['visibility'], $profile);
                         new Storage\Loader($binder);
@@ -157,10 +157,10 @@
                 $changed = true;
                 
                 // kill dependent items because source is changed
-                if (is_array($record['depends'])) {
+                if (is_array($record['depends'] ?? null)) {
                     foreach ($record['depends'] as $id) {
                         $child = $storage->fetch($id);
-                        if ($child['creator']) {
+                        if (isset($child['creator'])) {
                             $child['creator']::purge($child, $storage);
                         }
                     }
@@ -176,21 +176,17 @@
                 $record['time'] = time();
                 // get folder entries
                 $entries = scandir($source);
-                $entries = array_filter($entries, function ($entry) {
-                    if ($entry === '.' || $entry === '..' || $entry === '.node') {
-                        return false;
-                    }
-                    
-                    return true;
+                $entries = array_filter($entries, static function ($entry) {
+                    return !($entry === '.' || $entry === '..' || $entry === '.node');
                 });
                 
                 $current = $src->get($record['source']);
                 
                 // check changes in folder entries
-                $node = $record['object'];
+                $node = $record['object'] ?? null;
                 $node->each(function () use ($storage, &$entries, $node, $src, $current) {
                     $child = $storage->fetch($this->origin()->id()->object());
-                    if ($child['source']) {
+                    if (isset($child['source'])) {
                         $exists = false;
                         array_walk($entries, function ($item, $i) use (&$exists, &$entries, $current, $child) {
                             if ($current->relative($item) === $child['source']) {
@@ -222,7 +218,7 @@
                     if ($child) {
                         [$name, $profile] = explode('@', $item['name'], 2);
                         $profile ??= Context::DEFAULT_PROFILE;
-                        $binder = new core\Binder($name, $child['object'], $item['visibility'], $profile);
+                        $binder = new core\Binder($name, $child['object'] ?? null, $item['visibility'] ?? core\I\Visibility::PUBLIC, $profile);
                         new Storage\Loader($binder);
                         $node->add($binder);
                     }

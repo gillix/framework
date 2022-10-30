@@ -34,11 +34,11 @@ code;
             
             $code = null;
             // loading code of method
-            if ($info['content']) {
+            if ($info['content'] ?? false) {
                 // if creates from parent .node definition
                 $code = $info['content'];
 //        $record['source'] = $info['source'];
-            } elseif ($info['file'] && is_file($path = $info['path'])) {
+            } elseif (isset($info['file']) && is_file($path = $info['path'])) {
                 // if creates from file
                 $code = file_get_contents($path);
                 $record['source'] = $current->relative($info['file']);
@@ -49,7 +49,7 @@ code;
             }
             
             // convert code to native php
-            if ($info['extension'] !== 'php') {
+            if ($info['extension'] ?? '' !== 'php') {
                 $arguments = null;
                 // fetch arguments if we have it
                 $code = preg_replace_callback('/\s*@\(([^)]*)\)/m', function ($found) use (&$arguments) {
@@ -82,7 +82,7 @@ code;
              'storage' => $storage,
              'source'  => new Storage\FS\Pathfinder($storage->id(), $hidden, 'hidden')
             ];
-            if (($old = $info['old']) && $old instanceof core\I\Entity) {
+            if (($old = $info['old'] ?? false) && $old instanceof core\I\Entity) {
                 $options['id'] = $old->id();
             }
             

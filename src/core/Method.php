@@ -18,9 +18,9 @@
             } elseif (is_string($options)) {
                 $this->source = $options;
             } elseif (is_array($options)) {
-                if ($function = $options['function']) {
+                if ($function = $options['function'] ?? false) {
                     $this->function = $function;
-                } elseif ($options['source']) {
+                } elseif ($options['source'] ?? false) {
                     $this->source = $options['source'];
                 }
             }
@@ -128,4 +128,3 @@
     {
         return Method::super($arguments);
     }
- 

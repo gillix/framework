@@ -11,7 +11,7 @@
         
         public function __construct(array $options = [])
         {
-            if ($options['id']) {
+            if (isset($options['id'])) {
                 $this->_id = $options['id'];
             } else {
                 $storage = $options['storage'] ?? Storage\Dynamic\Storage::get();
