@@ -16,7 +16,7 @@
         
         public function __construct(array &$array)
         {
-            $this->content = $array;
+            $this->content = &$array;
         }
         
         public function __get($name)
