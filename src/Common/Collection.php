@@ -21,7 +21,7 @@
         
         public function __get($name)
         {
-            return (is_array($this->content[$name]) ? new self($this->content[$name]) : $this->content[$name]) ?? $this->checkLinked($name);
+            return (is_array($this->content[$name]) ? new self($this->content[$name]) : $this->content[$name]) ?? $this->checkLinked($name) ?? null;
         }
         
         protected function checkLinked($name, $isset = false)

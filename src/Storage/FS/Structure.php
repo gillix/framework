@@ -42,7 +42,7 @@
         
         protected function section(string $name = null): string
         {
-            return $this->path . ($name && $this->sections[$name] ? '/' . $this->sections[$name] : null);
+            return $this->path . ($name && isset($this->sections[$name]) ? '/' . $this->sections[$name] : null);
         }
         
         protected static function mkdir($path, $mask): bool
@@ -50,11 +50,7 @@
             if (!is_dir($parent = dirname($path))) {
                 self::mkdir($parent, $mask);
             }
-            if (!is_dir($path) && !mkdir($path, $mask) && !is_dir($path)) {
-                return false;
-            }
-            
-            return true;
+            return !(!is_dir($path) && !mkdir($path, $mask) && !is_dir($path));
         }
         
         protected static function clear($path): void
@@ -93,11 +89,11 @@
         
         public function get($name): I\Structure
         {
-            if ($this->sections[$name]) {
+            if (isset($this->sections[$name])) {
                 return new self($this->section($name));
-            } else {
-                return new self($this->path, implode('/', array_filter([$this->relative, $name])));
             }
+
+            return new self($this->path, implode('/', array_filter([$this->relative, $name])));
         }
         
         public function __get(string $name): I\Structure

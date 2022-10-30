@@ -41,7 +41,7 @@
         
         public function record(string $id): ?array
         {
-            return $this->records[$id];
+            return $this->records[$id] ?? null;
         }
         
         public function section(string $id, string $section)

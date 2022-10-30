@@ -11,7 +11,7 @@
         
         public function for(I\Emitter $emitter): I\Support
         {
-            if (!($dispatcher = $this->emitters[spl_object_hash($emitter)])) {
+            if (!($dispatcher = $this->emitters[spl_object_hash($emitter)] ?? null)) {
                 $this->emitters[spl_object_hash($emitter)] = $dispatcher = new class() implements I\Support {
                     use Support;
                 };
