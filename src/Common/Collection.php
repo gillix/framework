@@ -14,14 +14,14 @@
         protected ?array $content = null;
         protected ?array $linked  = null;
         
-        public function __construct(array $array)
+        public function __construct(array &$array)
         {
             $this->content = $array;
         }
         
         public function __get($name)
         {
-            return (is_array($this->content[$name]) ? new self($this->content[$name]) : $this->content[$name]) ?? $this->checkLinked($name) ?? null;
+            return (is_array($this->content[$name] ?? null) ? new self($this->content[$name]) : $this->content[$name]) ?? $this->checkLinked($name) ?? null;
         }
         
         protected function checkLinked($name, $isset = false)
