@@ -49,7 +49,7 @@ code;
             }
             
             // convert code to native php
-            if ($info['extension'] ?? '' !== 'php') {
+            if (($info['extension'] ?? '') !== 'php') {
                 $arguments = null;
                 // fetch arguments if we have it
                 $code = preg_replace_callback('/\s*@\(([^)]*)\)/m', function ($found) use (&$arguments) {
