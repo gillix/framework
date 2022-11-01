@@ -39,7 +39,7 @@
                 return json_encode($result = $target->call(
                  $index ?? self::DEFAULT_INDEX,
                  [$request ?? $this->context->http()->request()->input()]
-                ), JSON_THROW_ON_ERROR);
+                ), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
             } catch (RestError $e) {
                 return json_encode(['error' => $e->getMessage()], JSON_THROW_ON_ERROR);
             } catch (JsonException $e) {

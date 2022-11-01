@@ -12,12 +12,8 @@
         {
             $val = $info['content'];
             $extension = $info['extension'];
-            if ((!$extension && isset($info['content']) && (is_bool($val) || is_int($val) || is_float($val) || is_string($val)))
-             || ($extension && in_array($extension, ['float', 'int', 'bool', 'string', 'str']))) {
-                return true;
-            }
-            
-            return false;
+            return (!$extension && isset($info['content']) && (is_bool($val) || is_int($val) || is_float($val) || is_string($val)))
+                || ($extension && in_array($extension, ['float', 'int', 'bool', 'string', 'str']));
         }
         
         public static function create(array $info, Storage\FS\I\Structure $current, Storage\FS\I\Storage $storage): array

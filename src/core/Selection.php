@@ -149,7 +149,7 @@
             return $this;
         }
         
-        public function map(Closure $callback)
+        public function map(Closure $callback): static
         {
             return new static(array_map($callback, $this->array()));
         }

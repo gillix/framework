@@ -14,7 +14,7 @@
         public function get(string $lang = null): _string
         {
             $lang ??= Context::locale()->language();
-            if (!($string = $this->value[$lang]) &&
+            if (!($string = ($this->value[$lang] ?? false)) &&
              ($config = Context::config()->core) &&
              ($config = $config->ml) &&
              ($config->defaultIfEmpty === true) &&

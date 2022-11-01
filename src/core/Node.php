@@ -307,33 +307,33 @@
                 if ($my === '.') {
                     if ($rest) {
                         return $this->explore($rest, $type, $strict);
-                    } else {
-                        return (!$type || $this->is($type)) ? $this->this() : null;
                     }
+
+                    return (!$type || $this->is($type)) ? $this->this() : null;
                 }
                 if ($my === '..') {
                     if ($parent = $this->this()->parent()) {
                         if ($rest) {
                             return $parent->explore($rest, $type, $strict);
-                        } else {
-                            return (!$type || $parent->is($type)) ? $parent : null;
                         }
+
+                        return (!$type || $parent->is($type)) ? $parent : null;
                     }
                     throw new Exception('Can`t fetch parent node: parent is not exist.');
                 }
                 if ($child = $strict ? $this->property($my, $type) : $this->obtain($my, $type)) {
                     if (!$rest) {
                         return $child;
-                    } else {
-                        return $child->explore($rest);
                     }
+
+                    return $child->explore($rest);
                 }
                 if ($this->capture($my)) {
                     if ($rest) {
                         return $this->explore($rest, $type, $strict);
-                    } else {
-                        return $this;
                     }
+
+                    return $this;
                 }
             }
             
@@ -418,11 +418,13 @@
             $foreign = $callstack->current()->owner();
             if ($foreign && $foreign->sameAs($this->this())) {
                 return Visibility::PRIVATE;
-            } elseif ($foreign && ($foreign->childOf($this->this()) || $foreign->inheritedFrom($this->this()))) {
-                return Visibility::PROTECTED;
-            } else {
-                return Visibility::PUBLIC;
             }
+
+            if ($foreign && ($foreign->childOf($this->this()) || $foreign->inheritedFrom($this->this()))) {
+                return Visibility::PROTECTED;
+            }
+
+            return Visibility::PUBLIC;
         }
         
         public function select($condition = null): I\Selection
