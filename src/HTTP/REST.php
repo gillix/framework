@@ -18,8 +18,7 @@
                 try {
                     $request = (array)json_decode($requestBody, true, 512, JSON_THROW_ON_ERROR);
                     if ($request) {
-                        $request = new Common\Collection($request);
-                        $this->context->input()->link($request);
+                        $this->context->input()->link(new Common\Collection($request));
                     } else {
                         $request = null;
                     }
@@ -42,10 +41,10 @@
                 ), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
             } catch (RestError $e) {
                 return json_encode(['error' => $e->getMessage()], JSON_THROW_ON_ERROR);
-            } catch (JsonException $e) {
+            } catch (\JsonException $e) {
                 $this->context->log()->error('Failed of encode REST response.', isset($result) ? [$result] : null);
             }
-            
+
             return '{}';
         }
     }
