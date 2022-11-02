@@ -73,7 +73,7 @@
                 $this->handleCORS();
             }
 
-            if (in_array($this->server()->request()->method(), ['OPTIONS', 'HEAD'])) {
+            if (in_array($this->server()->request()->method(), ['options', 'head'])) {
                 return null;
             }
 
