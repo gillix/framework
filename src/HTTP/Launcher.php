@@ -12,7 +12,6 @@
     class Launcher extends \glx\Launcher implements I\Launcher
     {
         protected I\Server       $server;
-        protected Context        $context;
         protected const DEFAULT_INDEX = 'start';
         
         public function __construct($config)
@@ -66,21 +65,30 @@
             return $target->call($this->config->index ?? self::DEFAULT_INDEX);
         }
         
-        public function execute(Context $context, string $path = null)
+        public function execute(Context $context, string $path = null): ?string
         {
-            $stopwatch = Stopwatch::start();
+// TODO: move to events handler
+//            $stopwatch = Stopwatch::start();
+            if ($this->config->cors) {
+                $this->handleCORS();
+            }
+
+            if (in_array($this->server()->request()->method(), ['OPTIONS', 'HEAD'])) {
+                return null;
+            }
+
             /** @var core\Node $target */
             $target = $this->fetch($path ?? $this->server->request()->target());
             try {
                 if ($target && $target->is('NODE')) {
                     $this->server->response()->body($this->process($target));
                 } else {
-                    throw new Error(Response::NOT_FOUND);
+                    throw new Error(I\Response::NOT_FOUND);
                 }
             } catch (Error $e) {
                 $this->server->response()->status($e->getCode());
                 if ($this->config->error && ($uri = $this->config->error[(string)$e->getCode()])) {
-                    return $this->redirect(new URI($uri), Redirect::INTERNAL) ?? $stopwatch;
+                    return $this->redirect(new URI($uri), Redirect::INTERNAL);
                 }
             } catch (Status $e) {
                 $this->server->response()->status($e->getCode());
@@ -88,20 +96,21 @@
                 $uri = $e->uri();
                 $mode = $e->mode();
                 
-                return $this->redirect($uri, $mode) ?? $stopwatch;
+                return $this->redirect($uri, $mode);
             } catch (Exception $e) {
                 $this->server->response()->body($e->out());
                 $this->server->send();
                 throw $e;
             }
-            $stopwatch->tick('execute');
-            $this->context->log('stat')->info('Launcher timing', $stopwatch->stat());
+// TODO: move to events handler
+//            $stopwatch->tick('execute');
+//            $this->context->log('stat')->info('Launcher timing', $stopwatch->stat());
             $this->server->send();
             
-            return $stopwatch;
+            return null;
         }
         
-        protected function redirect(I\URI $uri, int $mode)
+        protected function redirect(I\URI $uri, int $mode): ?string
         {
             if ($mode === Redirect::AUTO) {
                 $mode = $uri->has('scheme') ? Redirect::EXTERNAL : Redirect::INTERNAL;
@@ -145,5 +154,10 @@
             }
     
             return null;
+        }
+
+        protected function handleCORS(): void
+        {
+
         }
     }

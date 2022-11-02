@@ -11,7 +11,8 @@
     {
         protected Common\I\Collection $config;
         protected Storage\I\Storage   $storage;
-        
+        protected I\Context $context;
+
         use Events\Delegated;
         
         public function __construct($config)
@@ -63,8 +64,9 @@
         
         abstract protected function execute(I\Context $context, string $path = null);
         
-        public function run($path = null)
+        public function run($path = null): ?string
         {
+            $context = null;
             try {
                 $context = $this->initContext();
                 try {
