@@ -73,34 +73,33 @@
                 $this->handleCORS();
             }
 
-            if (in_array($this->server()->request()->method(), ['options', 'head'])) {
-                return null;
-            }
+            if (!in_array($this->server()->request()->method(), ['options', 'head'])) {
 
-            /** @var core\Node $target */
-            $target = $this->fetch($path ?? $this->server->request()->target());
-            try {
-                if ($target && $target->is('NODE')) {
-                    $this->server->response()->body($this->process($target));
-                } else {
-                    throw new Error(I\Response::NOT_FOUND);
+                /** @var core\Node $target */
+                $target = $this->fetch($path ?? $this->server->request()->target());
+                try {
+                    if ($target && $target->is('NODE')) {
+                        $this->server->response()->body($this->process($target));
+                    } else {
+                        throw new Error(I\Response::NOT_FOUND);
+                    }
+                } catch (Error $e) {
+                    $this->server->response()->status($e->getCode());
+                    if ($this->config->error && ($uri = $this->config->error[(string)$e->getCode()])) {
+                        return $this->redirect(new URI($uri), Redirect::INTERNAL);
+                    }
+                } catch (Status $e) {
+                    $this->server->response()->status($e->getCode());
+                } catch (Redirect $e) {
+                    $uri = $e->uri();
+                    $mode = $e->mode();
+
+                    return $this->redirect($uri, $mode);
+                } catch (Exception $e) {
+                    $this->server->response()->body($e->out());
+                    $this->server->send();
+                    throw $e;
                 }
-            } catch (Error $e) {
-                $this->server->response()->status($e->getCode());
-                if ($this->config->error && ($uri = $this->config->error[(string)$e->getCode()])) {
-                    return $this->redirect(new URI($uri), Redirect::INTERNAL);
-                }
-            } catch (Status $e) {
-                $this->server->response()->status($e->getCode());
-            } catch (Redirect $e) {
-                $uri = $e->uri();
-                $mode = $e->mode();
-                
-                return $this->redirect($uri, $mode);
-            } catch (Exception $e) {
-                $this->server->response()->body($e->out());
-                $this->server->send();
-                throw $e;
             }
 // TODO: move to events handler
 //            $stopwatch->tick('execute');
