@@ -80,26 +80,26 @@
                 }
             } catch (Error $e) {
                 $context->log()->error($e->getMessage(), [
-                 'data'   => $e->context(),
-                 'gillix' => $e->stack(),
-                 'php'    => [
-                  'file'  => $e->getFile(),
-                  'line'  => $e->getLine(),
-                  'trace' => $e->getTrace()
+                    'data'   => $e->context(),
+                    'gillix' => $e->stack(),
+                    'php'    => [
+                        'file'  => $e->getFile(),
+                        'line'  => $e->getLine(),
+                        'trace' => $e->getTrace()
                  ]
                 ]);
             } catch (Exception $e) {
                 $context->log()->critical($e->getMessage(), [
-                 'file'  => $e->getFile(),
-                 'line'  => $e->getLine(),
-                 'trace' => $e->getTrace()
+                    'file'  => $e->getFile(),
+                    'line'  => $e->getLine(),
+                    'trace' => $e->getTrace()
                 ]);
             } catch (\Exception|\Error $e) {
                 if ($context) {
                     $context->log()->critical($e->getMessage(), [
-                     'file'  => $e->getFile(),
-                     'line'  => $e->getLine(),
-                     'trace' => $e->getTrace()
+                        'file'  => $e->getFile(),
+                        'line'  => $e->getLine(),
+                        'trace' => $e->getTrace()
                     ]);
                 } else {
                     throw $e;

@@ -180,6 +180,8 @@
         
         public function produce(array $info, I\Structure $current): ?array
         {
+            $factories = null;
+            $factory = null;
             if ($info['extension']) {
                 $factories = self::$types[$info['extension']];
             }
