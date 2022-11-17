@@ -12,7 +12,8 @@
         "psr/simple-cache": "*",
         "punic/punic": "*",
         "erusev/parsedown": "*",
-        "symfony/yaml": "*"
+        "symfony/yaml": "*",
+        "gillix/db": "*"
     },
     "suggest": {
         "geoip2/geoip2": "Allows detect geo information of user",
