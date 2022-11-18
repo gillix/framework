@@ -15,9 +15,9 @@
         
         public function persistent(): Cache\I\Persistent;
         
-        public function temporary(string $name = null);
+        public function temporary(string $name = null): mixed;
         
-        public function input(string $name = null);
+        public function input(string $name = null): mixed;
         
         public function http(): HTTP\I\Server;
         
@@ -31,4 +31,3 @@
         
         public function event(string $name = null);
     }
- 

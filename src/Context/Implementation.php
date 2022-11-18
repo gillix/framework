@@ -5,6 +5,7 @@
     use Closure;
     use glx\Cache;
     use glx\Common;
+    use glx\Common\I\Collection;
     use glx\Error;
     use glx\Events;
     use glx\HTTP;
@@ -74,8 +75,12 @@
         {
             return $this->persistent;
         }
-        
-        public function temporary(string $name = null)
+
+        /**
+         * @param string|null $name
+         * @return Collection|mixed
+         */
+        public function temporary(string $name = null): mixed
         {
             if ($name) {
                 return $this->temporary[$name];
@@ -83,8 +88,12 @@
             
             return $this->temporary;
         }
-        
-        public function input(string $name = null)
+
+        /**
+         * @param string|null $name
+         * @return Collection|mixed
+         */
+        public function input(string $name = null): mixed
         {
             if ($name) {
                 return $this->input[$name];
