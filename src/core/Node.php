@@ -298,8 +298,8 @@
             if ($path === '/' || $path === '') {
                 return $root;
             }
-            list($my, $rest) = explode('/', $path, 2);
-            $rest = trim($rest, '/');
+            [$my, $rest] = explode('/', $path, 2);
+            $rest = is_string($rest) ? trim($rest ?? '', '/') : null;
             if ($my === '' && $rest !== null) {
                 return $root->explore($rest);
             }
