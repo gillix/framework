@@ -38,7 +38,7 @@
             return $this->__isset($name);
         }
         
-        public function offsetGet(string $name): mixed
+        public function offsetGet(mixed $name): mixed
         {
             return $this->__get($name);
         }
