@@ -58,7 +58,7 @@
             return $this->__isset($name);
         }
         
-        public function offsetGet($name)
+        public function offsetGet(mixed $name): mixed
         {
             return $this->__get($name);
         }
@@ -82,12 +82,12 @@
             return $this->content;
         }
         
-        public function getIterator()
+        public function getIterator(): \Traversable
         {
             return new ArrayIterator($this->content);
         }
         
-        public function count()
+        public function count(): int
         {
             return count($this->content);
         }

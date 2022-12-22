@@ -17,12 +17,12 @@
         
         public function __construct(array $params)
         {
-            $this->get = new Common\ReadOnly($array = $params['get'] ?? $_GET);
-            $this->post = new Common\ReadOnly($array = $params['post'] ?? $_POST);
-            $this->server = new Common\ReadOnly($array = $params['server'] ?? $_SERVER);
-            $this->files = new Common\ReadOnly($array = $params['files'] ?? $_FILES);
-            $this->request = new Common\ReadOnly($array = $params['request'] ?? $_REQUEST);
-            $this->cookie = $params['cookie'] instanceof Common\I\Collection ? $params['cookie'] : new Common\ReadOnly($array = $params['cookie'] ?? $_COOKIE);
+            $this->get = new Common\ReadOnlyCollection($array = $params['get'] ?? $_GET);
+            $this->post = new Common\ReadOnlyCollection($array = $params['post'] ?? $_POST);
+            $this->server = new Common\ReadOnlyCollection($array = $params['server'] ?? $_SERVER);
+            $this->files = new Common\ReadOnlyCollection($array = $params['files'] ?? $_FILES);
+            $this->request = new Common\ReadOnlyCollection($array = $params['request'] ?? $_REQUEST);
+            $this->cookie = $params['cookie'] instanceof Common\I\Collection ? $params['cookie'] : new Common\ReadOnlyCollection($array = $params['cookie'] ?? $_COOKIE);
             $this->client = new Client($this);
             parent::__construct($params);
         }

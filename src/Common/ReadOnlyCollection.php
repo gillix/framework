@@ -6,7 +6,7 @@
 
     require_once 'Collection.php';
     
-    class ReadOnly extends Collection
+    class ReadOnlyCollection extends Collection
     {
         public function __construct(array $array)
         {

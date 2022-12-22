@@ -140,7 +140,7 @@
         
         public function config(): Common\I\Collection
         {
-            return $this->config ?? new Common\ReadOnly($empty = []);
+            return $this->config ?? new Common\ReadOnlyCollection($empty = []);
         }
         
         public function event(string $name = null)
