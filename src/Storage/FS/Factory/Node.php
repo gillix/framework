@@ -50,7 +50,7 @@
             
             // class of new object
             $class = core\Node::class;
-            $instance = $definitions['instance'] ?? $definitions['class'] ?? $definitions['prototype'];
+            $instance = $definitions['instance'] ?? $definitions['class'] ?? $definitions['prototype'] ?? '';
             if (class_exists($instance)) {
                 $class = $instance;
                 unset(

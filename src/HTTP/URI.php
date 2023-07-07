@@ -3,6 +3,8 @@
     namespace glx\HTTP;
     
     
+    use const EXTR_IF_EXISTS;
+
     class URI implements I\URI
     {
         protected array        $parts = [];
@@ -113,21 +115,21 @@
         
         public function __toString()
         {
-            extract($this->parts, null);
+            extract($this->parts, EXTR_IF_EXISTS);
             /** @var string $scheme */
             /** @var string $port */
-            $port = ($port && (int)$port !== self::$ports[$scheme]) ? ":{$port}" : null;
-            $scheme = $scheme ? "{$scheme}://" : '//';
+            $port = (isset($port) && (int)$port !== self::$ports[$scheme]) ? ":{$port}" : null;
+            $scheme = isset($scheme) ? "{$scheme}://" : '//';
             /** @var string $pass */
-            $pass = $pass ? ":{$pass}" : null;
+            $pass = isset($pass) ? ":{$pass}" : null;
             /** @var string $user */
-            $user = $user ? "{$user}{$pass}@" : null;
+            $user = isset($user) ? "{$user}{$pass}@" : null;
             /** @var string $host */
-            $host = $host ? "{$scheme}{$user}{$host}{$port}" : null;
+            $host = isset($host) ? "{$scheme}{$user}{$host}{$port}" : null;
             /** @var I\Query $query */
             $query = $query->count() ? "?{$query}" : null;
             /** @var string $fragment */
-            $fragment = $fragment ? "#{$fragment}" : null;
+            $fragment = isset($fragment) ? "#{$fragment}" : null;
             /** @var string $path */
             $path ??= '/';
             
