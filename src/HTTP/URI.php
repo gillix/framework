@@ -107,7 +107,11 @@
         {
             $new = new static($this);
             foreach ($params as $name => $value) {
-                $new->param($name, $value);
+                if ($name === 'query') {
+                    $this->query($value);
+                } else {
+                    $new->param($name, $value);
+                }
             }
             
             return $new;
@@ -115,23 +119,14 @@
         
         public function __toString()
         {
-            extract($this->parts, EXTR_IF_EXISTS);
-            /** @var string $scheme */
-            /** @var string $port */
-            $port = (isset($port) && (int)$port !== self::$ports[$scheme]) ? ":{$port}" : null;
-            $scheme = isset($scheme) ? "{$scheme}://" : '//';
-            /** @var string $pass */
-            $pass = isset($pass) ? ":{$pass}" : null;
-            /** @var string $user */
-            $user = isset($user) ? "{$user}{$pass}@" : null;
-            /** @var string $host */
-            $host = isset($host) ? "{$scheme}{$user}{$host}{$port}" : null;
-            /** @var I\Query $query */
-            $query = $query->count() ? "?{$query}" : null;
-            /** @var string $fragment */
-            $fragment = isset($fragment) ? "#{$fragment}" : null;
-            /** @var string $path */
-            $path ??= '/';
+            $port = ($this->has('port') && (int)$this->port() !== self::$ports[$this->scheme()]) ? ":{$this->port()}" : null;
+            $scheme = $this->has('scheme') ? "{$this->scheme()}://" : '//';
+            $pass = $this->has('pass') ? ":{$this->pass()}" : null;
+            $user = $this->has('user') ? "{$this->user()}{$pass}@" : null;
+            $host = $this->has('host') ? "{$scheme}{$user}{$this->host()}{$port}" : null;
+            $query = ($this->has('wuery') && $this->query()->count()) ? "?{$this->query()}" : null;
+            $fragment = $this->has('fragment') ? "#{$this->fragment()}" : null;
+            $path = $this->path() ?? '/';
             
             return "{$host}{$path}{$query}{$fragment}";
         }
