@@ -3,6 +3,7 @@
     namespace glx\core;
     
     use ArrayObject;
+    use glx\Context;
 
     class Super implements I\Super
     {
@@ -41,9 +42,16 @@
             if ((strrpos($name, ':')) !== false) {
                 return $this->inheritor->get($name, $type);
             }
-            
-            if (($locator = $this->inheritor->owner()) && ($ancestor = $locator->get($name, $type))) {
-                return $ancestor;
+
+            $locator = $this->inheritor->owner();
+            if ($locator) {
+                // Put inheritor to callstack for correct visibility access resolving
+                Context::callstack()->enter($this->inheritor);
+                $ancestor = $locator->get($name, $type);
+                Context::callstack()->release();
+                if ($ancestor) {
+                    return $ancestor;
+                }
             }
             throw new Exception('Can`t find ancestor object: ' . $name);
             
