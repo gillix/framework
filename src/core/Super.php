@@ -137,8 +137,9 @@
         public function select($condition, I\Selection $list = null): I\Selection
         {
             $list ??= new Selection();
-            foreach ($this->ancestors as $item) {
-                $list = $list->extend($item->select($condition)->map(
+            foreach ($this->ancestors as &$ancestor) {
+                $ancestor = $this->resolve($ancestor);
+                $list = $list->extend($ancestor->select($condition)->map(
                     fn(I\Joint $item) => new Joint($item, $this->inheritor)
                 ));
             }
