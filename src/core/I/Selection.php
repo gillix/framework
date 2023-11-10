@@ -3,6 +3,7 @@
     namespace glx\core\I;
     
     use ArrayAccess;
+    use Closure;
     use Countable;
     use IteratorAggregate;
 
@@ -21,6 +22,8 @@
         public function offset($offset): Selection;
         
         public function each($callback, $arguments = null): Selection;
-        
+
+        public function map(Closure $callback): Selection;
+
         public function extend(Selection $set): Selection;
     }

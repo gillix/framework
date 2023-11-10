@@ -35,7 +35,7 @@
             $this->children = new Selection();
             $this->index = [];
             
-            $this->super = new Super(new ArrayObject(), $this->this());
+            $this->super = new Super([], $this->this());
             if ($inherit = $inherit ?? $options['inherit'] ?? $options['ancestors'] ?? $options['extends']) {
                 $this->super->add($inherit);
             }

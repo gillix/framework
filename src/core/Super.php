@@ -2,21 +2,16 @@
     
     namespace glx\core;
     
-    use ArrayObject;
     use glx\Context;
 
     class Super implements I\Super
     {
-        private I\Joint      $inheritor;
-        private ArrayObject  $ancestors;
-        
         use AccessProxy;
         
-        public function __construct(ArrayObject $ancestors, I\Joint $inheritor = null)
-        {
-            $this->ancestors = $ancestors ?? new ArrayObject();
-            $this->inheritor = $inheritor;
-        }
+        public function __construct(
+            private array $ancestors,
+            private readonly I\Joint $inheritor
+        ) {}
         
         public function get(string $name, $type = null): ?I\Joint
         {
@@ -30,7 +25,7 @@
             return null;
         }
         
-        protected function resolve($ancestor): I\Joint
+        protected function resolve($ancestor): I\Joint | Node
         {
             if (!is_string($ancestor)) {
                 return $ancestor;
@@ -110,7 +105,7 @@
         public function in(string $ancestor): I\Super
         {
             if ($item = $this->ancestors[$ancestor]) {
-                return new Super(new ArrayObject([$item]), $this->inheritor);
+                return new Super([$item], $this->inheritor);
             }
             
             return $this;
@@ -143,7 +138,9 @@
         {
             $list ??= new Selection();
             foreach ($this->ancestors as $item) {
-                $list = $list->extend($item->select($condition));
+                $list = $list->extend($item->select($condition)->map(
+                    fn(I\Joint $item) => new Joint($item, $this->inheritor)
+                ));
             }
             
             return $list;
