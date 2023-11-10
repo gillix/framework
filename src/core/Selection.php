@@ -180,7 +180,7 @@
                 $their["{$item->name()}:{$item->profile()}:{$item->type()}"] = $item;
             }
             
-            return new static(array_values(array_merge($my, $their)));
+            return new static(array_values(array_merge($their, $my)));
         }
     }
 
