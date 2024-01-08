@@ -176,6 +176,7 @@
         }
         
         /**
+         * Finds property in current node container
          * @param string $name
          * @param string|null $type
          * @return I\Joint|null
@@ -339,7 +340,13 @@
             
             return null;
         }
-        
+
+        /**
+         * finds property in current node and all inheritance tree
+         * @param string $name
+         * @param $type
+         * @return I\Joint|null
+         */
         public function obtain(string $name, $type = null): ?I\Joint
         {
             try {

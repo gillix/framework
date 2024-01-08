@@ -16,7 +16,7 @@ header;
         protected static $codeTemplate = <<<'code'
 return function([arguments]) use($context) {
 ?>[code]
-<?};
+<?php};
 code;
         
         public static function probe(array $info, Storage\FS\I\Structure $current): bool
