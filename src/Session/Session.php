@@ -33,7 +33,7 @@
             if (!isset($this->storage)) {
                 throw new Exception('Session storage not configured properly.');
             }
-            parent::__construct($a = []);
+            parent::__construct();
         }
         
         public function get(string $name, $default = null)

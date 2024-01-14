@@ -14,9 +14,10 @@
         protected ?array $content = null;
         protected ?array $linked  = null;
         
-        public function __construct(array &$array)
+        public function __construct(array &$array = null)
         {
             $this->content = &$array;
+            $this->content = $this->content ?? [];
         }
         
         public function __get($name)

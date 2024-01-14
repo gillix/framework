@@ -26,4 +26,6 @@
         public function map(Closure $callback): Selection;
 
         public function extend(Selection $set): Selection;
+
+        public function array(): array;
     }
