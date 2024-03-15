@@ -118,7 +118,7 @@
                     unset($index[$binder->profile()][$binder->name()]);
                 }
             } else {
-                if ($variants = $this->index[$profile][$name]) {
+                if ($variants = ($this->index[$profile] ?? [])[$name] ?? []) {
                     if (count($variants) === 1 && !$type) {
                         $property = $variants[0];
                     } else {
@@ -194,14 +194,13 @@
                 }
             }
             if (!$property) {
-                $property = $this->find($this->index[$default], $name, $type);
+                $property = $this->find($this->index[$default] ?? [], $name, $type);
             }
             if ($property) {
-                if ($property->visibility() !== Visibility::PUBLIC) {
-                    if ($this->contextAccessLevel() < $property->visibility()) {
+                if (($property->visibility() !== Visibility::PUBLIC)
+                    && $this->contextAccessLevel() < $property->visibility()) {
                         throw new E\PropertyAccessViolation(new Joint($property, $this->this()));
                     }
-                }
                 
                 return new Joint($property, $this->this());
             }

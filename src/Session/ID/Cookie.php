@@ -40,16 +40,22 @@
         
         public function create(int $lifetime = 0, array $options = []): string
         {
+            $path = $options['path'] ?? $this->options['path'] ?? '/';
+            $domain = $options['domain'] ?? $this->options['domain'] ?? null;
+            $secure = $options['secure'] ?? $this->options['secure'] ?? true;
+            $httponly = $options['httponly'] ?? $this->options['httponly'] ?? true;
+            $samesite = $options['samesite'] ?? $this->options['samesite'] ?? ($secure ? 'none' : 'lax');
+
             $this->id = $this->generate();
             $this->cookie->set(
              $this->key,
              $this->id,
              $lifetime,
-             $options['path'] ?? $this->options['path'] ?? '/',
-             $options['domain'] ?? $this->options['domain'] ?? null,
-             $options['secure'] ?? $this->options['secure'] ?? true,
-             $options['httponly'] ?? $this->options['httponly'] ?? true,
-             $options['samesite'] ?? $this->options['samesite'] ?? 'none'
+             $path,
+             $domain,
+             $secure,
+             $httponly,
+             $samesite
             );
             
             return $this->id;
