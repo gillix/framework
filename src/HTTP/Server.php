@@ -20,9 +20,9 @@
              'version' => explode('/', $_SERVER['SERVER_PROTOCOL'])[1],
              'uri'     => [
               'path'   => parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH),
-              'scheme' => $_SERVER['X-FORWARDED-PROTO'] ?? $_SERVER['REQUEST_SCHEME'],
-              'host'   => $_SERVER['X-FORWARDED-HOST'] ?? $_SERVER['HTTP_HOST'],
-              'port'   => $_SERVER['X-FORWARDED-PORT'] ?? $_SERVER['SERVER_PORT'],
+              'scheme' => $_SERVER['HTTP_X_FORWARDED_PROTO'] ?? $_SERVER['REQUEST_SCHEME'],
+              'host'   => $_SERVER['HTTP_X_FORWARDED_HOST'] ?? $_SERVER['HTTP_HOST'],
+              'port'   => $_SERVER['HTTP_X_FORWARDED_PORT'] ?? $_SERVER['SERVER_PORT'],
               'query'  => $_SERVER['QUERY_STRING'],
              ],
              'headers' => getallheaders(),
