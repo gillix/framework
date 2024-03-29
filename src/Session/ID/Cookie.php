@@ -70,7 +70,7 @@
              'domain' => $options['domain'] ?? $this->options['domain'] ?? null,
              'secure' => $options['secure'] ?? $this->options['secure'] ?? true,
              'httponly' => $options['httponly'] ?? $this->options['httponly'] ?? true,
-             'samesite' => $options['samesite'] ?? $this->options['samesite'] ?? ($options['secure'] ?? $this->options['secure'] ?? true) ? 'none' : 'lax',
+             'samesite' => $options['samesite'] ?? $this->options['samesite'] ?? (($options['secure'] ?? $this->options['secure'] ?? true) ? 'none' : 'lax'),
             ];
         }
     }

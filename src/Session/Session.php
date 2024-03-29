@@ -121,7 +121,11 @@
                 $this->destroy();
             }
             
-            return $this->started = (bool)$this->id->create($lifetime ?? $this->lifetime, $options);
+            return $this->started =
+                (bool)$this->id->create(
+                    $lifetime ?? $this->lifetime,
+                    $options
+                );
         }
         
         protected function save(): void
