@@ -8,9 +8,9 @@
     {
         protected array $cookies = [];
         
-        public function delete($name, ?string $domain = null, ?string $path = null): void
+        public function delete($name, array $options = []): void
         {
-            $this->set($name, false, 0, $path, $domain);
+            $this->set($name, false, ...$options);
         }
         
         public function has(string $name): bool
@@ -18,7 +18,7 @@
             return $this->__isset($name);
         }
         
-        public function set($name, $value, $lifetime = null, ?string $path = null, ?string $domain = null, bool $secure = null, bool $httponly = null, string $samesite = null): void
+        public function set($name, $value, $lifetime = null, string $path = null, string $domain = null, bool $secure = null, bool $httponly = null, string $samesite = null): void
         {
             if (is_array($name)) {
                 foreach ($name as $n => $v) {

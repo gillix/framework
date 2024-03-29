@@ -40,22 +40,18 @@
         
         public function create(int $lifetime = 0, array $options = []): string
         {
-            $path = $options['path'] ?? $this->options['path'] ?? '/';
-            $domain = $options['domain'] ?? $this->options['domain'] ?? null;
-            $secure = $options['secure'] ?? $this->options['secure'] ?? true;
-            $httponly = $options['httponly'] ?? $this->options['httponly'] ?? true;
-            $samesite = $options['samesite'] ?? $this->options['samesite'] ?? ($secure ? 'none' : 'lax');
+//            $path = $options['path'] ?? $this->options['path'] ?? '/';
+//            $domain = $options['domain'] ?? $this->options['domain'] ?? null;
+//            $secure = $options['secure'] ?? $this->options['secure'] ?? true;
+//            $httponly = $options['httponly'] ?? $this->options['httponly'] ?? true;
+//            $samesite = $options['samesite'] ?? $this->options['samesite'] ?? ($secure ? 'none' : 'lax');
 
             $this->id = $this->generate();
             $this->cookie->set(
-             $this->key,
-             $this->id,
-             $lifetime,
-             $path,
-             $domain,
-             $secure,
-             $httponly,
-             $samesite
+                $this->key,
+                $this->id,
+                $lifetime,
+                ...$this->fetchOptions($options)
             );
             
             return $this->id;
@@ -64,8 +60,17 @@
         public function delete(array $options = []): void
         {
             unset($this->id);
-            $domain = $options['domain'] ?? $this->options['domain'] ?? null;
-            $path = $options['path'] ?? $this->options['path'] ?? '/';
-            $this->cookie->set($this->key, false, 0, $path, $domain);
+            $this->cookie->set($this->key, false, ...$this->fetchOptions($options));
+        }
+
+        protected function fetchOptions(array $options): array
+        {
+            return [
+             'path' => $options['path'] ?? $this->options['path'] ?? '/',
+             'domain' => $options['domain'] ?? $this->options['domain'] ?? null,
+             'secure' => $options['secure'] ?? $this->options['secure'] ?? true,
+             'httponly' => $options['httponly'] ?? $this->options['httponly'] ?? true,
+             'samesite' => $options['samesite'] ?? $this->options['samesite'] ?? ($options['secure'] ?? $this->options['secure'] ?? true) ? 'none' : 'lax',
+            ];
         }
     }

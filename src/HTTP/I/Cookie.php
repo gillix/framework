@@ -5,7 +5,7 @@
     
     interface Cookie
     {
-        public function delete($name, ?string $domain = null, ?string $path = null): void;
+        public function delete($name, array $options = []): void;
         
         public function has(string $name): bool;
         
