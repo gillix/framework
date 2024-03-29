@@ -61,9 +61,11 @@
             return $this->id;
         }
         
-        public function delete(): void
+        public function delete(array $options = []): void
         {
             unset($this->id);
-            $this->cookie->set($this->key, false);
+            $domain = $options['domain'] ?? $this->options['domain'] ?? null;
+            $path = $options['path'] ?? $this->options['path'] ?? '/';
+            $this->cookie->set($this->key, false, 0, $path, $domain);
         }
     }

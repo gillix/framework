@@ -2,7 +2,7 @@
     
     namespace glx\HTTP;
     
-    class RestError extends \glx\Error
+    class RestError extends \Exception
     {
-    
+
     }
