@@ -8,7 +8,7 @@
     {
         protected array $cookies = [];
         
-        public function delete($name, string $domain = null, string $path = null): void
+        public function delete($name, ?string $domain = null, ?string $path = null): void
         {
             $this->set($name, false, 0, $path, $domain);
         }
