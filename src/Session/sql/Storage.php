@@ -17,7 +17,7 @@
         
         public function __construct(array $options = [])
         {
-            $this->db = Components::get('db');
+            $this->db = $options['db'] ?? Components::get('db');
             if (!$this->db) {
                 throw new Exception('Cant initialise sql session storage: DB connection is not configured');
             }
