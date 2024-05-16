@@ -39,9 +39,12 @@
         
         public function apply(I\Joint $caller, array $arguments = null)
         {
-            if (!isset($this->function) && isset($this->source)) {
+            // в методе используется контекст, который был при первом вызове метода, варианты:
+            // - изменить метод передачи контекста
+            // - определять не изменился ли контекст, тогда использовать кеш или нет
+//            if (!isset($this->function) && isset($this->source)) {
                 $this->function = static::embody((string)$this->source);
-            }
+//            }
             if (isset($this->function)) {
                 $callstack = Context::get()->callstack();
                 try {
