@@ -3,7 +3,7 @@
     "description": "Gillix PHP framework",
     "type": "library",
     "require": {
-        "monolog/monolog": "^2.0",
+        "monolog/monolog": "^3.0",
         "php": "^8.0",
         "symfony/cache": "^6.0",
         "ext-json": "*",
