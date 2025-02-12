@@ -299,7 +299,7 @@
                 return $root;
             }
             [$my, $rest] = explode('/', $path, 2);
-            $rest = is_string($rest) ? trim($rest ?? '', '/') : null;
+            $rest = $rest ? trim($rest, '/') : null;
             if ($my === '' && $rest !== null) {
                 return $root->explore($rest);
             }
@@ -360,21 +360,29 @@
         
         public function extend(?array $options = null): ?string
         {
-            // TODO: пождумать: может быть сохранять в джоинте
+            // TODO: подумать: может быть сохранять в джоинте
             if ($this->capture === null) {
                 return false;
             }
             $id = $this->id() . ':captured';
+            $restID = $this->id() . ':capture';
             $cache = Context::temporary();
             if (isset($cache[$id])) {
                 $extra = [];
                 foreach ($cache[$id] as $name => $value) {
-                    $extra[] = $options && $options[$name] ? $options[$name] : $value;
+                    $extra[] = $options && isset($options[$name]) ? $options[$name] : $value;
+                }
+                if (isset($cache[$restID])) {
+                    foreach ($cache[$restID] as $name) {
+                        if (isset($options[$name])) {
+                            $extra[] = $options[$name];
+                        }
+                    }
                 }
             } elseif ($options && is_array($this->capture)) {
                 $extra = [];
                 foreach ($this->capture as $name) {
-                    if ($options[$name]) {
+                    if (isset($options[$name])) {
                         $extra[] = $options[$name];
                     } else {
                         break;
