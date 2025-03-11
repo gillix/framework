@@ -124,7 +124,7 @@
             $pass = $this->has('pass') ? ":{$this->pass()}" : null;
             $user = $this->has('user') ? "{$this->user()}{$pass}@" : null;
             $host = $this->has('host') ? "{$scheme}{$user}{$this->host()}{$port}" : null;
-            $query = ($this->has('wuery') && $this->query()->count()) ? "?{$this->query()}" : null;
+            $query = ($this->has('query') && $this->query()->count()) ? "?{$this->query()}" : null;
             $fragment = $this->has('fragment') ? "#{$this->fragment()}" : null;
             $path = $this->path() ?? '/';
             
