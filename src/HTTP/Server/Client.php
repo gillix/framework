@@ -20,7 +20,12 @@
         
         public function ip(): string
         {
-            return $this->request->server('REMOTE_ADDR');
+            return
+                $this->request->server('HTTP_CLIENT_IP') ??
+                $this->request->server('HTTP_X_FORWARDED_FOR') ??
+                $this->request->server('HTTP_X_FORWARDED') ??
+                $this->request->server('HTTP_FORWARDED') ??
+                $this->request->server('REMOTE_ADDR');
         }
         
         public function agent(): string
