@@ -25,7 +25,7 @@
             }
         }
         
-        public function remove(string $id, string $section = null): void
+        public function remove(string $id, string|null $section = null): void
         {
             if ($section) {
                 unset($this->records[$id][$section]);
@@ -34,12 +34,12 @@
             }
         }
         
-        public function object(string $id): ?core\I\Entity
+        public function object(string $id): core\I\Entity|null
         {
             return $this->records[$id]['object'];
         }
         
-        public function record(string $id): ?array
+        public function record(string $id): array|null
         {
             return $this->records[$id] ?? null;
         }

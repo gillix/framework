@@ -143,7 +143,7 @@
             return $this->config ?? new Common\ReadOnlyCollection($empty = []);
         }
         
-        public function event(string $name = null)
+        public function event(string|null $name = null)
         {
             if ($name) {
                 return new Events\Event($this->events, $name);

@@ -12,7 +12,7 @@
         protected static array $template = ['package' => [], 'storage' => ['structure' => []], 'build' => []];
         public static string   $fileName = '.manifest';
         
-        public function __construct(string $path, array $options = null)
+        public function __construct(string $path, array|null $options = null)
         {
             $this->path = is_dir($path) ? $path . DIRECTORY_SEPARATOR . self::$fileName : $path;
             $content = self::$template;

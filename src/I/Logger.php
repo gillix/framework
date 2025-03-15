@@ -8,7 +8,7 @@
     {
         public function to(string $channel): Log\I\Channel;
         
-        public static function new(string $channel, array $options = null): Log\I\Channel;
+        public static function new(string $channel, array|null $options = null): Log\I\Channel;
 //   public function __call($name, $arguments);
     }
  

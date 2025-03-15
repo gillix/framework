@@ -27,7 +27,7 @@
             parent::__construct($params);
         }
         
-        public function post(string $name = null)
+        public function post(string|null $name = null)
         {
             if ($name !== null) {
                 return $this->post[$name];
@@ -36,7 +36,7 @@
             return $this->post;
         }
         
-        public function cookie(string $name = null)
+        public function cookie(string|null $name = null)
         {
             if ($name !== null) {
                 return $this->cookie[$name];
@@ -45,7 +45,7 @@
             return $this->cookie;
         }
         
-        public function get(string $name = null)
+        public function get(string|null $name = null)
         {
             if ($name !== null) {
                 return $this->get[$name];
@@ -54,7 +54,7 @@
             return $this->get;
         }
         
-        public function server(string $name = null)
+        public function server(string|null $name = null)
         {
             if ($name !== null) {
                 return $this->server[$name];
@@ -63,7 +63,7 @@
             return $this->server;
         }
         
-        public function files(string $name = null)
+        public function files(string|null $name = null)
         {
             if ($name !== null) {
                 return $this->files[$name];
@@ -72,7 +72,7 @@
             return $this->files;
         }
         
-        public function input(string $name = null)
+        public function input(string|null $name = null)
         {
             if ($name !== null) {
                 return $this->request[$name];

@@ -79,7 +79,7 @@
             return $this->param(__FUNCTION__, $value);
         }
         
-        public function parts(array $value = null): array
+        public function parts(array|null $value = null): array
         {
             return $this->parts;
         }
