@@ -9,23 +9,23 @@
 
     interface Selection extends IteratorAggregate, ArrayAccess, Countable
     {
-        public function add($item): Selection;
+        public function add($item): self;
         
-        public function remove($item): Selection;
+        public function remove($item): self;
         
-        public function filter($condition = null): Selection;
+        public function filter($condition = null): self;
         
-        public function sort($by, int $way = Sort::ASC): Selection;
+        public function sort($by, int $way = Sort::ASC): self;
         
-        public function limit(int $limit, int $offset = 0): Selection;
+        public function limit(int $limit, int $offset = 0): self;
         
-        public function offset($offset): Selection;
+        public function offset($offset): self;
         
-        public function each($callback, $arguments = null): Selection;
+        public function each($callback, $arguments = null): self;
 
-        public function map(Closure $callback): Selection;
+        public function map(Closure $callback): self;
 
-        public function extend(Selection $set): Selection;
+        public function extend(self $set): self;
 
         public function array(): array;
     }

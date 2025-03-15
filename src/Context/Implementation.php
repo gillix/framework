@@ -80,7 +80,7 @@
          * @param string|null $name
          * @return Collection|mixed
          */
-        public function temporary(string $name = null): mixed
+        public function temporary(string|null $name = null): mixed
         {
             if ($name) {
                 return $this->temporary[$name];
@@ -93,7 +93,7 @@
          * @param string|null $name
          * @return Collection|mixed
          */
-        public function input(string $name = null): mixed
+        public function input(string|null $name = null): mixed
         {
             if ($name) {
                 return $this->input[$name];
@@ -111,7 +111,7 @@
             return $this->profile;
         }
         
-        public function locale(\glx\I\Locale $locale = null): \glx\I\Locale
+        public function locale(\glx\I\Locale|null $locale = null): \glx\I\Locale
         {
             if ($locale) {
                 $this->locale = $locale;
@@ -129,7 +129,7 @@
             return $this->http;
         }
         
-        public function log(string $channel = null): Log\I\Channel
+        public function log(string|null $channel = null): Log\I\Channel
         {
             if ($channel) {
                 return $this->logger->to($channel);

@@ -50,7 +50,7 @@
          * @return I\Storage
          * @throws \glx\Storage\E\StorageNotFound
          */
-        public function locate($label, array $options = null): \glx\Storage\I\Storage
+        public function locate($label, array|null $options = null): \glx\Storage\I\Storage
         {
             // not sure
             return Manager::get($label, $options);

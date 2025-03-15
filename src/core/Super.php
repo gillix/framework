@@ -74,7 +74,7 @@
             */
         }
         
-        public function add($ancestor, string $name = null): void
+        public function add($ancestor, string|null $name = null): void
         {
             if ($ancestor instanceof I\Binder) {
                 $this->ancestors[$name ?? $ancestor->name()] = $ancestor->origin();
@@ -134,7 +134,7 @@
             return false;
         }
         
-        public function select($condition, I\Selection $list = null): I\Selection
+        public function select($condition, I\Selection|null $list = null): I\Selection
         {
             $list ??= new Selection();
             foreach ($this->ancestors as &$ancestor) {

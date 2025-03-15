@@ -7,7 +7,7 @@
     {
         protected I\Factory $factory;
         
-        public function factory(I\Factory $factory = null): I\Factory
+        public function factory(I\Factory|null $factory = null): I\Factory
         {
             if ($factory) {
                 $this->factory = $factory;

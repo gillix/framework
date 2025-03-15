@@ -13,7 +13,7 @@
         protected static string $default = 'yaml';
         protected string        $parser;
         
-        public function __construct(string $format = null)
+        public function __construct(string|null $format = null)
         {
             if ($format) {
                 $format = strtolower($format);
@@ -34,7 +34,7 @@
             ]);
         }
         
-        public static function get(string $format = null): I\Reader
+        public static function get(string|null $format = null): I\Reader
         {
             return new static($format);
         }
@@ -50,7 +50,7 @@
             return "\glx\Config\\{$format}\Parser";
         }
         
-        public static function default(string $format = null): string
+        public static function default(string|null $format = null): string
         {
             if ($format) {
                 $format = strtolower($format);

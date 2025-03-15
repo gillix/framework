@@ -10,9 +10,9 @@
         
         public function add(string $section, string $path): void;
         
-        public function path(string $relative = null): string;
+        public function path(string|null $relative = null): string;
         
-        public function relative(string $relative = null): string;
+        public function relative(string|null $relative = null): string;
         
         public function implement($mask = null): bool;
         

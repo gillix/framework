@@ -14,7 +14,7 @@
         
         public const DEFAULT_KEY = 'GLX-SESSION';
         
-        public function __construct(string $key = null, HTTP\I\Cookie $cookie = null, array $options = [])
+        public function __construct(string|null $key = null, HTTP\I\Cookie|null $cookie = null, array $options = [])
         {
             if (!$cookie && !($http = Context::http())) {
                 throw new Exception('Can`t resolve session ID by cookie in non-http context');

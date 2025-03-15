@@ -12,7 +12,7 @@
         protected          $id;
         protected Registry $registry;
         
-        public function __construct($id = null, array $options = [], Context $context = null)
+        public function __construct($id = null, array $options = [], Context|null $context = null)
         {
             $this->id = $id ?? self::generate();
             Manager::register($this->id, $this);
@@ -37,7 +37,7 @@
             return md5(uniqid('storage', true));
         }
         
-        public static function new($options, Context $context = null): I\Storage
+        public static function new($options, Context|null $context = null): I\Storage
         {
             return new static($options, $context);
         }

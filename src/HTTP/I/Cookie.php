@@ -11,7 +11,7 @@
         
         public function get(string $name);
         
-        public function set($name, $value, $lifetime = null, string $path = null, string $domain = null, bool $secure = null, bool $httponly = null, string $samesite = null): void;
+        public function set($name, $value, $lifetime = null, string|null $path = null, string|null $domain = null, bool|null $secure = null, bool|null $httponly = null, string|null $samesite = null): void;
         
         public function apply(): void;
     }

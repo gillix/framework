@@ -18,7 +18,7 @@
             return $this->__isset($name);
         }
         
-        public function set($name, $value, $lifetime = null, string $path = null, string $domain = null, bool $secure = null, bool $httponly = null, string $samesite = null): void
+        public function set($name, $value, $lifetime = null, string|null $path = null, string|null $domain = null, bool|null $secure = null, bool|null $httponly = null, string|null $samesite = null): void
         {
             if (is_array($name)) {
                 foreach ($name as $n => $v) {

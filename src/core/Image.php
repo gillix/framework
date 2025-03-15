@@ -18,7 +18,7 @@
             parent::__construct($options);
         }
         
-        public function info(string $param = null)
+        public function info(string|null $param = null)
         {
             if (!isset($this->info)) {
                 return [];

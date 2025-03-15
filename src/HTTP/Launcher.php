@@ -45,8 +45,11 @@
         private function configSection(string $section)
         {
             $section = $this->config[$section];
-            
-            return $section instanceof Collection ? $section->array() : $section;
+
+            if ($section instanceof Collection) {
+                return $section->array();
+            }
+            return $section;
         }
         
         public function server(): Server
@@ -65,7 +68,7 @@
             return $target->call($this->config->index ?? self::DEFAULT_INDEX);
         }
         
-        public function execute(Context $context, string $path = null): ?string
+        public function execute(Context $context, string|null $path = null): string|null
         {
 // TODO: move to events handler
 //            $stopwatch = Stopwatch::start();

@@ -11,7 +11,7 @@
     
     class Parser implements Config\I\Parser
     {
-        public static function parse(string $content, array $callbacks = null): array
+        public static function parse(string $content, array|null $callbacks = null): array
         {
             try {
                 $result = [];

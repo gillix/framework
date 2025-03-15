@@ -7,7 +7,7 @@
     {
         public function read(string $id): array;
         
-        public function write(string $id, array $data, int $lifetime = null): void;
+        public function write(string $id, array $data, int|null $lifetime = null): void;
         
         public function exist($id): bool;
         
@@ -17,4 +17,3 @@
         
         public function clear(int $lifetime): void;
     }
- 

@@ -53,7 +53,7 @@
         
         public function profile(): string { return $this->_binder->profile(); }
         
-        protected function _cheat(I\Joint $joint = null)
+        protected function _cheat(I\Joint|null $joint = null): void
         {
             $this->origin()->_cheat($joint);
         }

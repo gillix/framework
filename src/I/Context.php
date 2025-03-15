@@ -20,23 +20,23 @@
          * @param string|null $name
          * @return Collection|mixed
          */
-        public function temporary(string $name = null): mixed;
+        public function temporary(string|null $name = null): mixed;
 
         /**
          * @param string|null $name
          * @return Collection|mixed
          */
-        public function input(string $name = null): mixed;
+        public function input(string|null $name = null): mixed;
         
         public function http(): HTTP\I\Server;
         
-        public function log(string $channel = null): Log\I\Channel;
+        public function log(string|null $channel = null): Log\I\Channel;
         
-        public function locale(Locale $locale = null): Locale;
+        public function locale(Locale|null $locale = null): Locale;
         
         public function profile($profile = null): Profile;
         
         public function config(): Common\I\Collection;
         
-        public function event(string $name = null);
+        public function event(string|null $name = null);
     }

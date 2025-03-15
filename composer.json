@@ -3,8 +3,8 @@
     "description": "Gillix PHP framework",
     "type": "library",
     "require": {
-        "monolog/monolog": "^3.0",
-        "php": "^8.0",
+        "monolog/monolog": "*",
+        "php": "^8.1",
         "symfony/cache": "^6.0",
         "ext-json": "*",
         "ext-pdo": "*",

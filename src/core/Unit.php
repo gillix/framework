@@ -10,10 +10,10 @@
         use Events\Delegated;
         
         // костыль в связи с корявостью PHP
-        private ?I\Joint     $_joint    = null;
+        private I\Joint|null $_joint    = null;
         private static array $resolvers = [];
         
-        protected function _cheat(I\Joint $joint = null)
+        protected function _cheat(I\Joint|null $joint = null)
         {
             if ($joint) {
                 $this->_joint = $joint;
@@ -27,7 +27,7 @@
         
         public function owner(): ?I\Joint { return isset($this->_joint) ? $this->_joint->owner() : null; }
         
-        public function closest($type): I\Joint
+        public function closest($type): I\Joint|null
         {
             if ($this instanceof I\Node && $this->is($type)) {
                 return $this;
@@ -42,13 +42,13 @@
             return isset($this->_joint) ? $this->_joint->location() : '/';
         }
         
-        public function path(?array $options = null): string
+        public function path(array|null $options = null): string
         {
             return isset($this->_joint) ? $this->_joint->path($options) : '/' .
              ((($options === null || $options['clean'] !== true) && $this instanceof I\Rewriter) ? $this->extend($options) : null);
         }
         
-        public function childOf(I\Joint $parent): bool { return isset($this->_joint) ? $this->_joint->childOf($parent) : false; }
+        public function childOf(I\Joint $parent): bool { return isset($this->_joint) && $this->_joint->childOf($parent); }
         
         public function origin(): I\Entity { return $this; }
         

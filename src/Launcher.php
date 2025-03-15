@@ -62,7 +62,7 @@
             Context::release();
         }
         
-        abstract protected function execute(I\Context $context, string $path = null);
+        abstract protected function execute(I\Context $context, string|null $path = null);
         
         public function run($path = null): ?string
         {

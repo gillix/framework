@@ -87,7 +87,7 @@
             return false;
         }
         
-        public function new(string $id, $default = null, array $arguments = null)
+        public function new(string $id, $default = null, array|null $arguments = null)
         {
             if ($arguments === null && is_array($default)) {
                 $arguments = $default;
@@ -156,7 +156,7 @@
             return null;
         }
         
-        public function set($id, $maker, array $arguments = null, ?string $source = null): void
+        public function set($id, $maker, array|null $arguments = null, string|null $source = null): void
         {
             if (is_object($maker)) {
                 $this->instance($id, $maker);
@@ -177,7 +177,7 @@
             $this->instances[$key] = $instance;
         }
         
-        public function bind($id, $maker, ?array $arguments = null, ?string $source = null): void
+        public function bind($id, $maker, array|null $arguments = null, string|null $source = null): void
         {
             $this->makers ??= [];
             $maker = ['maker' => $maker];
@@ -220,7 +220,7 @@
             }
         }
         
-        public static function default($id, $maker, ?array $arguments = null, ?string $source = null): void
+        public static function default($id, $maker, array|null $arguments = null, string|null $source = null): void
         {
             self::$_makers ??= [];
             $maker = ['maker' => $maker];
@@ -270,7 +270,7 @@
          * @return mixed|object
          * @throws FactoryResolutionException
          */
-        protected function make($maker, ?array $arguments = null)
+        protected function make($maker, array|null $arguments = null)
         {
             if ($maker instanceof Closure) {
                 $object = $maker->call($this, $arguments);

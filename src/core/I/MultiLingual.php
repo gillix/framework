@@ -6,5 +6,5 @@
 
     interface MultiLingual
     {
-        public function get(string $lang = null): _string;
+        public function get(string|null $lang = null): _string;
     }

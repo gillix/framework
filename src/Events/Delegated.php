@@ -18,7 +18,7 @@
             Context::event()->for($this)->off($event, $handler);
         }
         
-        public function fire(string $event, array $arguments = null): void
+        public function fire(string $event, array|null $arguments = null): void
         {
             Context::event()->for($this)->fire($event, $arguments);
         }

@@ -27,7 +27,7 @@
             }
         }
         
-        public function fire(string $event, array $arguments = null): void
+        public function fire(string $event, array|null $arguments = null): void
         {
             if (!isset($this->handlers) || !count($this->handlers[])) {
                 return;

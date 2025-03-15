@@ -8,9 +8,9 @@
 
     class PropertyAccessViolation extends core\Exception
     {
-        protected static $msg = " property access prohibited for ";
+        protected static string $msg = " property access prohibited for ";
         
-        public function __construct(core\I\Joint $property, $code = 0, Throwable $previous = null)
+        public function __construct(core\I\Joint $property, $code = 0, Throwable|null $previous = null)
         {
             $callstack = Context::get()->callstack();
             if ($callstack->empty()) {

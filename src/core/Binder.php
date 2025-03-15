@@ -11,7 +11,7 @@
         protected I\Entity $_origin;
         protected int      $_visibility = I\Visibility::PUBLIC;
         
-        public function __construct(string $name, I\Entity $origin, int $visibility = I\Visibility::PUBLIC, string $profile = null)
+        public function __construct(string $name, I\Entity $origin, int $visibility = I\Visibility::PUBLIC, string|null $profile = null)
         {
             $this->_name = $name;
             $this->_origin = $origin;

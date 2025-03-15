@@ -20,7 +20,7 @@
          * @return I\Storage
          * @throws StorageNotFound
          */
-        public static function get($label, array $options = null): I\Storage
+        public static function get($label, array|null $options = null): I\Storage
         {
             
             // TODO: подумать о постоянном кешировании хранилищ

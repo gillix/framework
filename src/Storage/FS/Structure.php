@@ -30,17 +30,17 @@
             $this->sections[$section] = $relative;
         }
         
-        public function path(string $relative = null, string $section = null): string
+        public function path(string|null $relative = null, string|null $section = null): string
         {
             return implode('/', array_filter([$this->section($section), $this->relative, $relative]));
         }
         
-        public function relative(string $relative = null): string
+        public function relative(string|null $relative = null): string
         {
             return implode('/', array_filter([$this->relative, $relative]));
         }
         
-        protected function section(string $name = null): string
+        protected function section(string|null $name = null): string
         {
             return $this->path . ($name && isset($this->sections[$name]) ? '/' . $this->sections[$name] : null);
         }

@@ -14,7 +14,7 @@
         protected ?array $content = null;
         protected ?array $linked  = null;
         
-        public function __construct(array &$array = null)
+        public function __construct(array|null &$array = null)
         {
             $this->content = &$array;
             $this->content = $this->content ?? [];

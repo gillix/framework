@@ -27,7 +27,7 @@
             parent::__construct(is_array($options) ? $options : []);
         }
         
-        public function call(array $arguments = null)
+        public function call(array|null $arguments = null)
         {
             if ($caller = $this->parent()) {
                 return $this->apply($caller, $arguments);
@@ -37,7 +37,7 @@
             return null;
         }
         
-        public function apply(I\Joint $caller, array $arguments = null)
+        public function apply(I\Joint $caller, array|null $arguments = null)
         {
             // в методе используется контекст, который был при первом вызове метода, варианты:
             // - изменить метод передачи контекста
@@ -76,7 +76,7 @@
             return null;
         }
         
-        public static function super(array $arguments = null)
+        public static function super(array|null $arguments = null)
         {
             $callstack = Context::get()->callstack();
             if ($callstack->empty()) {
@@ -96,7 +96,7 @@
             return new static(...$arguments);
         }
         
-        public static function resolve($value): ?I\Invokable
+        public static function resolve($value): I\Invokable|null
         {
             if ($value instanceof Closure) {
                 return self::new($value);
@@ -120,14 +120,14 @@
     {
         return Method::new(...$arguments);
     }
-    
+
     /**
      * global function for simplify usage
      * calls parent of overloaded method
-     * @param array $arguments
+     * @param array|null $arguments
      * @return mixed
      */
-    function super(array $arguments = null)
+    function super(array|null $arguments = null)
     {
         return Method::super($arguments);
     }

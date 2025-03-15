@@ -6,15 +6,15 @@
 
     interface Request extends HTTP\I\Request
     {
-        public function get(string $name = null);
+        public function get(string|null $name = null);
         
-        public function post(string $name = null);
+        public function post(string|null $name = null);
         
-        public function cookie(string $name = null);
+        public function cookie(string|null $name = null);
         
-        public function server(string $name = null);
+        public function server(string|null $name = null);
         
-        public function input(string $name = null);
+        public function input(string|null $name = null);
         
         public function client(): Client;
         

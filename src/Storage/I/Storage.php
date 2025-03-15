@@ -19,11 +19,11 @@
          * @param array|null $options
          * @return Storage
          */
-        public function locate($label, array $options = null): Storage;
+        public function locate($label, array|null $options = null): Storage;
         
         public function root(): core\I\Entity;
         
-        public static function new(array $options, glx\I\Context $context = null): Storage;
+        public static function new(array $options, glx\I\Context|null $context = null): Storage;
 //    public function store();
 //    public function export();
 //    public function import();

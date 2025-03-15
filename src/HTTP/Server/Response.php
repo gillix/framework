@@ -13,7 +13,7 @@
             parent::__construct([]);
         }
         
-        public function header($name, string $value = null): string
+        public function header($name, string|null $value = null): string
         {
             if (is_array($name)) {
                 foreach ($name as $n => $v) {
@@ -28,7 +28,7 @@
             return $this->headers[$name];
         }
         
-        public function headers(array $headers = null): array
+        public function headers(array|null $headers = null): array
         {
             if ($headers !== null) {
                 $this->headers = $headers;
@@ -37,7 +37,7 @@
             return $this->headers;
         }
         
-        public function body(string $content = null): string
+        public function body(string|null $content = null): string
         {
             if ($content !== null) {
                 $this->body = $content;
@@ -46,7 +46,7 @@
             return $this->body;
         }
         
-        public function contentType(string $type = null): string
+        public function contentType(string|null $type = null): string
         {
             if ($type !== null) {
                 $this->contentType = $type;
@@ -55,7 +55,7 @@
             return $this->contentType;
         }
         
-        public function status(int $code = null): int
+        public function status(int|null $code = null): int
         {
             if ($code !== null && array_key_exists($code, self::$phrases)) {
                 $this->status = $code;

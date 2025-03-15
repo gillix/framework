@@ -7,7 +7,7 @@
         protected array $stack;
         protected array $context;
         
-        public function __construct($message, array $context = null, \Throwable $previous = null)
+        public function __construct($message, array|null $context = null, \Throwable|null $previous = null)
         {
             $this->stack = Context::callstack()->array();
             if ($context) {

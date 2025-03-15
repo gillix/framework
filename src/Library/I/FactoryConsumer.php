@@ -4,5 +4,5 @@
     
     interface FactoryConsumer
     {
-        public function factory(Factory $factory = null): Factory;
+        public function factory(Factory|null $factory = null): Factory;
     }

@@ -8,7 +8,7 @@
 
     class Status extends Exception
     {
-        public function __construct(int $code = I\Response::OK, Throwable $previous = null)
+        public function __construct(int $code = I\Response::OK, Throwable|null $previous = null)
         {
             parent::__construct('', $code, $previous);
         }

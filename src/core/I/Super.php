@@ -4,5 +4,5 @@
     
     interface Super
     {
-        public function get(string $name, $type = null): ?Joint;
+        public function get(string $name, $type = null): Joint|null;
     }

@@ -4,5 +4,5 @@
     
     interface Rewriter
     {
-        public function extend(?array $options = null): ?string;
+        public function extend(array|null $options = null): string|null;
     }

@@ -6,5 +6,5 @@
     {
         public function inheritedFrom($ancestor): bool;
         
-        public function super(string $ancestor = null): Super;
+        public function super(string|null $ancestor = null): Super;
     }

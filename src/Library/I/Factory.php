@@ -9,9 +9,9 @@
         
         public function get(string $id, $default = null);
         
-        public function new(string $id, $default = null, array $arguments = null);
+        public function new(string $id, $default = null, array|null $arguments = null);
         
         public function set(string $id, $maker): void;
         
-        public function use(Factory $other): void;
+        public function use(self $other): void;
     }

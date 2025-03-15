@@ -46,7 +46,7 @@
             return $this->response;
         }
         
-        public function session(string $channel = null, int $lifetime = 0): Session\I\Session
+        public function session(string|null $channel = null, int $lifetime = 0): Session\I\Session
         {
             if (!isset($this->session)) {
                 $this->session = [];

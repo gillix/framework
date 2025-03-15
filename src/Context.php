@@ -18,14 +18,14 @@
     /**
      * @method static Context\Profile profile($profile = null)
      * @method static Cache\I\Persistent persistent()
-     * @method static temporary(string $name = null)
+     * @method static temporary(string|null $name = null)
      * @method static Context\I\Callstack callstack()
-     * @method static \glx\I\Locale locale(\glx\I\Locale $locale = null)
-     * @method static Common\I\Collection input(string $name = null)
-     * @method static Events\I\Event|Events\Manager event(string $name = null)
+     * @method static \glx\I\Locale locale(\glx\I\Locale|null $locale = null)
+     * @method static Common\I\Collection input(string|null $name = null)
+     * @method static Events\I\Event|Events\Manager event(string|null $name = null)
      * @method static ?Common\I\Collection config()
      * @method static HTTP\I\Server http()
-     * @method static Log\I\Channel log(string $channel = null)
+     * @method static Log\I\Channel log(string|null $channel = null)
      */
     class Context
     {

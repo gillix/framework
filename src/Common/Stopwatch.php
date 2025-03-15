@@ -29,7 +29,7 @@
             return $this->tick('end');
         }
         
-        public function elapsed(string $label = null, string $from = null): _float
+        public function elapsed(string|null $label = null, string|null $from = null): _float
         {
             if ($label === null) {
                 $this->tick($label = 'end');

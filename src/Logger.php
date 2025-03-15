@@ -32,7 +32,7 @@
             return $this->channels[$channel] ?? new Log\Dummy();
         }
         
-        public function add($channel, array $options = null): void
+        public function add($channel, array|null $options = null): void
         {
             if (is_string($channel)) {
                 $channel = self::new($channel, $options);
@@ -40,12 +40,12 @@
             $this->channels[$channel->name()] = $channel;
         }
         
-        public static function new($channel, array $options = null): Log\I\Channel
+        public static function new($channel, array|null $options = null): Log\I\Channel
         {
             return new Log\Channel($channel, $options ?? []);
         }
         
-        public function default(string $channel = null): Log\I\Channel
+        public function default(string|null $channel = null): Log\I\Channel
         {
             if ($channel) {
                 $this->default = $this->channels[$channel];

@@ -74,7 +74,7 @@
             return new Currency($this, $currency ?? \Punic\Currency::getCurrencyForTerritory(Data::getTerritory($this->name)));
         }
         
-        public static function get(string $locale, ?string $region = null, ?string $script = null): I\Locale
+        public static function get(string $locale, string|null $region = null, string|null $script = null): I\Locale
         {
             if (!self::valid($valid = self::normalize($locale, $region, $script)) && !self::valid($valid = self::normalize($locale, $region)) && !self::valid($valid = $locale)) {
                 throw new Exception("Unknown locale: {$locale}");
@@ -83,7 +83,7 @@
             return new static($valid);
         }
         
-        public static function valid(string $locale, ?string $region = null, ?string $script = null): bool
+        public static function valid(string $locale, string|null $region = null, string|null $script = null): bool
         {
             return in_array(self::normalize($locale, $region, $script), self::locales(), true);
         }
@@ -104,7 +104,7 @@
             return self::$locales;
         }
         
-        protected static function normalize(string $locale, ?string $region = null, ?string $script = null): string
+        protected static function normalize(string $locale, string|null $region = null, string|null $script = null): string
         {
             if ($region) {
                 $locale = implode('-', array_filter([$locale, $script, $region]));
@@ -115,7 +115,7 @@
             return $locale;
         }
         
-        public static function for(string $country, ?string $script = null): ?I\Locale
+        public static function for(string $country, string|null $script = null): ?I\Locale
         {
             if ($langs = Territory::getLanguages($country, 'o', true)) {
                 return self::get($langs[0], $country, $script);
@@ -140,4 +140,3 @@
             return $list;
         }
     }
- 

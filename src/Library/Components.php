@@ -11,7 +11,7 @@
      *
      * @method static bool has(string $id)
      * @method static get(string $id, $default = null)
-     * @method static new(string $id, $default = null, array $arguments = null)
+     * @method static new(string $id, $default = null, array|null $arguments = null)
      * @method static set(string $id, $maker)
      * @method static default($id, $maker, ?array $arguments = null, ?string $source = null)
      */

@@ -16,7 +16,7 @@
         protected I\Selection   $children;
         protected array         $index;
         protected I\Super       $super;
-        protected ?array        $capture = null;
+        protected array|null    $capture = null;
         
         protected static array $_reserved = [
          'inherit',
@@ -61,7 +61,7 @@
             return $this->metatype ?? [];
         }
         
-        public function isMeta($type, bool $not = false)
+        public function isMeta($type, bool $not = false): bool
         {
             foreach ($this->metatype() as $metatype) {
                 if (strtoupper($type) === strtoupper($metatype)) {
@@ -215,7 +215,7 @@
          * @return I\Binder|null
          * @throws E\PropertyAccessAmbiguous
          */
-        private function find(?array $index, string $name, $type = null): ?I\Binder
+        private function find(array|null $index, string $name, $type = null): ?I\Binder
         {
             if (!is_array($index) || !count($index)) {
                 return null;
@@ -358,7 +358,7 @@
             return $this->super()->get($name, $type);
         }
         
-        public function extend(?array $options = null): ?string
+        public function extend(array|null $options = null): ?string
         {
             // TODO: подумать: может быть сохранять в джоинте
             if ($this->capture === null) {
@@ -465,7 +465,7 @@
             return $this->super()->select($condition, (new Selection($new))->filter($condition));
         }
         
-        public function super(string $ancestor = null): I\Super
+        public function super(string|null $ancestor = null): I\Super
         {
             $super = $this->super->fix($this->this());
             
@@ -482,7 +482,7 @@
             return $inheritor->inheritedFrom($this->this());
         }
         
-        public function call($method, array $arguments = null)
+        public function call($method, array|null $arguments = null)
         {
             $toCall = null;
             if ($method instanceof I\Joint && $method->origin() instanceof I\Invokable) {
@@ -511,7 +511,7 @@
             return new static(...$arguments);
         }
         
-        public static function resolve($value): ?I\Node
+        public static function resolve($value): I\Node|null
         {
             if (is_array($value)) {
                 return self::new($value);

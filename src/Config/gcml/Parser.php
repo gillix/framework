@@ -21,12 +21,12 @@
             self::$pattern = "/(?(DEFINE)\n$defines)[PATTERN]/mx";
         }
         
-        public static function parse(string $content, array $callbacks = null): array
+        public static function parse(string $content, array|null $callbacks = null): array
         {
             return self::fetch('items', $content, $callbacks);
         }
         
-        public static function fetch($subject, $data, ?array $callbacks = null)
+        public static function fetch($subject, $data, array|null $callbacks = null)
         {
             if (is_array($data) && isset($data["_$subject"]) && $data["_$subject"]) {
                 $content = $data["_$subject"];

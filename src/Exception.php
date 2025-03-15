@@ -9,7 +9,7 @@
     {
         protected string $content;
         
-        public function __construct($message = '', $code = 0, Throwable $previous = null, string $content = null)
+        public function __construct($message = '', $code = 0, Throwable|null $previous = null, string|null $content = null)
         {
             parent::__construct($message, $code, $previous);
             if ($content) {
@@ -17,7 +17,7 @@
             }
         }
         
-        public function out(string $content = null): string
+        public function out(string|null $content = null): string
         {
             if ($content) {
                 $this->content = ($this->content ?? '') . $content;

@@ -12,7 +12,7 @@
             $this->structure = $structure;
         }
         
-        public function fetch(string $id): ?array
+        public function fetch(string $id): array|null
         {
             if ($content = $this->read($id)) {
                 return unserialize($content, ['allowed_classes' => true]);

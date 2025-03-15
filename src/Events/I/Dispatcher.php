@@ -10,7 +10,7 @@
          * @param string $event
          * @param array|NULL $arguments
          */
-        public function fire(string $event, array $arguments = null): void;
+        public function fire(string $event, array|null $arguments = null): void;
         
         /** Process event
          * @param Event $event

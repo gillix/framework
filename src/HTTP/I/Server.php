@@ -14,7 +14,7 @@
         
         public function response(): Response;
         
-        public function session(string $channel = null): Session;
+        public function session(string|null $channel = null): Session;
         
         public function send(): void;
     }

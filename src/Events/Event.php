@@ -14,7 +14,7 @@
         protected array        $data;
         protected bool         $stopped = false;
         
-        public function __construct(I\Dispatcher $dispatcher, string $name, array $data = null, I\Emitter $emitter = null)
+        public function __construct(I\Dispatcher $dispatcher, string $name, array|null $data = null, I\Emitter|null $emitter = null)
         {
             $this->dispatcher = $dispatcher;
             $this->name = $name;

@@ -29,7 +29,7 @@
             return unserialize($this->db->from($this->table)->where('id', $id)->value('data')) ?: [];
         }
         
-        public function write(string $id, array $data, int $lifetime = null): void
+        public function write(string $id, array $data, int|null $lifetime = null): void
         {
             $this->db->insert($this->table, [
              'id'       => $id,

@@ -4,5 +4,5 @@
     
     interface Image extends File, Printable
     {
-        public function info(string $param = null);
+        public function info(string|null $param = null);
     }

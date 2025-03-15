@@ -38,7 +38,7 @@
          * @param array|string $options
          * @param \glx\I\Context|NULL $context
          */
-        public function __construct($options = [], \glx\I\Context $context = null)
+        public function __construct($options = [], \glx\I\Context|null $context = null)
         {
             $this->mode = $options['mode'] ?? 'production';
             $path = realpath(is_string($options) ? $options : $options['path'] ?? $options['location']);
@@ -140,7 +140,7 @@
             return "storage:{$this->key}:{$suffix}";
         }
         
-        public function compile(array $options = null): void
+        public function compile(array|null $options = null): void
         {
             // Include only if we need
             $this->include();
@@ -248,7 +248,7 @@
             }
         }
         
-        public static function locations(array $locations = null, bool $append = false): array
+        public static function locations(array|null $locations = null, bool $append = false): array
         {
             if ($locations) {
                 self::$locations = $append ? array_merge(self::$locations, $locations) : $locations;
@@ -267,7 +267,7 @@
             return is_dir($location) && is_file($location . DIRECTORY_SEPARATOR . Manifest::$fileName);
         }
         
-        public function locate($label, array $options = null): \glx\Storage\I\Storage
+        public function locate($label, array|null $options = null): \glx\Storage\I\Storage
         {
             self::cwd()->push($this->structure()->path());
             $storage = Manager::get($label, $options);
@@ -286,7 +286,7 @@
     }
     
     Manager::storage('fs', Storage::class);
-    Manager::autoloader(function (string $label, ?array $options = null): ?\glx\Storage\I\Storage {
+    Manager::autoloader(function (string $label, array|null $options = null): ?\glx\Storage\I\Storage {
  
  //  TODO: поиск должен начинаться с текущего проекта
         

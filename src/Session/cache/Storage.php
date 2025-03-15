@@ -26,7 +26,7 @@
             return $stored ? $stored['data'] ?? [] : [];
         }
         
-        public function write(string $id, array $data, int $lifetime = null): void
+        public function write(string $id, array $data, int|null $lifetime = null): void
         {
             $this->cache->store($this->key($id), ['data' => $data, 'lifetime' => $lifetime], $lifetime);
         }

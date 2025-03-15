@@ -83,12 +83,11 @@
             return $object;
         }
         
-        public function _cheat(core\I\Joint $joint = null)
+        public function _cheat(core\I\Joint|null $joint = null): void
         {
             (new class($this->replace()) extends core\Cheater {
-                public function __construct(core\Cheater $object) { $this->_origin = $object; }
-                
-                public function _cheat(core\I\Joint $joint = null) { $this->_origin->_cheat($joint); }
+                public function __construct(protected core\Cheater $object) {}
+                public function _cheat(core\I\Joint|null $joint = null): void { $this->object->_cheat($joint); }
             })->_cheat($joint);
         }
         

@@ -14,7 +14,7 @@
         protected int   $mode;
         protected I\URI $uri;
         
-        public function __construct($uri, int $mode = self::AUTO, Throwable $previous = null)
+        public function __construct($uri, int $mode = self::AUTO, Throwable|null $previous = null)
         {
             $this->uri = new URI($uri);
             $this->mode = $mode;
