@@ -33,7 +33,7 @@
                 // if creates from file definition
                 if (isset($info['file']) && is_file($path = $info['path'])) {
                     $record['source'] = $current->relative($info['file']);
-                } // if create form filesystem folder
+                } // if create from filesystem folder
                 elseif (is_dir($current->path())) {
                     if (!is_file($path = $current->path('.node'))) {
                         $path = null;
@@ -85,7 +85,7 @@
                 $item = self::fetchName($name);
                 $item['content'] = $value;
 // не нужен        $item['source'] = $info['source'] ?? $current->relative('.node');
-                $child = $storage->produce($item, $current);
+                $child = $storage->produce($item, !isset($info['path']) ? $current->get($info['name']) : $current);
                 if ($child) {
                     $record['depends'][] = $child['object']->id()->object();
                     

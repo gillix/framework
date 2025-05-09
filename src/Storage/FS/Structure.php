@@ -21,7 +21,7 @@
             if (is_array($relative)) {
                 $this->sections = $relative;
             } elseif (is_string($relative)) {
-                $this->relative = implode('/', array_filter(explode('/', $relative)));
+                $this->relative = implode('/', array_filter(explode('/', $relative), static fn($item) => !($item === null || $item === '')));
             }
         }
         
@@ -93,7 +93,7 @@
                 return new self($this->section($name));
             }
 
-            return new self($this->path, implode('/', array_filter([$this->relative, $name])));
+            return new self($this->path, implode('/', array_filter([$this->relative, $name], static fn($item) => !($item === null || $item === ''))));
         }
         
         public function __get(string $name): I\Structure
